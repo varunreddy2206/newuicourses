@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Placement() {
   return (
-    <section className="w-full bg-white py-20 px-6">
+    <section className="w-full bg-white py-10 px-6">
       <div className="max-w-7xl mx-auto bg-white rounded-3xl border border-gray-200 overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
         {/* LEFT CONTENT */}
@@ -16,12 +16,12 @@ export default function Placement() {
           </span>
 
           {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight font-urbanist">
             Premium Placement Assistance
           </h2>
 
           {/* Subtext */}
-          <p className="text-gray-600 text-lg mt-4 leading-relaxed">
+          <p className="text-gray-600 text-lg mt-4 leading-relaxed font-urbanist">
             Your Career, Supported for 24 Months — Even After Course Completion
           </p>
 
@@ -30,27 +30,27 @@ export default function Placement() {
 
             {/* Feature 1 */}
             <div>
-              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900 font-urbanist">
                 ✔ Direct Access to Hiring Partners
               </p>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-gray-600 text-sm mt-1 font-urbanist">
                 Get shortlisted faster with exclusive referrals through our partnered companies.
               </p>
             </div>
 
             {/* Feature 2 */}
             <div>
-              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900 font-urbanist">
                 ✔ Exclusive Job Opportunities
               </p>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-gray-600 text-sm mt-1 font-urbanist">
                 Access curated openings matched to your skillset and career goals.
               </p>
             </div>
 
             {/* Feature 3 */}
             <div>
-              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900 font-urbanist">
                 ✔ Dedicated Career Mentoring & Interview Prep
               </p>
               <p className="text-gray-600 text-sm mt-1">
@@ -60,23 +60,23 @@ export default function Placement() {
 
             {/* Feature 4 */}
             <div>
-              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <p className="flex items-center gap-2 text-lg font-semibold text-gray-900 font-urbanist">
                 ✔ Unlimited Interview Attempts for 2 Years
               </p>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-gray-600 text-sm mt-1 font-urbanist">
                 Apply multiple times across companies until you successfully land a job.
               </p>
             </div>
           </div>
 
           {/* Button */}
-          <button className="mt-10 bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition flex items-center gap-2 w-fit">
+          <button className="mt-10 bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition flex items-center gap-2 w-fit font-urbanist">
             Explore Courses →
           </button>
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full ">
           <Image
             src="/placement.png"   // ⭐ Replace with your actual image path
             alt="Placement Support"

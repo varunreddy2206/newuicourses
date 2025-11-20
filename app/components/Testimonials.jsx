@@ -5,7 +5,7 @@ import { CheckCircle } from "lucide-react";
 
 export default function Testimonials() {
     return (
-        <section className="w-full px-6 md:px-16 lg:px-24 mt-24 mb-32">
+        <section className="w-full px-6  md:px-16 lg:px-24 mt-24 mb-32">
 
             {/* Badge */}
             <div className="flex justify-center mb-3">

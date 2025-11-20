@@ -15,7 +15,7 @@ export default function Workshop() {
   };
 
   return (
-    <section className="w-full bg-white py-20 px-6">
+    <section className="w-full bg-white py-10 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* TITLE */}
@@ -79,7 +79,7 @@ export default function Workshop() {
               {/* Slider Cards */}
               <div
                 ref={sliderRef}
-                className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pr-4"
+                className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pr-6"
               >
                 {[1, 2, 3].map((item) => (
                   <div

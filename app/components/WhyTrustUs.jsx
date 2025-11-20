@@ -5,7 +5,7 @@ import React from "react";
 
 export default function WhyTrustUs() {
   return (
-    <section className="w-full py-16 px-6 md:px-12 lg:px-20">
+    <section className="w-full py-10 px-6 md:px-12 lg:px-20">
       {/* Outer Card */}
       <div className="bg-white border rounded-3xl p-8 md:p-12 shadow-sm">
 

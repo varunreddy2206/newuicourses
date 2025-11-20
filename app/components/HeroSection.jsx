@@ -5,7 +5,7 @@ import React from "react";
 export default function Hero() {
   return (
     <section className="w-full bg-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-20 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-10 px-6">
 
         {/* LEFT CONTENT */}
         <div className="flex flex-col gap-6">
@@ -23,7 +23,7 @@ export default function Hero() {
           </h1>
 
           {/* Subtext */}
-          <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
+          <p className="text-gray-600 text-lg leading-relaxed max-w-lg font-urbanist">
             Learn from industry experts, earn global certifications, and start your career
             journey with confidence.
           </p>
