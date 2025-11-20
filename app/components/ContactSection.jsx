@@ -8,7 +8,7 @@ export default function ContactSection() {
   const [selected, setSelected] = useState("");
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-16 lg:px-24 py-10">
+    <section className="w-full px-4 sm:px-6 md:px-16 lg:px-24 py-3">
       <div
         className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 
         rounded-3xl bg-white shadow-sm 
@@ -67,7 +67,7 @@ export default function ContactSection() {
               text-sm sm:text-[15px] outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            {/* Dropdown 1 */}
+            {/* Dropdown 2 */}
             <div className="relative">
               <select
                 value={selected}
@@ -75,7 +75,7 @@ export default function ContactSection() {
                 className="appearance-none w-full border border-gray-300 rounded-xl px-5 py-3 
                 text-sm sm:text-[15px] outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="">Select course</option>
+                <option value="">Select Category</option>
                 <option value="ai">Artificial Intelligence</option>
                 <option value="ml">Machine Learning</option>
                 <option value="frontend">Frontend Development</option>
@@ -86,8 +86,7 @@ export default function ContactSection() {
                 size={20}
               />
             </div>
-
-            {/* Dropdown 2 */}
+            {/* Dropdown 1 */}
             <div className="relative">
               <select
                 value={selected}
@@ -95,7 +94,7 @@ export default function ContactSection() {
                 className="appearance-none w-full border border-gray-300 rounded-xl px-5 py-3 
                 text-sm sm:text-[15px] outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="">Select Category</option>
+                <option value="">Select course</option>
                 <option value="ai">Artificial Intelligence</option>
                 <option value="ml">Machine Learning</option>
                 <option value="frontend">Frontend Development</option>

@@ -1,130 +1,164 @@
 "use client";
-
-import React, { useRef } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-
-const courses = [
-    {
-        id: 1,
-        title: "Generative AI",
-        desc: "Build intelligent solutions with real-world AI & ML training.",
-        img: "/course1.png",
-    },
-    {
-        id: 2,
-        title: "Generative AI",
-        desc: "Build intelligent solutions with real-world AI & ML training.",
-        img: "/course2.png",
-    },
-    {
-        id: 3,
-        title: "Generative AI",
-        desc: "Build intelligent solutions with real-world AI & ML training.",
-        img: "/course3.png",
-    },
-    {
-        id: 4,
-        title: "Generative AI",
-        desc: "Build intelligent solutions with real-world AI & ML training.",
-        img: "/course4.png",
-    },
-];
+import Image from "next/image";
+import { ChevronRight, ChevronLeft } from "lucide-react";
+import { useRef } from "react";
 
 export default function PopularCourses() {
-    const sliderRef = useRef(null);
+  const courses = [
+    {
+      title: "Generative AI",
+      desc: "Build intelligent solutions with real-world AI & ML training.",
+      img: "/course1.png",
+    },
+    {
+      title: "Generative AI",
+      desc: "Build intelligent solutions with real-world AI & ML training.",
+      img: "/course2.png",
+    },
+    {
+      title: "Generative AI",
+      desc: "Build intelligent solutions with real-world AI & ML training.",
+      img: "/course3.png",
+    },
+    {
+      title: "Generative AI",
+      desc: "Build intelligent solutions with real-world AI & ML training.",
+      img: "/course4.png",
+    },
+  ];
 
-    const slideLeft = () => {
-        sliderRef.current.scrollBy({ left: -360, behavior: "smooth" });
-    };
+  const sliderRef = useRef(null);
 
-    const slideRight = () => {
-        sliderRef.current.scrollBy({ left: 360, behavior: "smooth" });
-    };
+  const slideLeft = () => {
+    sliderRef.current.scrollBy({ left: -260, behavior: "smooth" });
+  };
 
-    return (
-        <section className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Popular Courses</h2>
+  const slideRight = () => {
+    sliderRef.current.scrollBy({ left: 260, behavior: "smooth" });
+  };
 
-            <div className="relative">
+  return (
+    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
 
-                {/* Left Arrow */}
-                <button
-                    onClick={slideLeft}
-                    className="hidden md:flex absolute -left-5 lg:-left-7 top-1/2 -translate-y-1/2 z-20 
-                    bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
-                >
-                    <ChevronLeft size={20} />
-                </button>
+      {/* TITLE */}
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
 
-                {/* Slider */}
-                <div
-                    ref={sliderRef}
-                    className="flex gap-6 overflow-x-scroll scroll-smooth no-scrollbar pr-4
-                    sm:gap-7 md:gap-8"
-                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                >
-                    {courses.map((item) => (
-                        <div
-                            key={item.id}
-                            className="min-w-[260px] sm:min-w-[280px] md:min-w-[300px] 
-                            max-w-[260px] sm:max-w-[280px] md:max-w-[300px]
-                            h-[440px] sm:h-[450px] md:h-[460px]
-                            bg-white border shadow-md rounded-3xl 
-                            p-4 sm:p-5 flex flex-col justify-between 
-                            hover:shadow-xl transition"
-                        >
-                            {/* Image */}
-                            <img
-                                src={item.img}
-                                alt={item.title}
-                                className="w-full h-[180px] sm:h-[190px] md:h-[200px] 
-                                object-cover rounded-2xl"
-                            />
+      {/* DESKTOP VIEW */}
+      <div className="hidden md:grid grid-cols-4 gap-6">
+        {courses.map((course, index) => (
+          <div
+            key={index}
+            className="bg-white border shadow-md rounded-2xl p-4"
+          >
+            <Image
+              src={course.img}
+              alt="Course"
+              width={400}
+              height={300}
+              className="rounded-xl object-cover w-full h-[170px]"
+            />
 
-                            {/* Text */}
-                            <div>
-                                <h3 className="text-lg sm:text-xl font-bold mt-4">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm mt-2 leading-relaxed">
-                                    {item.desc}
-                                </p>
-                            </div>
-
-                            {/* Buttons */}
-                            <div className="flex justify-between items-center mt-3 gap-2">
-
-                                <button
-                                    className="bg-blue-600 text-white px-3 py-2 rounded-full text-xs sm:text-sm 
-                                    font-medium hover:bg-blue-700 transition flex items-center gap-2 
-                                    whitespace-nowrap"
-                                >
-                                    Enroll Now <ArrowRight size={16} />
-                                </button>
-
-                                <button
-                                    className="border border-gray-400 text-gray-800 px-3 py-2 rounded-full 
-                                    text-xs sm:text-sm font-medium hover:bg-gray-100 transition 
-                                    flex items-center gap-2 whitespace-nowrap"
-                                >
-                                    Know More <ArrowRight size={16} />
-                                </button>
-
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Right Arrow */}
-                <button
-                    onClick={slideRight}
-                    className="hidden md:flex absolute -right-5 lg:-right-7 top-1/2 -translate-y-1/2 z-20 
-                    bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
-                >
-                    <ChevronRight size={20} />
-                </button>
-
+            {/* TAGS */}
+            <div className="flex items-center gap-3 mt-3 text-xs text-gray-600">
+              <span>🛡 Beginner</span>
+              <span>🟢 Online</span>
+              <span>⭐ 17M+</span>
             </div>
-        </section>
-    );
+
+            <h3 className="text-lg font-semibold text-gray-900 mt-2">
+              {course.title}
+            </h3>
+
+            <p className="text-gray-600 text-sm mt-1 leading-snug">{course.desc}</p>
+
+            <div className="flex items-center justify-between mt-4">
+              <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center gap-1">
+                Enroll Now →
+              </button>
+              <button className="border px-5 py-2 rounded-full text-sm flex items-center gap-1">
+                Know More ⓘ
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* MOBILE / TABLET VIEW */}
+      <div className="md:hidden relative mt-2">
+
+        {/* LEFT ARROW */}
+        <button
+          onClick={slideLeft}
+          className="
+            absolute left-1 top-[40%]
+            bg-white shadow-md border p-2 rounded-full z-10
+          "
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        {/* SLIDER */}
+        <div
+          ref={sliderRef}
+          className="
+            flex gap-4 overflow-x-auto no-scrollbar pb-4 
+            snap-x snap-mandatory
+          "
+        >
+          {courses.map((course, index) => (
+            <div
+              key={index}
+              className="
+                min-w-[78%] max-w-[78%]
+                bg-white border shadow-md rounded-2xl p-4
+                snap-start
+              "
+            >
+              <Image
+                src={course.img}
+                alt="Course"
+                width={400}
+                height={300}
+                className="rounded-xl object-cover w-full h-[150px]"
+              />
+
+              <div className="flex items-center gap-3 mt-3 text-xs text-gray-600">
+                <span>🛡 Beginner</span>
+                <span>🟢 Online</span>
+                <span>⭐ 17M+</span>
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-2">
+                {course.title}
+              </h3>
+
+              <p className="text-gray-600 text-sm mt-1 leading-snug">{course.desc}</p>
+
+              <div className="flex items-center justify-between mt-4">
+                <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center gap-1">
+                  Enroll Now →
+                </button>
+                <button className="border px-5 py-2 rounded-full text-sm flex items-center gap-1">
+                  Know More ⓘ
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* RIGHT ARROW */}
+        <button
+          onClick={slideRight}
+          className="
+            absolute right-1 top-[40%]
+            bg-white shadow-md border p-2 rounded-full  
+          "
+        >
+          <ChevronRight size={22} />
+        </button>
+
+      </div>
+
+    </div>
+  );
 }

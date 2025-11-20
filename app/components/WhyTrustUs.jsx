@@ -64,7 +64,7 @@ export default function WhyTrustUs() {
 
             {/* 4️⃣ Stat */}
             <div>
-              <h3 className="text-4xl sm:text-5xl font-bold">2 Year</h3>
+              <h3 className="text-4xl sm:text-5xl font-bold">2 Years</h3>
               <p className="text-gray-600 text-base sm:text-lg mt-1">
                 Unlimited Placement Support
               </p>

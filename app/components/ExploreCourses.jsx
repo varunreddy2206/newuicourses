@@ -1,154 +1,138 @@
 "use client";
 import Image from "next/image";
-import React from "react";
-import { Star, Clock } from "lucide-react";
-
-const categories = [
-  "All",
-  "Artificial Intelligence",
-  "Data Science",
-  "Computer Science",
-  "Information Technology",
-  "Personal Development",
-  "Healthcare",
-  "Language Learning",
-  "Social Sciences",
-  "Arts and Humanities",
-  "Physical Science and Engineering",
-  "Math and Logic",
-];
-
-const courses = [
-  {
-    title: "Artificial Intelligence & Machine Learning with Python",
-    desc: "Learn machine learning algorithms, data processing, and model deployment using Python for real-world AI solutions.",
-    level: "Beginner",
-    duration: "6 months",
-    mode: "Online",
-    learners: "1.7M+",
-    image: "/course1.png",
-  },
-  {
-    title: "Artificial Intelligence & Machine Learning with Python",
-    desc: "Learn machine learning algorithms, data processing, and model deployment using Python for real-world AI solutions.",
-    level: "Beginner",
-    duration: "6 months",
-    mode: "Online",
-    learners: "1.7M+",
-    image: "/course1.png",
-  },
-  {
-    title: "Artificial Intelligence & Machine Learning with Python",
-    desc: "Learn machine learning algorithms, data processing, and model deployment using Python for real-world AI solutions.",
-    level: "Beginner",
-    duration: "6 months",
-    mode: "Online",
-    learners: "1.7M+",
-    image: "/course1.png",
-  },
-];
+import { Clock, Globe, Star, User } from "lucide-react";
 
 export default function ExploreCourses() {
+  const courseImages = [
+    "/course1.png",
+    "/course1.png",
+    "/course1.png",
+    "/course1.png",
+  ];
+
   return (
-    <section className="w-full bg-white py-10 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
 
-        {/* Title */}
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">
-          Explore courses
-        </h2>
+      {/* SECTION TITLE */}
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">
+        Explore courses
+      </h2>
 
-        {/* Category Chips */}
-        <div className="flex flex-wrap gap-3">
-          {categories.map((cat, i) => (
-            <button
-              key={i}
-              className="px-5 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 hover:bg-gray-200 transition text-sm"
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+      {/* TAGS LIST */}
+      <div className="flex flex-wrap gap-3 mb-10">
+        {[
+          "AI",
+          "Artificial Intelligence",
+          "Data Science",
+          "Computer Science",
+          "Information Technology",
+          "Personal Development",
+          "Healthcare",
+          "Language Learning",
+          "Social Sciences",
+          "Arts and Humanities",
+          "Physical Science and Engineering",
+          "Math and Logic"
+        ].map((tag, i) => (
+          <span
+            key={i}
+            className="text-sm px-4 py-1 border rounded-full bg-white shadow-sm"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
 
-        {/* Divider */}
-        <hr className="my-10 border-gray-200" />
+      {/* COURSE LIST */}
+      <div className="space-y-12">
+        {[1, 2, 3, 4].map((index) => (
+          <div
+            key={index}
+            className="
+              w-full 
+              flex 
+              flex-col sm:flex-row 
+              items-start sm:items-center 
+              justify-between 
+              gap-6 
+              border-b 
+              pb-10
+            "
+          >
 
-        {/* COURSE LIST */}
-        <div className="flex flex-col gap-16">
-          {courses.map((course, idx) => (
-            <div
-              key={idx}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            >
+            {/* LEFT CONTENT */}
+            <div className="flex-1">
 
-              {/* LEFT DETAILS */}
-              <div className="order-2 md:order-1">
-                <h3 className="text-2xl font-bold text-gray-900">
-                  {course.title}
-                </h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Artificial Intelligence & Machine Learning with Python
+              </h3>
 
-                <p className="text-gray-600 text-lg mt-2 leading-relaxed max-w-xl">
-                  {course.desc}
-                </p>
+              {/* DESCRIPTION — hidden on mobile */}
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 hidden sm:block">
+                Learn machine learning algorithms, data processing, and model deployment
+                using Python for real-world AI solutions.
+              </p>
 
-                {/* Course Info */}
-                <div className="flex flex-wrap gap-6 mt-4 text-gray-800">
+              {/* TAG ROW */}
+              <div className="flex items-center gap-6 text-sm text-gray-700 mb-5">
 
-                  {/* Level */}
-                  <div className="flex items-center gap-2">
-                    <Image src="/beginner.png" width={22} height={22} alt="level" />
-                    <span className="text-sm">{course.level}</span>
-                  </div>
-
-                  {/* Duration */}
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-gray-700" />
-                    <span className="text-sm">{course.duration}</span>
-                  </div>
-
-                  {/* Mode */}
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-green-500"></span>
-                    <span className="text-sm">{course.mode}</span>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-sm">{course.learners}</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <User size={16} className="text-green-600" />
+                  <span>Beginner</span>
                 </div>
 
-                {/* Enroll Button */}
-                <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-lg font-medium transition">
-                  Enroll Now
-                </button>
+                <div className="flex items-center gap-2">
+                  <Clock size={16} className="text-gray-700" />
+                  <span>6 months</span>
+                </div>
 
-                {/* Divider below each card */}
-                <hr className="mt-10 border-gray-200 md:hidden" />
+                <div className="flex items-center gap-2">
+                  <Globe size={16} className="text-teal-600" />
+                  <span>Online</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Star size={16} className="text-yellow-500" />
+                  <span>17M+</span>
+                </div>
+
               </div>
 
-              {/* RIGHT IMAGE */}
-              <div className="order-1 md:order-2 flex justify-center md:justify-end">
-                <Image
-                  src={course.image}
-                  alt={course.title}
-                  width={350}
-                  height={260}
-                  className="rounded-xl shadow-md object-cover max-w-full h-auto"
-                />
+              {/* BUTTON */}
+              <div className="mt-2">
+                <button className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700">
+                  Enroll Now
+                </button>
               </div>
 
             </div>
-          ))}
-        </div>
 
-        {/* Bottom CTA Banner */}
-        <div className="mt-16 mx-auto max-w-5xl bg-blue-700 text-white py-6 px-6 rounded-full text-center text-lg font-medium">
-          Learn from industry experts, earn global certifications, and start your career journey with confidence. →→→
-        </div>
+            {/* RIGHT IMAGE — vertical on mobile, right side on tablet+ */}
+            <div className="w-full sm:min-w-[220px] sm:max-w-[240px]">
+              <Image
+                src={courseImages[index - 1]}
+                alt="AI Course"
+                width={240}
+                height={200}
+                className="
+                  rounded-xl 
+                  object-cover 
+                  w-full 
+                  h-[180px] 
+                  sm:h-full
+                "
+              />
+            </div>
 
+          </div>
+        ))}
       </div>
-    </section>
+
+      {/* BLUE FOOTER BANNER */}
+      <div className="mt-12 w-full bg-blue-600 text-white text-center py-4 rounded-full text-sm sm:text-base font-medium shadow">
+        Learn from industry experts, earn global certifications, and start your career journey with confidence. »
+      </div>
+
+    </div>
   );
 }

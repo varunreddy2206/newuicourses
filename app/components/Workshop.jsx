@@ -1,114 +1,121 @@
 "use client";
 import Image from "next/image";
-import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
-export default function Workshop() {
+export default function WorkShop() {
   const sliderRef = useRef(null);
 
   const slideLeft = () => {
-    sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    sliderRef.current.scrollBy({ left: -260, behavior: "smooth" });
   };
 
   const slideRight = () => {
-    sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    sliderRef.current.scrollBy({ left: 260, behavior: "smooth" });
   };
 
+  // 🔥 NEW — Different images for different cards
+  const cardImages = [
+    "/workshop.png",
+    "/workshop.png",
+    "/workshop.png",
+    "/workshop.png",
+  ];
+
   return (
-    <div className="w-full px-4 md:px-8 lg:px-16 py-10">
-      <h2 className="text-3xl font-bold mb-6">Upcoming Workshops</h2>
+    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
+
+      {/* SECTION TITLE */}
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Workshops</h2>
 
       {/* MAIN WRAPPER */}
-      <div className="w-full bg-white rounded-xl shadow-md p-6 md:p-10">
+      <div className="w-full bg-white rounded-2xl shadow-md border p-6 md:p-10">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
 
-        {/* LEFT SECTION */}
-        <div className="flex flex-col lg:flex-row gap-10">
-          {/* Text Section */}
+          {/* LEFT BOX */}
           <div className="flex-1">
+            <Image
+              src="/workshop-icon.png"
+              alt="Workshop Icon"
+              width={40}
+              height={40}
+              className="mb-3"
+            />
+
             <h3 className="text-2xl font-bold mb-2">
               Full Stack Java Professional Workshop Series
             </h3>
 
-            <p className="text-sm font-semibold mb-1">Skills you’ll gain:</p>
-
-            <p className="text-sm text-gray-600 mb-3 leading-relaxed">
-              Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS,
-              React Basics, Project Architecture, Deployment, Debugging,
-              Git & Version Control
+            <p className="font-semibold text-gray-800 text-sm mb-1">
+              Skills you'll gain:
+              <span className="font-normal text-gray-600">
+                {" "}
+                Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS,
+                React Basics, Project Architecture, Deployment, Debugging, Git &
+                Version Control
+              </span>
             </p>
 
-            <div className="flex items-center gap-1 mb-3">
+            <div className="flex items-center gap-1 mb-2">
               <span>⭐</span>
-              <p className="text-sm font-medium">4.6 (980 learners)</p>
+              <span className="text-sm font-medium">
+                4.6 <span className="text-gray-500">(980 learners)</span>
+              </span>
             </div>
 
-            <ul className="text-sm text-gray-600 space-y-1 mb-4">
-              <li>• Beginner Level</li>
-              <li>• Live Workshop</li>
-              <li>• 1 Week</li>
-            </ul>
+            <div className="flex gap-5 text-sm text-gray-700 mb-4">
+              <span>• Beginner Level</span>
+              <span>• Live Workshop</span>
+              <span>• 1 Week</span>
+            </div>
 
-            <div className="flex gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md">
+            <div className="flex gap-4 mt-4">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-medium">
                 Register Now
               </button>
-              <button className="text-blue-600 font-medium">View details</button>
+              <button className="text-blue-600 font-medium text-sm">View details</button>
             </div>
           </div>
 
-          {/* SLIDER SECTION */}
-          <div className="flex-1 relative">
-            {/* Slider Buttons */}
-            <button
-              onClick={slideLeft}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-10"
-            >
-              <ChevronLeft size={20} />
-            </button>
+          {/* RIGHT — SLIDER */}
+          <div className="flex-1 relative lg:max-w-[630px] lg:overflow-hidden lg:pr-4">
 
-            <button
-              onClick={slideRight}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full z-10"
-            >
-              <ChevronRight size={20} />
-            </button>
-
-            {/* CARD SLIDER */}
+            {/* SLIDER CARDS */}
             <div
               ref={sliderRef}
-              className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar py-2"
+              className="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-4"
             >
-              {[1, 2, 3].map((_, idx) => (
+              {[1, 2, 3, 4].map((i) => (
                 <div
-                  key={idx}
-                  className="min-w-[260px] max-w-[260px] bg-white rounded-lg shadow-sm border p-4"
+                  key={i}
+                  className="min-w-[230px] max-w-[230px] bg-white rounded-xl shadow-md border p-4"
                 >
                   <Image
-                    src="/workshop.png"
+                    src={cardImages[i - 1]}   // 🌟 DIFFERENT IMAGE FOR EACH CARD
+                    alt="Workshop Image"
                     width={300}
-                    height={150}
-                    alt="Data Analyst"
-                    className="rounded-md object-cover h-[150px] w-full"
+                    height={200}
+                    className="rounded-md object-cover w-full h-[130px] mb-3"
                   />
 
-                  <p className="text-xs mt-2 text-gray-500">Globally Certified Course</p>
+                  <p className="text-xs text-gray-500 mb-1">🌍 Globally Certified Course</p>
 
-                  <h4 className="text-lg font-semibold mt-1">Data Analyst</h4>
+                  <h4 className="font-semibold text-lg mb-1">Data Analyst</h4>
 
-                  <p className="text-sm text-gray-600 mt-1">
-                    A Data Analyst collects, cleans, and interprets data using tools & techniques.
+                  <p className="text-sm text-gray-700 mb-2 leading-snug">
+                    A Data Analyst collects, cleans, and interprets data using tools.
                   </p>
 
-                  <p className="text-sm font-semibold mt-3">
+                  <p className="text-sm font-semibold">
                     Starts From <span className="text-blue-600">14-12-2025</span>
                   </p>
 
                   <div className="flex items-center gap-3 mt-3">
                     <Image
-                      src="/workshop.png"
-                      width={35}
-                      height={35}
+                      src="/trainer.png"
                       alt="Trainer"
+                      width={40}
+                      height={40}
                       className="rounded-full"
                     />
                     <div>
@@ -119,8 +126,32 @@ export default function Workshop() {
                 </div>
               ))}
             </div>
-          </div>
 
+            {/* BOTTOM ARROWS */}
+            <div className="flex justify-center items-center gap-6 mt-4">
+              <button
+                onClick={slideLeft}
+                className="bg-white shadow p-2 rounded-full"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={slideRight}
+                className="bg-white shadow p-2 rounded-full"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            {/* DOT INDICATORS */}
+            <div className="flex items-center justify-center gap-2 mt-3">
+              <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

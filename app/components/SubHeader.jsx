@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { Menu, X, Search } from "lucide-react";
 
 export default function SubHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-10 left-0 w-full z-40 bg-white shadow-md px-6 py-2">
+    <div className="fixed top-3 left-0 w-full z-30 bg-white shadow-md px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* LEFT LOGO */}
@@ -15,41 +16,52 @@ export default function SubHeader() {
           <Image
             src="/logo.png"
             alt="Ascend Academy"
-            width={80}
-            height={80}
+            width={70}
+            height={70}
+            className="object-contain"
           />
-          <h1 className="text-xl font-semibold text-gray-800">Ascend Academy</h1>
         </div>
 
-        {/* DESKTOP NAV — now only on lg (1024px and up) */}
-        <div className="hidden lg:flex items-center gap-6">
+        {/* EXPLORE BUTTON 
+            Desktop: Visible
+            Tablet/Mobile: Visible OUTSIDE toggle */}
+        <button className="flex lg:flex bg-blue-600 text-white px-8 py-2 mt-5 rounded-full font-medium text-base items-center gap-2 hover:bg-blue-700">
+          <span className="text-lg">»»»</span> Explore Courses
+        </button>
 
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full font-medium 
-            hover:bg-blue-700 transition flex items-center gap-2">
-            <span className="text-lg">»»</span> Explore Courses
-          </button>
-
-          <div className="flex items-center w-96 border rounded-full shadow-sm overflow-hidden">
-            <input
-              type="text"
-              placeholder="Search courses here……"
-              className="w-full px-4 py-2 outline-none text-gray-700"
-            />
-            <button className="bg-yellow-400 px-5 py-2 font-medium text-white hover:bg-yellow-500 transition">
-              Search
-            </button>
+        {/* SEARCH BAR 
+            Desktop: Visible
+            Tablet/Mobile: HIDDEN → goes inside toggle */}
+        <div className="hidden lg:flex items-center w-[340px] mt-5 border rounded-full shadow-sm overflow-hidden">
+          <div className="px-3 text-gray-500">
+            <Search size={18} />
           </div>
-
-          <button className="border-blue-600 text-blue-600 border px-6 py-2 rounded-full font-medium hover:bg-blue-50">
-            Sign Up
+          <input
+            type="text"
+            placeholder="Search courses here……"
+            className="w-full px-2 py-2 outline-none text-gray-700"
+          />
+          <button className="bg-yellow-400 px-6 py-2 font-medium text-white hover:bg-yellow-500">
+            Search
           </button>
+        </div>
 
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 flex items-center gap-2">
+        {/* LOGIN BUTTON 
+            Desktop: Visible
+            Tablet/Mobile: HIDDEN → goes inside toggle */}
+        <Link href="/Registrationform">
+          <button className="bg-blue-600 text-white px-6 py-2 mt-5 rounded-full">
             Login →
           </button>
-        </div>
+        </Link>
+        {/* JOIN FOR FREE 
+            Desktop: Visible
+            Tablet/Mobile: Visible OUTSIDE toggle */}
+        <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex">
+          Join For Free
+        </button>
 
-        {/* MOBILE/TABLET MENU BUTTON */}
+        {/* HAMBURGER */}
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden text-gray-700"
@@ -58,29 +70,26 @@ export default function SubHeader() {
         </button>
       </div>
 
-      {/* MOBILE & TABLET DROPDOWN */}
+      {/* MOBILE + TABLET DROPDOWN */}
       {open && (
         <div className="lg:hidden mt-3 bg-gray-50 p-4 rounded-md shadow-md space-y-4">
 
-          <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium flex justify-center gap-2">
-            <span className="text-lg">»»</span> Explore Courses
-          </button>
-
-          <div className="flex items-center w-full border rounded-full shadow-sm overflow-hidden">
+          {/* SEARCH BAR (MOVES HERE) */}
+          <div className="flex items-center w-full border mt-2 rounded-full shadow-sm overflow-hidden">
+            <div className="px-3 text-gray-500">
+              <Search size={18} />
+            </div>
             <input
               type="text"
               placeholder="Search courses here……"
-              className="w-full px-4 py-2 outline-none text-gray-700"
+              className="w-full px-2 py-2 outline-none text-gray-700"
             />
-            <button className="bg-yellow-400 px-5 py-2 font-medium text-white">
+            <button className="bg-yellow-400 px-6 py-2 font-medium text-white">
               Search
             </button>
           </div>
 
-          <button className="w-full border-blue-600 text-blue-600 border py-3 rounded-full font-medium text-center">
-            Sign Up
-          </button>
-
+          {/* LOGIN (MOVES HERE) */}
           <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium">
             Login →
           </button>

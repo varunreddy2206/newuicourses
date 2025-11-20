@@ -14,7 +14,7 @@ import Workshop from './components/Workshop';
 
 export default function Home() {
   return (
-    <div className="space-y-[5px]">
+    <div className="space-y-[3px]">
       <HeroSection />
       <Placement />
       <Workshop />

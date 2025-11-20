@@ -5,6 +5,8 @@ import Scholarship from "../components/Scholarship";
 import PopularCourses from "../components/PopularCourses";
 import CertificateSection from "../components/CertificateSection";
 import Footer from "../components/Footer";
+import RegisterForm from "../components/RegisterForm";
+import CourseEnrollment from "../components/CourseEnrollment";
 
 export default function Page() {
   return (
@@ -14,6 +16,7 @@ export default function Page() {
         <Scholarship />
         <PopularCourses />
         <CertificateSection />
+        
         <Footer />
     </div>
   );
