@@ -42,7 +42,7 @@ export default function PopularCourses() {
     };
 
     return (
-        <section className="w-full py-10 px-4 md:px-10 lg:px-20">
+        <section className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Popular Courses</h2>
 
             <div className="relative">
@@ -50,8 +50,8 @@ export default function PopularCourses() {
                 {/* Left Arrow */}
                 <button
                     onClick={slideLeft}
-                    className="hidden md:flex absolute -left-7 top-1/2 -translate-y-1/2 z-20 
-          bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
+                    className="hidden md:flex absolute -left-5 lg:-left-7 top-1/2 -translate-y-1/2 z-20 
+                    bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
                 >
                     <ChevronLeft size={20} />
                 </button>
@@ -59,50 +59,57 @@ export default function PopularCourses() {
                 {/* Slider */}
                 <div
                     ref={sliderRef}
-                    className="flex gap-6 overflow-x-scroll scroll-smooth 
-          no-scrollbar pr-4"
+                    className="flex gap-6 overflow-x-scroll scroll-smooth no-scrollbar pr-4
+                    sm:gap-7 md:gap-8"
                     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                    {courses.map((item, index) => (
+                    {courses.map((item) => (
                         <div
                             key={item.id}
-                            className="min-w-[300px] max-w-[300px] h-[460px] bg-white border 
-              shadow-md rounded-3xl p-5 flex flex-col justify-between hover:shadow-xl transition"
+                            className="min-w-[260px] sm:min-w-[280px] md:min-w-[300px] 
+                            max-w-[260px] sm:max-w-[280px] md:max-w-[300px]
+                            h-[440px] sm:h-[450px] md:h-[460px]
+                            bg-white border shadow-md rounded-3xl 
+                            p-4 sm:p-5 flex flex-col justify-between 
+                            hover:shadow-xl transition"
                         >
                             {/* Image */}
                             <img
                                 src={item.img}
                                 alt={item.title}
-                                className="w-full h-[200px] object-cover rounded-2xl"
+                                className="w-full h-[180px] sm:h-[190px] md:h-[200px] 
+                                object-cover rounded-2xl"
                             />
 
                             {/* Text */}
                             <div>
-                                <h3 className="text-xl font-bold mt-4">{item.title}</h3>
-                                <p className="text-gray-600 text-sm mt-2">
+                                <h3 className="text-lg sm:text-xl font-bold mt-4">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-600 text-sm mt-2 leading-relaxed">
                                     {item.desc}
                                 </p>
                             </div>
 
                             {/* Buttons */}
-                            <div className="flex justify-between items-center mt-3">
+                            <div className="flex justify-between items-center mt-3 gap-2">
 
                                 <button
-                                    className="bg-blue-600 text-white px-3 py-2 rounded-full text-sm 
-  font-medium hover:bg-blue-700 transition flex items-center gap-2 whitespace-nowrap"
+                                    className="bg-blue-600 text-white px-3 py-2 rounded-full text-xs sm:text-sm 
+                                    font-medium hover:bg-blue-700 transition flex items-center gap-2 
+                                    whitespace-nowrap"
                                 >
                                     Enroll Now <ArrowRight size={16} />
                                 </button>
 
                                 <button
                                     className="border border-gray-400 text-gray-800 px-3 py-2 rounded-full 
-  text-sm font-medium hover:bg-gray-100 transition flex items-center gap-2 whitespace-nowrap"
+                                    text-xs sm:text-sm font-medium hover:bg-gray-100 transition 
+                                    flex items-center gap-2 whitespace-nowrap"
                                 >
                                     Know More <ArrowRight size={16} />
                                 </button>
 
-
-                                
                             </div>
                         </div>
                     ))}
@@ -111,8 +118,8 @@ export default function PopularCourses() {
                 {/* Right Arrow */}
                 <button
                     onClick={slideRight}
-                    className="hidden md:flex absolute -right-7 top-1/2 -translate-y-1/2 z-20 
-          bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
+                    className="hidden md:flex absolute -right-5 lg:-right-7 top-1/2 -translate-y-1/2 z-20 
+                    bg-white shadow-xl border rounded-full p-3 hover:bg-gray-100 transition"
                 >
                     <ChevronRight size={20} />
                 </button>

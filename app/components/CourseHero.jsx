@@ -5,53 +5,53 @@ import { Play } from "lucide-react";
 
 export default function CourseHero() {
   return (
-    <section className="w-full py-16 px-6 md:px-16 lg:px-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="w-full py-12 sm:py-16 px-4 sm:px-6 md:px-16 lg:px-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
         {/* LEFT TEXT SECTION */}
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           {/* Badge */}
-          <div className="inline-block bg-gray-100 text-gray-700 px-6 py-2 rounded-full text-sm font-medium">
+          <div className="inline-block bg-gray-100 text-gray-700 px-5 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium">
             Smart Learning
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl leading-tight md:text-6xl font-bold text-gray-900">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold text-gray-900">
             The Complete <br />
             <span className="text-yellow-500">Graphic Design</span> for <br />
             Beginners
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-700 max-w-xl">
+          <p className="text-base sm:text-lg text-gray-700 max-w-xl">
             Learn from industry experts, earn global certifications, and start your
             career journey with confidence.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap items-center gap-4 mt-6">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3">
               Enroll Now
-              <span className="text-xl">➡️</span>
+              <span className="text-lg sm:text-xl">➡️</span>
             </button>
 
-            <button className="bg-white border px-10 py-4 rounded-full text-lg font-medium flex items-center gap-3 shadow-sm">
+            <button className="bg-white border px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3 shadow-sm">
               Download Curriculum
-              <span className="text-xl">📥</span>
+              <span className="text-lg sm:text-xl">📥</span>
             </button>
           </div>
 
           {/* Info Row */}
-          <div className="flex flex-wrap items-center gap-6 pt-4 text-gray-700">
-            <div className="flex items-center gap-2 text-lg">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-gray-700">
+            <div className="flex items-center gap-1 text-sm sm:text-lg">
               ⭐ 3.4 (36 Review)
             </div>
 
-            <div className="flex items-center gap-2 text-lg">
+            <div className="flex items-center gap-1 text-sm sm:text-lg">
               🎥 48 HRS Classes
             </div>
 
-            <div className="flex items-center gap-2 text-lg">
+            <div className="flex items-center gap-1 text-sm sm:text-lg">
               🎓 Beginner
             </div>
           </div>
@@ -60,16 +60,16 @@ export default function CourseHero() {
         {/* RIGHT IMAGE SECTION */}
         <div className="relative w-full flex items-center justify-center">
           <Image
-            src="/coursehero.png"  // Replace with your actual image
+            src="/coursehero.png"
             alt="Graphic Design Course"
             width={900}
             height={600}
-            className="rounded-3xl w-full h-[420px] md:h-[520px] object-cover shadow-lg"
+            className="rounded-3xl w-full h-[260px] sm:h-[360px] md:h-[420px] lg:h-[520px] object-cover shadow-lg"
           />
 
           {/* Play Button */}
-          <button className="absolute bg-white w-20 h-20 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition">
-            <Play size={38} fill="blue" color="blue" />
+          <button className="absolute bg-white w-14 h-14 sm:w-20 sm:h-20 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition">
+            <Play size={30} className="sm:w-[38px] sm:h-[38px]" fill="blue" color="blue" />
           </button>
         </div>
 

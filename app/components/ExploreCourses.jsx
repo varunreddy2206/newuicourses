@@ -26,7 +26,7 @@ const courses = [
     duration: "6 months",
     mode: "Online",
     learners: "1.7M+",
-    image: "/course1.png", // update must
+    image: "/course1.png",
   },
   {
     title: "Artificial Intelligence & Machine Learning with Python",
@@ -50,7 +50,7 @@ const courses = [
 
 export default function ExploreCourses() {
   return (
-    <section className="w-full bg-white py-10 px-6">
+    <section className="w-full bg-white py-10 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
@@ -74,12 +74,15 @@ export default function ExploreCourses() {
         <hr className="my-10 border-gray-200" />
 
         {/* COURSE LIST */}
-        <div className="flex flex-col gap-14">
+        <div className="flex flex-col gap-16">
           {courses.map((course, idx) => (
-            <div key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div
+              key={idx}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+            >
 
               {/* LEFT DETAILS */}
-              <div>
+              <div className="order-2 md:order-1">
                 <h3 className="text-2xl font-bold text-gray-900">
                   {course.title}
                 </h3>
@@ -122,27 +125,28 @@ export default function ExploreCourses() {
                 </button>
 
                 {/* Divider below each card */}
-                <hr className="mt-10 border-gray-200" />
+                <hr className="mt-10 border-gray-200 md:hidden" />
               </div>
 
               {/* RIGHT IMAGE */}
-              <div className="flex justify-center md:justify-end">
+              <div className="order-1 md:order-2 flex justify-center md:justify-end">
                 <Image
                   src={course.image}
                   alt={course.title}
                   width={350}
                   height={260}
-                  className="rounded-xl shadow-md object-cover"
+                  className="rounded-xl shadow-md object-cover max-w-full h-auto"
                 />
               </div>
+
             </div>
           ))}
         </div>
 
         {/* Bottom CTA Banner */}
-       <div className="mt-16 mx-auto max-w-5xl bg-blue-700 text-white py-6 rounded-full text-center text-lg font-medium">
-  Learn from industry experts, earn global certifications, and start your career journey with confidence. →→→
-</div>
+        <div className="mt-16 mx-auto max-w-5xl bg-blue-700 text-white py-6 px-6 rounded-full text-center text-lg font-medium">
+          Learn from industry experts, earn global certifications, and start your career journey with confidence. →→→
+        </div>
 
       </div>
     </section>
