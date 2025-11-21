@@ -82,8 +82,8 @@ export default function LearningSlider() {
 
                   <Image
                     src={c.img}
-                    width={150}
-                    height={150}
+                    width={200}
+                    height={200}
                     alt="illustration"
                     className="object-contain"
                   />
@@ -93,8 +93,8 @@ export default function LearningSlider() {
                   {/* RIGHT CARD → Image → Button */}
                   <Image
                     src={c.img}
-                    width={150}
-                    height={150}
+                    width={200}
+                    height={200}
                     alt="illustration"
                     className="object-contain"
                   />
