@@ -100,9 +100,9 @@ export default function CourseEnrollPayment() {
                     <div className="flex justify-between gap-4 pt-2">
                         <button
                             onClick={() => router.push("/courseenroll")}
-                            className="w-1/3 py-2 border-2 border-gray-300 rounded-lg text-[14px] text-gray-700"
+                            className="w-1/3 py-2 border-2 border-gray-300 rounded-lg text-[14px] text-gray-700 hover:bg-[#1b4edb] hover:text-white"
                         >
-                            back
+                            Back
                         </button>
 
 
