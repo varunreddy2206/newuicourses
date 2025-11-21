@@ -128,12 +128,12 @@ export default function Recomemded() {
               <div className="flex items-center justify-between mt-4">
                 <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center justify-center gap-2 leading-none">
                   <span className="inline-block">Enroll Now</span>
-                  <span className="inline-block translate-y-[1px]">→</span>
+                  <span className="inline-block translate-y-px">→</span>
                 </button>
 
                 <button className="border px-5 py-2 rounded-full text-sm flex items-center gap-1 justify-center leading-none">
                   <span className="inline-block">Know More</span>
-                  <span className="inline-block translate-y-[1px]">ⓘ</span>
+                  <span className="inline-block translate-y-px">ⓘ</span>
                 </button>
               </div>
             </div>
