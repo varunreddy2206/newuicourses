@@ -35,7 +35,7 @@ export default function WorkShop() {
           {/* LEFT BOX */}
           <div className="flex-1">
             <Image
-              src="/workshop-icon.png"
+              src="/workshop2.png"
               alt="Workshop Icon"
               width={40}
               height={40}
