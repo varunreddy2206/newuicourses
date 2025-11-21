@@ -38,23 +38,43 @@ export default function Footer() {
               workshops & Internship Offers
             </p>
 
-            {/* Email Box */}
-            <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0">
-              <input
-                type="email"
-                placeholder="Enter your Email"
-                className="px-4 py-3 border border-gray-300 sm:border-r-0 rounded-full sm:rounded-l-full sm:rounded-r-none 
-  w-full focus:outline-none text-sm sm:text-base"
-              />
+           {/* MOBILE → separate boxes, DESKTOP/TABLET → same capsule */}
+<div className="mt-5 w-full">
 
-              <button
-                className="bg-blue-600 text-white px-6 py-3 md:py-0 border border-blue-600 sm:border-l-0 
-  rounded-full sm:rounded-l-none sm:rounded-r-full hover:bg-blue-700 text-sm sm:text-base"
-              >
-                Sign up
-              </button>
+  {/* MOBILE VIEW (vertical stacked) */}
+  <div className="flex flex-col gap-3 sm:hidden">
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      className="px-4 py-3 border border-gray-300 rounded-full w-full text-sm focus:outline-none"
+    />
 
-            </div>
+    <button
+      className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 text-sm w-full"
+    >
+      Sign up
+    </button>
+  </div>
+
+  {/* TABLET + DESKTOP VIEW (your original layout — unchanged) */}
+  <div className="hidden sm:flex items-center w-full max-w-md min-w-[330px] border border-gray-300 rounded-full overflow-hidden bg-white">
+
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      className="flex-1 px-1 py-3 text-gray-700 focus:outline-none text-sm sm:text-base"
+    />
+
+    <button
+      className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 text-sm sm:text-base mr-2"
+    >
+      Sign up
+    </button>
+  </div>
+
+</div>
+
+
           </div>
 
           {/* Explore */}

@@ -8,7 +8,7 @@ export default function SubHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-3 left-0 w-full z-30 bg-white shadow-md px-6 py-4">
+    <div className="fixed top-3 left-0 w-full z-30 bg-white shadow-md px-6 py-4 mt-4 sm:mt-0">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* LEFT LOGO */}
@@ -22,16 +22,14 @@ export default function SubHeader() {
           />
         </div>
 
-        {/* EXPLORE BUTTON 
-            Desktop: Visible
-            Tablet/Mobile: Visible OUTSIDE toggle */}
-        <button className="flex lg:flex bg-blue-600 text-white px-8 py-2 mt-5 rounded-full font-medium text-base items-center gap-2 hover:bg-blue-700">
-          <span className="text-lg">»»»</span> Explore Courses
-        </button>
+        {/* EXPLORE BUTTON (Visible on all devices) */}
+        <Link href="/courses">
+          <button className="flex bg-blue-600 text-white px-8 py-2 mt-5 rounded-full font-medium text-base items-center gap-2 hover:bg-blue-700">
+            <span className="text-lg">»»»</span> Explore Courses
+          </button>
+        </Link>
 
-        {/* SEARCH BAR 
-            Desktop: Visible
-            Tablet/Mobile: HIDDEN → goes inside toggle */}
+        {/* SEARCH BAR (Desktop only) */}
         <div className="hidden lg:flex items-center w-[340px] mt-5 border rounded-full shadow-sm overflow-hidden">
           <div className="px-3 text-gray-500">
             <Search size={18} />
@@ -46,22 +44,19 @@ export default function SubHeader() {
           </button>
         </div>
 
-        {/* LOGIN BUTTON 
-            Desktop: Visible
-            Tablet/Mobile: HIDDEN → goes inside toggle */}
+        {/* LOGIN BUTTON (Desktop only) */}
         <Link href="/Registrationform">
-          <button className="bg-blue-600 text-white px-6 py-2 mt-5 rounded-full">
+          <button className="hidden lg:block bg-blue-600 text-white px-6 py-2 mt-5 rounded-full">
             Login →
           </button>
         </Link>
-        {/* JOIN FOR FREE 
-            Desktop: Visible
-            Tablet/Mobile: Visible OUTSIDE toggle */}
-        <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex">
+
+        {/* JOIN FOR FREE (Desktop + Tablet visible, Mobile hidden) */}
+        <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex sm:flex max-sm:hidden">
           Join For Free
         </button>
 
-        {/* HAMBURGER */}
+        {/* HAMBURGER (Mobile + Tablet) */}
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden text-gray-700"
@@ -70,11 +65,11 @@ export default function SubHeader() {
         </button>
       </div>
 
-      {/* MOBILE + TABLET DROPDOWN */}
+      {/* MOBILE / TABLET DROPDOWN */}
       {open && (
         <div className="lg:hidden mt-3 bg-gray-50 p-4 rounded-md shadow-md space-y-4">
 
-          {/* SEARCH BAR (MOVES HERE) */}
+          {/* SEARCH (Mobile + Tablet) */}
           <div className="flex items-center w-full border mt-2 rounded-full shadow-sm overflow-hidden">
             <div className="px-3 text-gray-500">
               <Search size={18} />
@@ -89,9 +84,14 @@ export default function SubHeader() {
             </button>
           </div>
 
-          {/* LOGIN (MOVES HERE) */}
+          {/* LOGIN (Mobile + Tablet) */}
           <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium">
             Login →
+          </button>
+
+          {/* JOIN FOR FREE – Mobile only */}
+          <button className="w-full bg-white border border-blue-600 text-blue-600 py-3 rounded-full font-medium sm:hidden">
+            Join For Free
           </button>
         </div>
       )}

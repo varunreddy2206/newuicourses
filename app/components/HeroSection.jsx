@@ -151,19 +151,21 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT IMAGE (ONLY CHANGE → md:-mt-20) */}
         <div className="flex justify-center md:justify-end">
-          <Image
-            src="/Hero.png"
-            alt="Student Image"
-            width={480}
-            height={480}
-            className="
-              object-contain
-              w-[260px] sm:w-[320px] md:w-[420px] lg:w-[520px]
-              mx-auto md:mx-0
-            "
-          />
+          <div className="md:-mt-90 lg:-mt-20">
+            <Image
+              src="/Hero.png"
+              alt="Student Image"
+              width={480}
+              height={480}
+              className="
+                object-contain
+                w-[260px] sm:w-[320px] md:w-[420px] lg:w-[520px]
+                mx-auto md:mx-0
+              "
+            />
+          </div>
         </div>
 
       </div>

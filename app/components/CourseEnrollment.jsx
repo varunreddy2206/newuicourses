@@ -1,12 +1,18 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CourseEnrollment() {
   const [mode, setMode] = useState("online");
+  const [batch, setBatch] = useState(""); // ⭐ FIXED - ADDED
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    router.push(`/CourseEnrollPayment?mode=${mode}&batch=${batch}`);
+  };
 
   return (
     <div className="w-full flex justify-center px-4 sm:px-6 md:px-12 lg:px-20 py-10">
-
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl border pb-10">
 
         {/* HEADER */}
@@ -16,7 +22,6 @@ export default function CourseEnrollment() {
           </h2>
         </div>
 
-        {/* BODY */}
         <div className="px-6 mt-6 space-y-5">
 
           {/* Preferred Category */}
@@ -60,7 +65,7 @@ export default function CourseEnrollment() {
                 Offline
               </button>
 
-              {/* LIVE CLASSES */}
+              {/* LIVE */}
               <button
                 onClick={() => setMode("live")}
                 className={`px-3 py-1 border rounded-lg text-sm ${
@@ -74,37 +79,50 @@ export default function CourseEnrollment() {
           </div>
 
           {/* CONDITIONAL SECTIONS */}
-          {mode === "online" && (
-            <div className="pt-3 text-sm text-gray-700">
-              {/* NOTHING EXTRA — EXACTLY LIKE IMAGE 1 */}
-            </div>
-          )}
-
-          {mode === "offline" && (
+          {mode !== "online" && (
             <div className="pt-3 text-sm text-gray-700">
               <label className="font-medium">Batch Timings</label>
-              <div className="flex gap-3 mt-2">
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Morning</button>
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Afternoon</button>
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Evening</button>
-              </div>
-            </div>
-          )}
 
-          {mode === "live" && (
-            <div className="pt-3 text-sm text-gray-700">
-              <label className="font-medium">Batch Timings</label>
               <div className="flex gap-3 mt-2">
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Morning</button>
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Afternoon</button>
-                <button className="px-3 py-1 border rounded-lg text-sm bg-white">Evening</button>
+
+                {/* ⭐ FIXED — NOW SELECTABLE */}
+                <button
+                  onClick={() => setBatch("morning")}
+                  className={`px-3 py-1 border rounded-lg text-sm ${
+                    batch === "morning" ? "bg-[#1b4edb] text-white" : "bg-white"
+                  }`}
+                >
+                  Morning
+                </button>
+
+                <button
+                  onClick={() => setBatch("afternoon")}
+                  className={`px-3 py-1 border rounded-lg text-sm ${
+                    batch === "afternoon" ? "bg-[#1b4edb] text-white" : "bg-white"
+                  }`}
+                >
+                  Afternoon
+                </button>
+
+                <button
+                  onClick={() => setBatch("evening")}
+                  className={`px-3 py-1 border rounded-lg text-sm ${
+                    batch === "evening" ? "bg-[#1b4edb] text-white" : "bg-white"
+                  }`}
+                >
+                  Evening
+                </button>
+
               </div>
             </div>
           )}
 
           {/* SUBMIT BUTTON */}
           <div className="pt-4">
-            <button className="w-full bg-[#1b4edb] text-white py-2 rounded-lg text-sm font-medium">
+            <button
+              onClick={handleSubmit}
+              className="w-full bg-[#1b4edb] text-white py-2 rounded-lg text-sm font-medium"
+            >
               Enroll Course
             </button>
           </div>
