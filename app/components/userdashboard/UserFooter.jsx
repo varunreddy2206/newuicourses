@@ -1,101 +1,159 @@
 "use client";
+
 import Image from "next/image";
-import React from "react";
+import { Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function UserFooter() {
   return (
-    <footer className="w-full bg-[#F4F7FF] pt-10 pb-6">
-      
-      {/* TOP SECTION */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-6">
+    <footer className="w-full bg-[#F3F5FB] border-t pt-12 pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
 
-        {/* LOGO + SOCIAL + TEXT */}
-        <div>
-          {/* Logo */}
-          <div className="flex items-center gap-2 mb-4">
+        {/* --------- TOP SECTION --------- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12">
+
+          {/* Left – Logo + Social */}
+          <div>
             <Image
-              src="/logo.png" // <-- you can replace manually
-              width={42}
-              height={42}
-              alt="Ascend Logo"
+              src="/logo.svg"
+              alt="Ascend Academy"
+              width={150}
+              height={40}
+              className="mb-6 w-[120px] sm:w-[150px]"
             />
-            <div className="flex flex-col leading-tight">
-              <span className="text-[18px] font-semibold">Ascend</span>
-              <span className="text-[10px] -mt-0.5 text-gray-600 tracking-wider">
-                Academy
-              </span>
+
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 rounded-full border cursor-pointer hover:bg-gray-100">
+                <Facebook size={18} />
+              </div>
+              <div className="p-3 rounded-full border cursor-pointer hover:bg-gray-100">
+                <Instagram size={18} />
+              </div>
+              <div className="p-3 rounded-full border cursor-pointer hover:bg-gray-100">
+                <Linkedin size={18} />
+              </div>
             </div>
+
+            <p className="text-gray-700 font-medium text-sm sm:text-base leading-relaxed">
+              Subscribe to Ascend Academy for Latest <br />
+              workshops & Internship Offers
+            </p>
+
+           {/* MOBILE → separate boxes, DESKTOP/TABLET → same capsule */}
+<div className="mt-5 w-full">
+
+  {/* MOBILE VIEW (vertical stacked) */}
+  <div className="flex flex-col gap-3 sm:hidden">
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      className="px-4 py-3 border border-gray-300 rounded-full w-full text-sm focus:outline-none"
+    />
+
+    <button
+      className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 text-sm w-full"
+    >
+      Sign up
+    </button>
+  </div>
+
+  {/* TABLET + DESKTOP VIEW (your original layout — unchanged) */}
+  <div className="hidden sm:flex items-center w-full max-w-md min-w-[330px] border border-gray-300 rounded-full overflow-hidden bg-white">
+
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      className="flex-1 px-1 py-3 text-gray-700 focus:outline-none text-sm sm:text-base"
+    />
+
+    <button
+      className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 text-sm sm:text-base mr-2"
+    >
+      Sign up
+    </button>
+  </div>
+
+</div>
+
+
           </div>
 
-          {/* Social Media Icons */}
-          <div className="flex items-center gap-4 mb-4">
-            <Image src="/icons/facebook.png" width={20} height={20} alt="fb" />
-            <Image src="/icons/linkedin.png" width={20} height={20} alt="linkedin" />
-            <Image src="/icons/youtube.png" width={20} height={20} alt="youtube" />
+          {/* Explore */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-lg">
+              Explore
+            </h3>
+            <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Non IT Courses</li>
+              <li>Blog</li>
+            </ul>
           </div>
 
-          {/* Subtitle */}
-          <p className="text-[13px] text-gray-600 leading-relaxed max-w-[200px]">
-            Subscribe to Ascend Academy for Latest workshops & Internships Offers
-          </p>
+          {/* Resources 1 */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-lg">
+              Resources
+            </h3>
+            <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+            </ul>
+          </div>
+
+          {/* Resources 2 */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-lg">
+              Resources
+            </h3>
+            <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+              <li>Lorem ipsum</li>
+            </ul>
+          </div>
         </div>
 
-        {/* EXPLORE */}
-        <div>
-          <h3 className="text-[15px] font-semibold mb-3">Explore</h3>
-          <ul className="space-y-2 text-[13px] text-gray-700">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Solutions</li>
-            <li>Blog</li>
-          </ul>
+        {/* --------- TRENDING TRACKS (REPEATED SECTION) --------- */}
+        <FooterTrackSection />
+        <FooterTrackSection />
+        <FooterTrackSection />
+
+        {/* --------- BOTTOM LINKS --------- */}
+        <div className="text-center mt-10 flex flex-wrap justify-center gap-4 text-gray-600 text-xs sm:text-sm">
+          <span>• Terms and Conditions</span>
+          <span>• Privacy Policy</span>
+          <span>• Refund Policy</span>
         </div>
 
-        {/* RESOURCES 1 */}
-        <div>
-          <h3 className="text-[15px] font-semibold mb-3">Resources</h3>
-          <ul className="space-y-2 text-[13px] text-gray-700">
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-          </ul>
-        </div>
-
-        {/* RESOURCES 2 */}
-        <div>
-          <h3 className="text-[15px] font-semibold mb-3">Resources</h3>
-          <ul className="space-y-2 text-[13px] text-gray-700">
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-            <li>Lorem ipsum</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* DIVIDER */}
-      <div className="w-full flex justify-center mt-10">
-        <p className="text-[11px] text-gray-600 flex gap-4">
-          <span>Terms and Conditions</span>
-          <span>•</span>
-          <span>Privacy Policy</span>
-          <span>•</span>
-          <span>Refund Policy</span>
+        <p className="mt-4 text-center text-gray-500 text-xs">
+          © 2025 – Simplilearn Americas Inc. All Rights Reserved.
         </p>
       </div>
-
-      {/* ADDRESS + COPYRIGHT */}
-      <div className="text-center mt-2">
-        <p className="text-[10px] text-gray-500">
-          Address: 5851 Legacy Circle 8th Floor, Plano, TX 75024 United States Phone No: 844-LEARN-8 (844-532-7688)
-        </p>
-
-        <p className="text-[10px] text-gray-400 mt-1">
-          © 2025 - Simplilearn Americas Inc. All Rights Reserved. The certification names are the trademarks of their respective owners.
-        </p>
-      </div>
-
     </footer>
+  );
+}
+
+/* Reusable Footer Track Component */
+function FooterTrackSection() {
+  return (
+    <div className="py-6 border-t">
+      <h4 className="font-semibold text-gray-900 mb-3 text-base sm:text-lg">
+        Trending Post-Graduate Tracks
+      </h4>
+
+      <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700 leading-relaxed">
+        <span>PG in Data Science</span> |
+        <span>Cloud Computing and DevOps - IITG</span> |
+        <span>Data Analytics Program</span> |
+        <span>AI and ML Course</span> |
+        <span>Business Analysis Certification Course</span> |
+        <span>Data Engineering</span> |
+        <span>Certification Courses</span>
+      </div>
+    </div>
   );
 }

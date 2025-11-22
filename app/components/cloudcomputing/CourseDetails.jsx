@@ -1,17 +1,20 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { CheckCircle, Clock, Users, BookOpen, Award, Globe } from "lucide-react";
 
 export default function CourseDetails() {
   return (
-    <section className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-14">
+    <section className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-12">
+
+      {/* GRID: LEFT CONTENT + RIGHT SIDEBAR */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
 
-        {/* ---------------- LEFT CONTENT ---------------- */}
+        {/* -------------------------------- LEFT CONTENT -------------------------------- */}
         <div className="lg:col-span-2">
 
           {/* Tabs */}
-          <div className="flex flex-wrap gap-4 sm:gap-8 text-gray-600 border-b pb-3 sm:pb-4 mb-5 sm:mb-6">
+          <div className="flex flex-wrap gap-6 text-gray-600 border-b pb-4 mb-8">
             <button className="font-semibold text-gray-900">Overview</button>
             <button>Curriculum</button>
             <button>Instructor</button>
@@ -20,88 +23,107 @@ export default function CourseDetails() {
 
           {/* Course Description */}
           <h2 className="text-xl sm:text-2xl font-bold mb-3">Course Descriptions</h2>
+
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
-            Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, made of owl the quis nostrud exercitation ullamco laboris nisi ut aliquip 
-            ex ea dolor commodo consequat. Duis aute irure and dolor in reprehenderit.
+            Nuvhan Global Services Pvt. Ltd presents an industry-oriented Artificial Intelligence and Machine Learning course with Python,
+            designed to help you master the most in-demand technologies of the future.
           </p>
 
-          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-8 sm:mb-10">
-            Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, made of owl the quis nostrud exercitation ullamco laboris nisi ut aliquip 
-            ex ea dolor commodo consequat. Duis aute irure and dolor in reprehenderit.
+          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
+            Our course offers hands-on training, real-time projects, and personalized mentoring to help you build intelligent systems,
+            predictive models, and automation solutions using Python programming and AI frameworks.
+          </p>
+
+          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-10">
+            This course bridges the gap between theory and practice, ensuring you gain the skills required to work on real-world AI
+            applications across industries like healthcare, finance, automation, and more.
           </p>
 
           {/* Skills */}
           <h2 className="text-lg sm:text-xl font-bold mb-3">Skills You will gain:</h2>
-          <p classname="text-gray-700 text-sm sm:text-base mb-8 sm:mb-10">
-            Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS, React Basics, 
-            Project Architecture, Deployment, Debugging, Git & Version Control
+
+          <p className="text-gray-700 text-sm sm:text-base leading-6 mb-10">
+            Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS, React Basics, Project Architecture,
+            Deployment, Debugging, Git & Version Control
           </p>
 
-          {/* Requirements */}
-          <h2 className="text-lg sm:text-xl font-bold mb-3">Requirements for The Course</h2>
-          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-5 sm:mb-6">
-            Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, made of owl the quis nostrud exercitation ullamco laboris nisi ut aliquip 
-            ex ea dolor commodo consequat. Duis aute irure and dolor in reprehenderit.
+          {/* Career Opportunities */}
+          <h2 className="text-xl font-semibold mb-2">Career Opportunities</h2>
+
+          <p className="text-sm text-gray-600 leading-6 mb-6">
+            After completing this course, you can apply for roles such as:<br />
+            Top recruiters include MNC Companies, IT firms, startups, fintech companies, and research institutions.
           </p>
 
-          {/* Requirement List */}
-          <ul className="space-y-3 sm:space-y-4">
+          <ul className="space-y-3">
             {[
-              "Ut Viverra Bibendum Lorem. At Tempus Nibh Mattis",
-              "Quis Nostrud Exercitation Ullamco Laboris Nisi",
-              "Duis Aute Irure And Dolor In Reprehenderit",
-              "Ante Rutrum Sed The Is Sodales Augue Consequat",
-            ].map((item, i) => (
-              <li key={i} className="flex items-center gap-2 sm:gap-3 text-gray-700 text-sm sm:text-base">
-                <CheckCircle className="text-blue-600 min-w-5" size={20} />
-                {item}
+              "AI Engineer",
+              "Machine Learning Engineer",
+              "Data Scientist",
+              "Research Analyst / Data Analyst",
+              "Deep Learning Engineer",
+              "Automation Engineer",
+              "Research Analyst / Data Analyst",
+            ].map((role, index) => (
+              <li
+                key={index}
+                className="flex items-center gap-3 text-sm text-gray-800"
+              >
+                <CheckCircle className="text-blue-600 w-5 h-5" />
+                {role}
               </li>
             ))}
           </ul>
+
         </div>
 
-        {/* ---------------- RIGHT SIDEBAR CARD ---------------- */}
-        <div>
-          <div className="border rounded-3xl p-5 sm:p-6 shadow-sm space-y-6">
+        {/* -------------------------------- RIGHT SIDEBAR -------------------------------- */}
+        <div className="space-y-6">
 
+          {/* Course Includes Card */}
+          <div className="border rounded-3xl p-6 shadow-sm space-y-6">
             <h3 className="text-lg sm:text-xl font-semibold">Course includes:</h3>
 
-            <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-gray-700">
+            <div className="space-y-4 text-sm sm:text-base text-gray-700">
               <InfoRow icon={Award} label="Level:" value="Expert" />
-              <InfoRow icon={Clock} label="Duration:" value="8h 30m" />
+              <InfoRow icon={Clock} label="Duration:" value="6 Months/Fast-track" />
               <InfoRow icon={BookOpen} label="Lessons:" value="15" />
               <InfoRow icon={Users} label="Students:" value="120" />
               <InfoRow icon={Award} label="Certifications:" value="Yes" />
               <InfoRow icon={Globe} label="Language:" value="English" />
             </div>
 
-            {/* Pricing Button */}
-            <button className="w-full py-3 bg-blue-50 border border-blue-600 rounded-full 
-            text-blue-700 font-medium hover:bg-blue-100 transition text-sm sm:text-base">
-              Course Fee: 45,000 / 3 Months
-            </button>
-
-            {/* Join Button */}
-            <button className="w-full py-3 bg-blue-600 text-white rounded-full 
-            font-medium hover:bg-blue-700 flex justify-center items-center gap-2 
-            transition text-sm sm:text-base">
-              Join This Course →
-            </button>
-
             {/* Share */}
-            <div className="flex flex-col">
+            <div className="mt-4 flex flex-col">
               <p className="text-gray-500 text-xs sm:text-sm mb-3">Share This Course</p>
 
               <div className="flex gap-3 sm:gap-4 text-gray-600">
-                <div className="w-9 sm:w-10 h-9 sm:h-10 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📘</div>
-                <div className="w-9 sm:w-10 h-9 sm:h-10 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📸</div>
-                <div className="w-9 sm:w-10 h-9 sm:h-10 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">🔗</div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📘</div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📸</div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">🔗</div>
               </div>
             </div>
+          </div>
 
+          {/* Invite Card */}
+          <div className="border rounded-3xl shadow-sm p-5 flex flex-col items-start gap-3">
+            <Image
+              src="/mnt/data/568f5b2f-40b1-4c47-ae64-62873f376b2b.png"
+              width={120}
+              height={120}
+              alt="Invite Friends"
+              className="object-contain"
+            />
+
+            <h3 className="font-semibold text-[15px]">Invite your friends</h3>
+
+            <p className="text-[13px] text-gray-600 leading-5">
+              Enroll for as many SkillUp courses as you like for <b>FREE</b>
+            </p>
+
+            <button className="text-blue-600 text-sm font-medium border border-blue-600 rounded-md px-4 py-2 hover:bg-blue-100">
+              Invite now
+            </button>
           </div>
         </div>
 
@@ -110,7 +132,7 @@ export default function CourseDetails() {
   );
 }
 
-/* ---------------- Reusable Sidebar Row ---------------- */
+/* ---------------- Reusable Item for Sidebar ---------------- */
 function InfoRow({ icon: Icon, label, value }) {
   return (
     <div className="flex justify-between items-center">
