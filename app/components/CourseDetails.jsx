@@ -1,19 +1,25 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { CheckCircle, Clock, Users, BookOpen, Award, Globe } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  Users,
+  BookOpen,
+  Award,
+  Globe,
+} from "lucide-react";
 
-export default function CourseDetails() {
+export default function CourseDetails({ course }) {
+  const totalLessons = course?.curriculum?.reduce(
+    (sum, module) => sum + (module.lessons?.length || 0),
+    0
+  );
   return (
     <section className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-12">
-
       {/* GRID: LEFT CONTENT + RIGHT SIDEBAR */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
-
-        {/* -------------------------------- LEFT CONTENT -------------------------------- */}
         <div className="lg:col-span-2">
-
-          {/* Tabs */}
           <div className="flex flex-wrap gap-6 text-gray-600 border-b pb-4 mb-8">
             <button className="font-semibold text-gray-900">Overview</button>
             <button>Curriculum</button>
@@ -21,42 +27,55 @@ export default function CourseDetails() {
             <button>Reviews</button>
           </div>
 
-          {/* Course Description */}
-          <h2 className="text-xl sm:text-2xl font-bold mb-3">Course Descriptions</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-3">
+            Course Descriptions
+          </h2>
 
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
-            Nuvhan Global Services Pvt. Ltd presents an industry-oriented Artificial Intelligence and Machine Learning course with Python,
-            designed to help you master the most in-demand technologies of the future.
+            {/* Nuvhan Global Services Pvt. Ltd presents an industry-oriented
+            Artificial Intelligence and Machine Learning course with Python,
+            designed to help you master the most in-demand technologies of the
+            future. */}
+            {course?.description}
           </p>
 
-          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
-            Our course offers hands-on training, real-time projects, and personalized mentoring to help you build intelligent systems,
-            predictive models, and automation solutions using Python programming and AI frameworks.
-          </p>
+          {/* <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4">
+            Our course offers hands-on training, real-time projects, and
+            personalized mentoring to help you build intelligent systems,
+            predictive models, and automation solutions using Python programming
+            and AI frameworks.
+          </p> */}
 
-          <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-10">
-            This course bridges the gap between theory and practice, ensuring you gain the skills required to work on real-world AI
-            applications across industries like healthcare, finance, automation, and more.
-          </p>
-
-          {/* Skills */}
-          <h2 className="text-lg sm:text-xl font-bold mb-3">Skills You will gain:</h2>
+          {/* <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-10">
+            This course bridges the gap between theory and practice, ensuring
+            you gain the skills required to work on real-world AI applications
+            across industries like healthcare, finance, automation, and more.
+          </p> */}
+          <h2 className="text-lg sm:text-xl font-bold mb-3">
+            Skills You will gain:
+          </h2>
 
           <p className="text-gray-700 text-sm sm:text-base leading-6 mb-10">
-            Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS, React Basics, Project Architecture,
-            Deployment, Debugging, Git & Version Control
+            {/* Core Java, OOPs, JDBC, Spring Boot, REST APIs, MySQL, HTML/CSS/JS,
+            React Basics, Project Architecture, Deployment, Debugging, Git &
+            Version Control */}
+            {course?.skills?.map((each, index) => (
+              <span key={index}>{each}, </span>
+            ))}
           </p>
 
           {/* Career Opportunities */}
           <h2 className="text-xl font-semibold mb-2">Career Opportunities</h2>
 
           <p className="text-sm text-gray-600 leading-6 mb-6">
-            After completing this course, you can apply for roles such as:<br />
-            Top recruiters include MNC Companies, IT firms, startups, fintech companies, and research institutions.
+            After completing this course, you can apply for roles such as:
+            <br />
+            Top recruiters include MNC Companies, IT firms, startups, fintech
+            companies, and research institutions.
           </p>
 
           <ul className="space-y-3">
-            {[
+            {/* [
               "AI Engineer",
               "Machine Learning Engineer",
               "Data Scientist",
@@ -64,7 +83,8 @@ export default function CourseDetails() {
               "Deep Learning Engineer",
               "Automation Engineer",
               "Research Analyst / Data Analyst",
-            ].map((role, index) => (
+            ] */}
+            {course?.requirements?.map((role, index) => (
               <li
                 key={index}
                 className="flex items-center gap-3 text-sm text-gray-800"
@@ -74,33 +94,55 @@ export default function CourseDetails() {
               </li>
             ))}
           </ul>
-
         </div>
 
         {/* -------------------------------- RIGHT SIDEBAR -------------------------------- */}
         <div className="space-y-6">
-
           {/* Course Includes Card */}
           <div className="border rounded-3xl p-6 shadow-sm space-y-6">
-            <h3 className="text-lg sm:text-xl font-semibold">Course includes:</h3>
+            <h3 className="text-lg sm:text-xl font-semibold">
+              Course includes:
+            </h3>
 
             <div className="space-y-4 text-sm sm:text-base text-gray-700">
-              <InfoRow icon={Award} label="Level:" value="Expert" />
-              <InfoRow icon={Clock} label="Duration:" value="6 Months/Fast-track" />
-              <InfoRow icon={BookOpen} label="Lessons:" value="15" />
-              <InfoRow icon={Users} label="Students:" value="120" />
+              <InfoRow icon={Award} label="Level:" value={course?.level} />
+              <InfoRow
+                icon={Clock}
+                label="Duration:"
+                // value="6 Months/Fast-track"
+                value={course?.totalHours}
+              />
+              <InfoRow
+                icon={BookOpen}
+                label="Lessons:"
+                //  value="15"
+                value={totalLessons}
+              />
+              <InfoRow
+                icon={Users}
+                label="Students:"
+                value={course?.studentsEnrolled}
+              />
               <InfoRow icon={Award} label="Certifications:" value="Yes" />
               <InfoRow icon={Globe} label="Language:" value="English" />
             </div>
 
             {/* Share */}
             <div className="mt-4 flex flex-col">
-              <p className="text-gray-500 text-xs sm:text-sm mb-3">Share This Course</p>
+              <p className="text-gray-500 text-xs sm:text-sm mb-3">
+                Share This Course
+              </p>
 
               <div className="flex gap-3 sm:gap-4 text-gray-600">
-                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📘</div>
-                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">📸</div>
-                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">🔗</div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">
+                  📘
+                </div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">
+                  📸
+                </div>
+                <div className="w-9 h-9 border rounded-full flex justify-center items-center hover:bg-gray-100 cursor-pointer">
+                  🔗
+                </div>
               </div>
             </div>
           </div>
@@ -126,7 +168,6 @@ export default function CourseDetails() {
             </button>
           </div>
         </div>
-
       </div>
     </section>
   );
