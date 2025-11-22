@@ -2,168 +2,139 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Clock, Globe, Star, User } from "lucide-react";
+import { useGetAPI } from "@/common/hooks/useGetAPI";
+import { getCourseServiceApi } from "@/features/courses/service/get-course.service";
+import Link from "next/link";
 
 export default function ExploreCourses() {
-  // -------------------------
-  // COURSE CATEGORY DATA
-  // -------------------------
-  const categories = {
-    "Artificial Intelligence, Data & Automation": [
-      "Artificial Intelligence & Machine Learning with Python",
-      "Data Science & Analytics with Python",
-      "Python for Development & Automation",
-    ],
-    "Web Development": [
-      "Full Stack Web Development (MERN / MEAN)",
-      "Full Stack Java Development (Spring Boot + React / Angular)",
-      "Full Stack Python Development (Django / Flask + React)",
-      "Frontend Development (HTML, CSS, JavaScript, React)",
-      "Backend Development (Node.js, Express, MongoDB / MySQL)",
-    ],
-    "Mobile App Development": [
-      "Flutter App Development",
-      "React Native App Development",
-      "Swift App Development (iOS)",
-      "Kotlin App Development (Android)",
-    ],
-    "Cloud, DevOps & Infrastructure": [
-      "DevOps Engineer Program",
-      "Cloud Computing Fundamentals",
-      "Docker, Kubernetes & CI/CD Tools",
-    ],
-    "Software Testing & QA": [
-      "Manual & Automation Testing",
-      "Selenium & API Testing (Advanced QA)",
-    ],
-    "Design & Creative Technologies": [
-      "UI/UX Design Fundamentals (Figma & Adobe XD)",
-      "Graphic Design (Photoshop, Illustrator, Canva Pro)",
-    ],
-    "Internship & Corporate Programs": [
-      "Real-Time Project Internship (Web/App/AI)",
-      "Corporate Upskilling (Custom Modules)",
-    ],
-  };
+  const newCat = [
+    "Artificial Intelligence, Data & Automation",
+    "Web Development",
+    "Mobile App Development",
+    "Cloud, DevOps & Infrastructure",
+    "Software Testing & QA",
+    "Design & Creative Technologies",
+    "Internship & Corporate Programs",
+  ];
 
-  // -------------------------
-  // STORE SELECTED CATEGORY
-  // -------------------------
-  const [selectedCategory, setSelectedCategory] = useState(
-    "Artificial Intelligence, Data & Automation"
-  );
+  // Selected category
+  const [selectedCategory, setSelectedCategory] = useState(newCat[0]);
 
-  // -------------------------
-  // Dummy course images
-  // -------------------------
-  const courseImages = ["/course1.png", "/course1.png", "/course1.png", "/course1.png"];
+  // API CALL
+  const { data, loading, error } = useGetAPI(getCourseServiceApi, {
+    category: selectedCategory,
+    page: 1,
+    limit: 5,
+  });
+
+  const serverCourses = data?.data || [];
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
-
-      {/* SECTION TITLE */}
       <h2 className="text-lg font-semibold text-gray-900 mb-6">
         Explore courses
       </h2>
 
-      {/* CATEGORY TAGS */}
+      {/* CATEGORY BUTTONS */}
       <div className="flex flex-wrap gap-3 mb-10">
-        {Object.keys(categories).map((category, i) => (
+        {newCat.map((category, i) => (
           <button
             key={i}
             onClick={() => setSelectedCategory(category)}
-            className={`
-              text-sm px-4 py-1 border rounded-full shadow-sm
-              ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-white text-gray-700"}
-            `}
+            className={`text-sm px-4 py-1 border rounded-full shadow-sm ${
+              selectedCategory === category
+                ? "bg-blue-600 text-white"
+                : "bg-white text-gray-700"
+            }`}
           >
             {category}
           </button>
         ))}
       </div>
 
+      {/* Loading */}
+      {loading && (
+        <p className="text-center text-gray-500 py-10">Loading courses...</p>
+      )}
+
+      {/* No courses from server */}
+      {!loading && serverCourses.length === 0 && (
+        <div className="text-center text-gray-600 py-10">
+          <p className="text-lg font-medium">
+            No courses found in this category
+          </p>
+          <p className="text-sm text-gray-500 mt-1">
+            Try selecting another category.
+          </p>
+        </div>
+      )}
+
       {/* COURSE LIST */}
       <div className="space-y-12">
-        {categories[selectedCategory].map((courseName, index) => (
-          <div
-            key={index}
-            className="
-              w-full 
-              flex 
-              flex-col sm:flex-row 
-              items-start sm:items-center 
-              justify-between 
-              gap-6 
-              border-b 
-              pb-10
-            "
-          >
+        {!loading &&
+          serverCourses.length > 0 &&
+          serverCourses.map((course, index) => (
+            <div
+              key={index}
+              className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b pb-10"
+            >
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {course.title}
+                </h3>
 
-            {/* LEFT CONTENT */}
-            <div className="flex-1">
+                <p className="text-gray-600 text-sm mb-4 hidden sm:block">
+                  {course.subtitle}
+                </p>
 
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {courseName}
-              </h3>
+                <div className="flex items-center gap-6 text-sm text-gray-700 mb-5">
+                  <div className="flex items-center gap-2">
+                    <User size={16} className="text-green-600" />
+                    <span>{course.level}</span>
+                  </div>
 
-              {/* DESCRIPTION — placeholder (you can replace later) */}
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 hidden sm:block">
-                Learn professional skills with hands-on projects, industry-level tools, and real-time concepts.
-              </p>
+                  <div className="flex items-center gap-2">
+                    <Clock size={16} className="text-gray-700" />
+                    <span>{course.totalHours}</span>
+                  </div>
 
-              {/* TAG ROW */}
-              <div className="flex items-center gap-6 text-sm text-gray-700 mb-5">
+                  <div className="flex items-center gap-2">
+                    <Globe size={16} className="text-teal-600" />
+                    <span>Online</span>
+                  </div>
 
-                <div className="flex items-center gap-2">
-                  <User size={16} className="text-green-600" />
-                  <span>Beginner</span>
+                  <div className="flex items-center gap-2">
+                    <Star size={16} className="text-yellow-500" />
+                    <span>{course.rating}</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Clock size={16} className="text-gray-700" />
-                  <span>6 months</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Globe size={16} className="text-teal-600" />
-                  <span>Online</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Star size={16} className="text-yellow-500" />
-                  <span>17M+</span>
-                </div>
-
-              </div>
-
-              {/* BUTTON */}
-              <div className="mt-2">
-                <button className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700 mt-15">
+                <Link
+                  href={`/course/${course._id}`}
+                  className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700"
+                >
                   Enroll Now
-                </button>
+                </Link>
               </div>
 
+              <div className="w-full sm:min-w-[220px] sm:max-w-[240px]">
+                <Image
+                  src="/course1.png"
+                  alt="Course Image"
+                  width={400}
+                  height={250}
+                  className="w-full h-48 object-cover rounded-md"
+                />
+              </div>
             </div>
-
-            {/* COURSE IMAGE */}
-            <div className="w-full sm:min-w-[220px] sm:max-w-[240px]">
-              <Image
-                src={courseImages[index % 4]}
-                alt="Course Thumbnail"
-                width={240}
-                height={200}
-                className="rounded-xl object-cover w-full h-[180px] sm:h-full"
-              />
-            </div>
-
-          </div>
-        ))}
+          ))}
       </div>
 
-      {/* BLUE FOOTER BANNER */}
+      {/* Banner */}
       <div className="mt-12 w-full bg-blue-600 text-white text-center py-4 rounded-full text-sm sm:text-base font-medium shadow">
-        Learn from industry experts, earn global certifications, and start your career journey with confidence. »
+        Learn from industry experts, earn global certifications, and start your
+        career journey with confidence. »
       </div>
-
     </div>
   );
 }
