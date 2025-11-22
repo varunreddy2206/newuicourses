@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { Play } from "lucide-react";
 
-export default function CourseHero() {
+export default function CourseHero({ course }) {
+  console.log("course", course);
+
   return (
     <section className="w-full py-12 sm:py-16 px-4 sm:px-6 md:px-16 lg:px-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-
         {/* LEFT TEXT SECTION */}
         <div className="space-y-5 sm:space-y-6">
           {/* Badge */}
@@ -18,14 +19,19 @@ export default function CourseHero() {
           {/* Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold text-gray-900">
             The Complete <br />
-            <span className="text-yellow-500">Artificial Intelligence & Machine Learning With Python</span> for <br />
-            Beginners
+            <span className="text-yellow-500">
+              {/* Artificial Intelligence & Machine Learning With Python */}
+              {course?.title}
+            </span>{" "}
+            {/* for <br />
+            Beginners */}
+            {course?.subtitle}
           </h1>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg text-gray-700 max-w-xl">
-            Learn from industry experts, earn global certifications, and start your
-            career journey with confidence.
+            Learn from industry experts, earn global certifications, and start
+            your career journey with confidence.
           </p>
 
           {/* Buttons */}
@@ -44,15 +50,15 @@ export default function CourseHero() {
           {/* Info Row */}
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-gray-700">
             <div className="flex items-center gap-1 text-sm sm:text-lg">
-              ⭐ 3.4 (36 Review)
+              ⭐ {course?.rating}({course?.totalReviews ?? 0} Review)
             </div>
 
             <div className="flex items-center gap-1 text-sm sm:text-lg">
-              🎥 48 HRS Classes
+              🎥 {course?.totalHours} Classes
             </div>
 
             <div className="flex items-center gap-1 text-sm sm:text-lg">
-              🎓 Beginner
+              🎓 {course?.level}
             </div>
           </div>
         </div>
@@ -69,10 +75,14 @@ export default function CourseHero() {
 
           {/* Play Button */}
           <button className="absolute bg-white w-14 h-14 sm:w-20 sm:h-20 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition">
-            <Play size={30} className="sm:w-[38px] sm:h-[38px]" fill="blue" color="blue" />
+            <Play
+              size={30}
+              className="sm:w-[38px] sm:h-[38px]"
+              fill="blue"
+              color="blue"
+            />
           </button>
         </div>
-
       </div>
     </section>
   );
