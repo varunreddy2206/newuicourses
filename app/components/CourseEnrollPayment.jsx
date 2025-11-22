@@ -1,16 +1,16 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 
 export default function CourseEnrollPayment() {
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
     const router = useRouter();
 
 
-    const mode = (searchParams.get("mode") || "online").toUpperCase();
-    const batch = searchParams.get("batch") || "";
+    // const mode = (searchParams.get("mode") || "online").toUpperCase();
+    // const batch = searchParams.get("batch") || "";
 
     const [student, setStudent] = useState("");
     const [email, setEmail] = useState("");
@@ -83,7 +83,7 @@ export default function CourseEnrollPayment() {
 
                         <div className="border-2 border-[#1b4edb] rounded-lg px-3 py-2 inline-block">
                             <p className="text-[14px] font-medium text-[#1b4edb]">
-                                {mode} {batch && `- ${batch.toUpperCase()}`}
+                                {/* {mode} {batch && `- ${batch.toUpperCase()}`} */}
                             </p>
                         </div>
                     </div>
