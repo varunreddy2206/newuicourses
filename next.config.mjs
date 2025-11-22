@@ -2,6 +2,9 @@
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    domains: ["example.com"], // 👈 Add your image host here
+  },
 };
 
 export default nextConfig;
