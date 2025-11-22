@@ -1,21 +1,40 @@
 import React from "react";
-import UserHeader from "../components/userdashboard/userheader";
-import LearningSlider from "../components/userdashboard/LearningSlider";
-import UserLearning from "../components/userdashboard/UserLearning";
-import Placement from "../components/Placement";
-import CertificateSection from "../components/CertificateSection";
-import Recomemded from "../components/Recomemded";
+import UserHeader from "../components/userdashboard/UserHeader";
+import UserHeroSection from "../components/userdashboard/UserHeroSection";
+import UserPlacement from "../components/userdashboard/UserPlacement";
+import UserWorkShop from "../components/userdashboard/UserWorkShop";
+import UserExploreCourses from "../components/userdashboard/UserExploreCourses";
+import UserPopularCourses from "../components/userdashboard/UserPopularCourses";
+import UserWhyTrustUs from "../components/userdashboard/UserWhyTrustUs";
+import UserScholarship from "../components/userdashboard/UserScholarship";
+import UserCertificateSection from "../components/userdashboard/UserCertificateSection";
+import UserContactSection from "../components/userdashboard/UserContactSection";
+import UserPrograms from "../components/userdashboard/UserPrograms";
+import UserRecomemded from "../components/userdashboard/UserRecomemded";
+import UserTestimonials from "../components/userdashboard/UserTestimonials";
 import UserFooter from "../components/userdashboard/UserFooter";
+import UserSubHeader from "../components/userdashboard/UserSubHeader";
+
 export default function Page() {
   return (
-    <div>
+    <div className="pt-[140px] md:pt-[120px] lg:pt-[110px]">
+      <UserSubHeader />
       <UserHeader />
-      <LearningSlider />
-      <UserLearning />
-      <Placement  />
-      <CertificateSection />
-      <Recomemded />
+      <UserHeroSection />
+      <UserPlacement />
+      <UserWorkShop />
+      <UserExploreCourses />
+      <UserPopularCourses />
+      <UserWhyTrustUs />
+      <UserScholarship />
+      <UserCertificateSection />
+      <UserContactSection />
+      <UserPrograms />
+      <UserRecomemded />
+      <UserTestimonials />
       <UserFooter />
+
+      
     </div>
   );
 }

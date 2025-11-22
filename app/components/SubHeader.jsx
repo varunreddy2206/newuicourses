@@ -23,7 +23,7 @@ export default function SubHeader() {
         </div>
 
         {/* EXPLORE BUTTON (Visible on all devices) */}
-        <Link href="/courses">
+        <Link href="/">
           <button className="flex bg-blue-600 text-white px-8 py-2 mt-5 rounded-full font-medium text-base items-center gap-2 hover:bg-blue-700">
             <span className="text-lg">»»»</span> Explore Courses
           </button>

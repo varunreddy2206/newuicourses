@@ -42,7 +42,9 @@ export default function UserHeader() {
   }, [open]);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-50">
+    <header className="fixed top-[32px] left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40">
+
+
 
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
@@ -75,7 +77,10 @@ export default function UserHeader() {
               lg:flex      /* show on desktop & laptop */
             "
           >
-            <span className="text-lg">»»»</span> Explore Courses
+            <span className="text-lg">»»»</span>
+            <Link href="/courses">
+            Explore Courses
+            </Link>
           </button>
 
           {/* MY LEARNING (Desktop only) */}

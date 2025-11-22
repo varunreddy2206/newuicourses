@@ -8,7 +8,9 @@ import Link from "next/link";
 export default function RouteWrapper({ children }) {
   const pathname = usePathname();
 
-  const hideHeader = pathname.startsWith("/userdashboard");
+  const hideHeader =
+  pathname.startsWith("/userdashboard") ||
+  pathname.includes("/course"); 
 
   return (
     <div className={hideHeader ? "" : "pt-28"}>
