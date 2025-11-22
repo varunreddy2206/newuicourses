@@ -45,16 +45,18 @@ export default function SubHeader() {
         </div>
 
         {/* LOGIN BUTTON (Desktop only) */}
-        <Link href="/Registrationform">
+        <Link href="/login">
           <button className="hidden lg:block bg-blue-600 text-white px-6 py-2 mt-5 rounded-full">
             Login →
           </button>
         </Link>
 
         {/* JOIN FOR FREE (Desktop + Tablet visible, Mobile hidden) */}
+        <Link href="/Registrationform">
         <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex sm:flex max-sm:hidden">
           Join For Free
         </button>
+        </Link>
 
         {/* HAMBURGER (Mobile + Tablet) */}
         <button

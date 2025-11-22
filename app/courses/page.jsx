@@ -5,14 +5,15 @@ import Scholarship from "../components/Scholarship";
 import PopularCourses from "../components/PopularCourses";
 import CertificateSection from "../components/CertificateSection";
 import Footer from "../components/Footer";
-import RegisterForm from "../components/RegisterForm";
-import CourseEnrollment from "../components/CourseEnrollment";
+import TrainingOptions from "../components/TrainingOptions";
+
 
 export default function Page() {
   return (
     <div>
         <CourseHero />
         <CourseDetails />
+        <TrainingOptions />
         <Scholarship />
         <PopularCourses />
         <CertificateSection />

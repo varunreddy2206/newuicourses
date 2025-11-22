@@ -18,7 +18,7 @@ export default function CourseHero() {
           {/* Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold text-gray-900">
             The Complete <br />
-            <span className="text-yellow-500">Graphic Design</span> for <br />
+            <span className="text-yellow-500">Artificial Intelligence & Machine Learning With Python</span> for <br />
             Beginners
           </h1>
 
