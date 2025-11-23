@@ -60,13 +60,13 @@ export default function LoginForm() {
           {/* Social Buttons */}
           <div className="flex justify-center gap-6">
             <div className="border p-3 rounded-md shadow-sm cursor-pointer">
-              <Image src="/google.png" alt="Google" width={22} height={22} />
+              <Image src="/googlelogo.png" alt="Google" width={22} height={22} />
             </div>
             <div className="border p-3 rounded-md shadow-sm cursor-pointer">
               <Image src="/facebook.png" alt="Facebook" width={22} height={22} />
             </div>
             <div className="border p-3 rounded-md shadow-sm cursor-pointer">
-              <Image src="/linkedin.png" alt="LinkedIn" width={22} height={22} />
+              <Image src="/linkdin.png" alt="LinkedIn" width={22} height={22} />
             </div>
           </div>
 
@@ -93,7 +93,7 @@ export default function LoginForm() {
         
         {/* Image */}
         <Image
-          src="/mnt/data/b03e1121-6fb3-4ea8-8435-4694b31e2a65.png"
+          src="/loginpage.png"
           alt="Hero"
           fill
           className="object-cover"
