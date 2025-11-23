@@ -53,9 +53,9 @@ export default function SubHeader() {
 
         {/* JOIN FOR FREE (Desktop + Tablet visible, Mobile hidden) */}
         <Link href="/Registrationform">
-        <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex sm:flex max-sm:hidden">
-          Join For Free
-        </button>
+          <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex sm:flex max-sm:hidden">
+            Join For Free
+          </button>
         </Link>
 
         {/* HAMBURGER (Mobile + Tablet) */}
@@ -87,14 +87,19 @@ export default function SubHeader() {
           </div>
 
           {/* LOGIN (Mobile + Tablet) */}
-          <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium">
-            Login →
-          </button>
+          <Link href="/login">
+            <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium">
+              Login →
+            </button>
+          </Link>
 
           {/* JOIN FOR FREE – Mobile only */}
-          <button className="w-full bg-white border border-blue-600 text-blue-600 py-3 rounded-full font-medium sm:hidden">
-            Join For Free
-          </button>
+          <Link href="/Registrationform">
+            <button className="w-full bg-white border border-blue-600 text-blue-600 py-3 rounded-full font-medium sm:hidden">
+              Join For Free
+            </button>
+          </Link>
+
         </div>
       )}
     </div>
