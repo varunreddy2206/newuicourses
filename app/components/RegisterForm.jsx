@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function RegistrationForm() {
   return (
-    <div className="w-full min-h-screen bg-white flex flex-col md:flex-row">
+    <div className="w-full min-h-screen bg-white flex flex-col md:flex-row ">
       
       {/* LEFT SECTION */}
       <div className="w-full md:w-1/2 flex items-center justify-center py-10 px-4">
@@ -21,12 +21,12 @@ export default function RegistrationForm() {
             <div className="flex gap-3">
               <input
                 type="text"
-                placeholder="Charan s"
+                placeholder="First Name"
                 className="w-1/2 border border-gray-300 rounded-md px-3 py-2 text-sm"
               />
               <input
                 type="text"
-                placeholder="Last name"
+                placeholder="Last Name"
                 className="w-1/2 border border-gray-300 rounded-md px-3 py-2 text-sm"
               />
             </div>

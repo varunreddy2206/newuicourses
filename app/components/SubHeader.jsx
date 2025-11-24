@@ -1,11 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function SubHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className="fixed top-3 left-0 w-full z-30 bg-white shadow-md px-6 py-4 mt-4 sm:mt-0">
@@ -22,10 +28,11 @@ export default function SubHeader() {
           />
         </div>
 
-        {/* EXPLORE BUTTON (Visible on all devices) */}
+        {/* EXPLORE BUTTON (ALL DEVICES) */}
+        {/* Mobile gets full width, tablet+desktop get normal size */}
         <Link href="/">
-          <button className="flex bg-blue-600 text-white px-8 py-2 mt-5 rounded-full font-medium text-base items-center gap-2 hover:bg-blue-700">
-            <span className="text-lg">»»»</span> Explore Courses
+          <button className="bg-blue-600 text-white px-4 sm:px-8 py-2 sm:py-2 mt-3 rounded-full font-medium text-base inline-flex items-center gap-2 hover:bg-blue-700 lg:mt-5 sm:mt-3 lg:px-6 lg:py-3 max-[360px]:w-full max-[360px]:justify-center max-[360px]:text-sm">
+            <span className="text-lg sm:text-base">»»»</span> Explore Courses
           </button>
         </Link>
 
@@ -51,14 +58,14 @@ export default function SubHeader() {
           </button>
         </Link>
 
-        {/* JOIN FOR FREE (Desktop + Tablet visible, Mobile hidden) */}
+        {/* JOIN FOR FREE (Desktop + Tablet) */}
         <Link href="/Registrationform">
-          <button className="border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium flex sm:flex max-sm:hidden">
+          <button className="hidden sm:flex border border-blue-600 text-blue-600 px-6 mt-5 py-2 rounded-full font-medium">
             Join For Free
           </button>
         </Link>
 
-        {/* HAMBURGER (Mobile + Tablet) */}
+        {/* HAMBURGER MENU (Mobile + Tablet) */}
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden text-gray-700"
@@ -88,7 +95,7 @@ export default function SubHeader() {
 
           {/* LOGIN (Mobile + Tablet) */}
           <Link href="/login">
-            <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium">
+            <button className="w-full bg-blue-600 text-white py-3 rounded-full font-medium mb-3">
               Login →
             </button>
           </Link>

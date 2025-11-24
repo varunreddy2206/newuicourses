@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function LoginForm() {
   return (
-    <div className="w-full min-h-screen bg-white flex flex-col md:flex-row">
+    <div className="w-full min-h-screen bg-white flex flex-col md:flex-row ">
       
       {/* LEFT SECTION */}
       <div className="w-full md:w-1/2 flex items-center justify-center py-12 px-6">

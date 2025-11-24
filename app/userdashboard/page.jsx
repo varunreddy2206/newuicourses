@@ -35,8 +35,7 @@ export default function Page() {
       <UserRecomemded />
       <UserTestimonials />
       <UserFooter />
-
-      
+ 
     </div>
   );
 }
