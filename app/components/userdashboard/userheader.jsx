@@ -78,7 +78,7 @@ export default function UserHeader() {
             "
           >
             <span className="text-lg">»»»</span>
-            <Link href="/courses">
+            <Link href="/course">
             Explore Courses
             </Link>
           </button>

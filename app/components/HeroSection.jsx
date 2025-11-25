@@ -4,13 +4,12 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-white px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="
         max-w-7xl mx-auto 
         grid grid-cols-1 md:grid-cols-2 
-        gap-10 
-        py-10 
-        px-4 sm:px-6 md:px-10 lg:px-6
+        gap-8 sm:gap-10 
+        py-8 sm:py-10 md:py-12 lg:py-14 
         items-center
       ">
 

@@ -10,7 +10,7 @@ export default function RouteWrapper({ children }) {
 
   const hideHeader =
   pathname.startsWith("/userdashboard") ||
-  pathname.includes("/course"); 
+  pathname.includes("/course/"); 
 
   return (
     <div className={hideHeader ? "" : "pt-28"}>

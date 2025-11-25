@@ -42,7 +42,7 @@ export default function Usernewheader() {
   }, [open]);
 
   return (
-    <header className="fixed top-[32px] left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40">
+    <header className="fixed top-[26px] left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40">
 
 
 
@@ -71,17 +71,23 @@ export default function Usernewheader() {
           {/* EXPLORE (Tablet + Desktop + Laptop) */}
           <button
             className="
-              bg-blue-600 text-white px-5 py-2 rounded-full gap-2 text-sm font-medium hover:bg-blue-700
-              hidden
-              md:flex      /* show at 768px */
-              lg:flex      /* show on desktop & laptop */
-            "
+    hidden md:flex lg:flex
+    bg-blue-600 text-white px-5 py-3 rounded-full
+    text-sm font-medium hover:bg-blue-700
+    items-center gap-2
+    leading-none
+  "
           >
-            <span className="text-lg">»»»</span>
-            <Link href="/courses">
-            Explore Courses
+            <span className="text-lg leading-none flex items-center">»»»</span>
+
+            <Link
+              href="/courses"
+              className="leading-none flex items-center mt-0.5"
+            >
+              Explore Courses
             </Link>
           </button>
+
 
           {/* MY LEARNING (Desktop only) */}
           <button className="text-gray-700 hover:text-black text-sm font-medium hidden lg:flex">

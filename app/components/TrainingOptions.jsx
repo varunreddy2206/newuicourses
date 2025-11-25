@@ -4,27 +4,35 @@ import { Check, Video, Download, Infinity, Hammer, Award, Clock, Users, MapPin, 
 
 export default function TrainingOptions() {
   return (
-    <section className="w-full py-12 px-4 md:px-10 lg:px-20 bg-white">
-      {/* Heading Section */}
-      <h2 className="text-2xl md:text-3xl font-bold mb-2">Training Options</h2>
-      <p className="text-gray-600 text-sm md:text-base mb-10">
-        Choose the learning mode that best fits your schedule and learning style
-      </p>
+    <section className="w-full bg-white py-8 px-4 sm:py-10 sm:px-6 lg:py-12 lg:px-8 print:bg-white print:px-0 print:py-4">
+      {/* (heading removed from top) the heading and subtitle will sit in the centered grid container and be right-aligned above the cards */}
 
       {/* GRID FOR 4 CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+      <div className="max-w-[1366px] mx-auto">
+
+        {/* Right-aligned heading + subtitle above the cards (keeps small-screen behavior) */}
+        <div className="flex w-full justify-start mb-6">
+          <div className="max-w-[520px] md:max-w-[640px] text-left">
+            <h2 className="text-2xl md:text-3xl font-bold">Training Options</h2>
+            <p className="text-gray-600 text-sm md:text-base mt-2">
+              Choose the learning mode that best fits your schedule and learning style
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 auto-rows-fr items-stretch">
 
         {/* ---------------------------------------------------------------- */}
         {/* 1. Recorded Videos */}
         {/* ---------------------------------------------------------------- */}
-        <div className="border rounded-2xl bg-white shadow-sm p-0 overflow-hidden relative">
+        <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
           {/* Badge */}
           <div className="bg-[#EEDDFE] text-[#8A33E1] text-xs font-semibold text-center py-2">
             Self-Paced
           </div>
 
-          <div className="p-6">
+          <div className="p-6 flex flex-col flex-1">
 
             {/* Title */}
             <h3 className="text-lg font-semibold">Recorded Videos</h3>
@@ -52,31 +60,34 @@ export default function TrainingOptions() {
               </ul>
             </div>
 
-            {/* Pricing */}
-            <div className="mt-6 text-sm">
-              <span className="text-blue-600 font-semibold">11% Off</span>&nbsp;&nbsp;
-              <span className="text-gray-400 line-through">₹899</span>
-              <span className="font-bold text-lg"> ₹799</span>
-            </div>
+            {/* Footer - pricing + CTA pinned to bottom */}
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              <div className="text-sm">
+                <span className="text-blue-600 font-semibold">11% Off</span>
+                <span className="text-gray-400 line-through ml-2">₹899</span>
+                <span className="font-bold text-lg ml-2">₹799</span>
+              </div>
 
-            {/* Enroll Button */}
-            <button className="mt-4 w-full bg-blue-600 text-white text-sm py-2.5 rounded-full font-semibold hover:bg-blue-700 transition">
-              Enroll Now
-            </button>
+              <div className="shrink-0 w-32 sm:w-auto">
+                <button className="w-full bg-blue-600 text-white text-sm py-2.5  px-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                  Enroll Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ---------------------------------------------------------------- */}
         {/* 2. Online Live Classes */}
         {/* ---------------------------------------------------------------- */}
-        <div className="border rounded-2xl bg-white shadow-sm p-0 overflow-hidden relative">
+        <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
           {/* Badge */}
           <div className="bg-[#CFE2FF] text-[#0058E6] text-xs font-semibold text-center py-2">
             Most Popular
           </div>
 
-          <div className="p-6">
+          <div className="p-6 flex flex-col flex-1">
 
             {/* Title */}
             <h3 className="text-lg font-semibold">Online Live Classes</h3>
@@ -112,30 +123,34 @@ export default function TrainingOptions() {
               <li className="flex items-center gap-2"><Check size={16} className="text-[#0058E6]" /> Soft Skills Sessions</li>
             </ul>
 
-            {/* Pricing */}
-            <div className="mt-6 text-sm">
-              <span className="text-blue-600 font-semibold">11% Off</span>&nbsp;&nbsp;
-              <span className="line-through text-gray-400">₹899</span>
-              <span className="font-bold text-lg"> ₹799</span>
-            </div>
+            {/* Footer - pricing + CTA pinned to bottom */}
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              <div className="text-sm">
+                <span className="text-blue-600 font-semibold">11% Off</span>
+                <span className="text-gray-400 line-through ml-2">₹899</span>
+                <span className="font-bold text-lg ml-2">₹799</span>
+              </div>
 
-            <button className="mt-4 w-full bg-blue-600 text-white text-sm py-2.5 rounded-full font-semibold hover:bg-blue-700 transition">
-              Enroll Now
-            </button>
+              <div className="shrink-0 w-32 sm:w-auto">
+                <button className="w-full bg-blue-600 text-white text-sm py-2.5 px-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                  Enroll Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ---------------------------------------------------------------- */}
         {/* 3. Offline Classroom */}
         {/* ---------------------------------------------------------------- */}
-        <div className="border rounded-2xl bg-white shadow-sm p-0 overflow-hidden relative">
+        <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
           {/* Badge */}
           <div className="bg-[#FFE8D6] text-[#D47100] text-xs font-semibold text-center py-2">
             Premium
           </div>
 
-          <div className="p-6">
+          <div className="p-6 flex flex-col flex-1">
 
             <h3 className="text-lg font-semibold">Offline Classroom</h3>
             <p className="text-gray-500 text-sm mb-5">
@@ -175,30 +190,34 @@ export default function TrainingOptions() {
               </ul>
             </div>
 
-            {/* Pricing */}
-            <div className="mt-6 text-sm">
-              <span className="text-blue-600 font-semibold">11% Off</span>&nbsp;&nbsp;
-              <span className="line-through text-gray-400">₹899</span>
-              <span className="font-bold text-lg"> ₹799</span>
-            </div>
+            {/* Footer - pricing + CTA pinned to bottom */}
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              <div className="text-sm">
+                <span className="text-blue-600 font-semibold">11% Off</span>
+                <span className="text-gray-400 line-through ml-2">₹899</span>
+                <span className="font-bold text-lg ml-2">₹799</span>
+              </div>
 
-            <button className="mt-4 w-full bg-blue-600 text-white text-sm py-2.5 rounded-full font-semibold hover:bg-blue-700 transition">
-              Enroll Now
-            </button>
+              <div className="shrink-0 w-32 sm:w-auto">
+                <button className="w-full bg-blue-600 text-white text-sm py-2.5 px-3  rounded-full font-semibold hover:bg-blue-700 transition">
+                  Enroll Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ---------------------------------------------------------------- */}
         {/* 4. Corporate Training */}
         {/* ---------------------------------------------------------------- */}
-        <div className="border rounded-2xl bg-white shadow-sm p-0 overflow-hidden relative">
+        <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
           {/* Badge */}
           <div className="bg-[#DDE8FF] text-[#0040C1] text-xs font-semibold text-center py-2">
             PREFERRED
           </div>
 
-          <div className="p-6">
+          <div className="p-6 flex flex-col flex-1">
             <h3 className="text-lg font-semibold">Corporate Training</h3>
             <p className="text-gray-500 text-sm mb-5">Custom Enterprise Solutions</p>
 
@@ -210,11 +229,23 @@ export default function TrainingOptions() {
               <li className="flex items-center gap-2"><Check size={16} className="text-green-600" /> Billing/custom contracts</li>
             </ul>
 
-            {/* Contact Button */}
-            <button className="mt-8 w-full border border-blue-600 text-blue-700 text-sm py-2.5 rounded-full font-semibold flex justify-center items-center gap-2 hover:bg-blue-50 transition">
-              Contact Us
-            </button>
+            {/* Footer - pricing + CTA pinned to bottom */}
+            <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              <div className="text-sm">
+                <span className="text-blue-600 font-semibold">11% Off</span>
+                <span className="text-gray-400 line-through ml-2">₹899</span>
+                <span className="font-bold text-lg ml-2">₹799</span>
+              </div>
+
+              <div className="shrink-0 w-32 sm:w-auto">
+                <button className="w-full border border-blue-600 text-blue-700 text-sm py-2.5 px-3 rounded-full font-semibold flex justify-center items-center gap-2 hover:bg-blue-50 transition">
+                  Contact Us
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
+
         </div>
 
       </div>
