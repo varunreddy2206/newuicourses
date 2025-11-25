@@ -41,11 +41,10 @@ export default function ExploreCourses() {
           <button
             key={i}
             onClick={() => setSelectedCategory(category)}
-            className={`text-sm px-4 py-1 border rounded-full shadow-sm ${
-              selectedCategory === category
+            className={`text-sm px-4 py-1 border rounded-full shadow-sm ${selectedCategory === category
                 ? "bg-blue-600 text-white"
                 : "bg-white text-gray-700"
-            }`}
+              }`}
           >
             {category}
           </button>
@@ -87,31 +86,33 @@ export default function ExploreCourses() {
                   {course.subtitle}
                 </p>
 
-                <div className="flex items-center gap-6 text-sm text-gray-700 mb-5">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 md:gap-4  
+  text-sm text-gray-700 mb-5">
+                  <div className="flex items-center gap-1 md:gap-2">
                     <User size={16} className="text-green-600" />
                     <span>{course.level}</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 md:gap-2">
                     <Clock size={16} className="text-gray-700" />
-                    <span>{course.totalHours}</span>
+                    <span>{course.totalHours?.split(" ")?.[0]}-{course.totalHours?.split(" ")?.[1]?.toLowerCase()}</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 md:gap-2">
                     <Globe size={16} className="text-teal-600" />
                     <span>Online</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 md:gap-2">
                     <Star size={16} className="text-yellow-500" />
                     <span>{course.rating}</span>
                   </div>
                 </div>
 
+                <div className="pt-15" />
                 <Link
                   href={`/course/${course._id}`}
-                  className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700"
+                  className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700 mt-9"
                 >
                   Enroll Now
                 </Link>
