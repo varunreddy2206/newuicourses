@@ -42,14 +42,14 @@ export default function Usernewheader() {
   }, [open]);
 
   return (
-    <header className="fixed top-[26px] left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40">
+    <header className="fixed top-[24px] sm:top-[32px] left-0 w-full bg-white shadow-sm px-0 py-3 border-b z-40">
 
 
 
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="w-full px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
 
         {/* LEFT SIDE → MOBILE & TABLET: LOGO + USER IMAGE */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
 
           {/* LOGO */}
           <div className="flex items-center gap-2">
@@ -60,34 +60,26 @@ export default function Usernewheader() {
               alt="logo"
               className="object-contain"
             />
-            <div className="flex flex-col leading-tight">
+            {/* <div className="flex flex-col leading-tight">
               <span className="text-[18px] font-semibold">Ascend</span>
               <span className="text-[10px] -mt-1 text-gray-600 tracking-wider">
                 Academy
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* EXPLORE (Tablet + Desktop + Laptop) */}
-          <button
+          <Link
+            href="/courses"
             className="
-    hidden md:flex lg:flex
-    bg-blue-600 text-white px-5 py-3 rounded-full
-    text-sm font-medium hover:bg-blue-700
-    items-center gap-2
-    leading-none
-  "
+              bg-blue-600 text-white px-5 py-2 rounded-full gap-2 text-sm font-medium hover:bg-blue-700
+              inline-flex md:inline-flex
+              items-center
+            "
           >
-            <span className="text-lg leading-none flex items-center">»»»</span>
-
-            <Link
-              href="/courses"
-              className="leading-none flex items-center mt-0.5"
-            >
-              Explore Courses
-            </Link>
-          </button>
-
+            <span className="text-lg">»»»</span>
+            Explore Courses
+          </Link>
 
           {/* MY LEARNING (Desktop only) */}
           <button className="text-gray-700 hover:text-black text-sm font-medium hidden lg:flex">
@@ -96,7 +88,7 @@ export default function Usernewheader() {
         </div>
 
         {/* RIGHT SIDE — DESKTOP ONLY */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-5 ml-auto">
 
           {/* SEARCH BAR */}
           <div className="flex items-center border rounded-full px-4 py-2 w-[300px] shadow-sm">
@@ -112,12 +104,12 @@ export default function Usernewheader() {
           </div>
 
           {/* MESSAGE ICON */}
-          <button className="relative text-gray-700 hover:text-black">
+          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
             <MessageCircle size={21} />
           </button>
 
           {/* NOTIFICATION ICON */}
-          <button className="relative text-gray-700 hover:text-black">
+          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
             <Bell size={21} />
           </button>
 
@@ -148,10 +140,10 @@ export default function Usernewheader() {
                 ref={dropdownRef}
                 className="absolute right-0 mt-2 w-48 bg-white shadow-lg border rounded-lg py-2 z-50"
               >
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+                <Link href="/userdashboard/profile" className="block px-4 py-2 hover:bg-gray-100">
                   Profile
                 </Link>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+                <Link href="/userdashboard/profilecourses" className="block px-4 py-2 hover:bg-gray-100">
                   My Courses
                 </Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100">

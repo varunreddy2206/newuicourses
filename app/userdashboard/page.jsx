@@ -15,6 +15,7 @@ import UserTestimonials from "../components/userdashboard/UserTestimonials";
 import UserFooter from "../components/userdashboard/UserFooter";
 import UserSubHeader from "../components/userdashboard/UserSubHeader";
 import Usernewheader from "../components/userdashboard/Usernewheader";
+import Profile from "../components/userdashboard/Profile";
 
 export default function Page() {
   return (

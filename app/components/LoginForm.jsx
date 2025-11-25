@@ -46,7 +46,7 @@ export default function LoginForm() {
           </div>
 
           {/* Login Button */}
-          <Link href="/payment">
+          <Link href="/userdashboard">
           <button className="w-full bg-blue-600 text-white py-3 mt-4 rounded-md text-sm font-medium hover:bg-blue-700 transition">
             Login
           </button>
