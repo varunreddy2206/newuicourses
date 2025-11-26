@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function Usernewheader() {
+export default function Usernewheader({ noOffset = false }) {
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("User");
 
@@ -41,8 +41,10 @@ export default function Usernewheader() {
     return () => document.removeEventListener("mousedown", handleDocClick);
   }, [open]);
 
+  const topClass = noOffset ? "top-0" : "top-[24px] sm:top-[32px]";
+
   return (
-    <header className="fixed top-[24px] sm:top-[32px] left-0 w-full bg-white shadow-sm px-0 py-3 border-b z-40">
+    <header className={`fixed ${topClass} left-0 w-full bg-white shadow-sm px-0 py-3 border-b z-40`}>
 
 
 
@@ -143,7 +145,7 @@ export default function Usernewheader() {
                 <Link href="/userdashboard/profile" className="block px-4 py-2 hover:bg-gray-100">
                   Profile
                 </Link>
-                <Link href="/userdashboard/profilecourses" className="block px-4 py-2 hover:bg-gray-100">
+                <Link href="/userdashboard/profile-courses" className="block px-4 py-2 hover:bg-gray-100">
                   My Courses
                 </Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
@@ -220,7 +222,7 @@ export default function Usernewheader() {
 
           {/* PROFILE MENU */}
           <button className="w-full text-left px-2 py-2 text-gray-800">Profile</button>
-          <button className="w-full text-left px-2 py-2 text-gray-800">My Courses</button>
+          <Link href="/userdashboard/profile-courses" className="w-full block px-2 py-2 text-gray-800">My Courses</Link>
           <button className="w-full text-left px-2 py-2 text-gray-800">Certificates</button>
           <button className="w-full text-left px-2 py-2 text-gray-800">Help Center</button>
           <button className="w-full text-left px-2 py-2 text-gray-800">Logout</button>

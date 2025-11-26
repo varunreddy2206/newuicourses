@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function UserHeader() {
+export default function userheader({ noOffset = false }) {
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("User");
 
@@ -41,47 +41,37 @@ export default function UserHeader() {
     return () => document.removeEventListener("mousedown", handleDocClick);
   }, [open]);
 
+  const topClass = noOffset ? "top-0" : "top-[24px] sm:top-[32px]";
+
   return (
-    <header className="fixed top-[32px] left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40">
+    <header className={`fixed ${topClass} left-0 w-full bg-white shadow-sm px-6 py-3 border-b z-40`}>
 
 
 
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* LEFT SIDE → MOBILE & TABLET: LOGO + USER IMAGE */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 md:gap-5">
 
           {/* LOGO */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <Image
               src="/logo.png"
-              width={42}
-              height={42}
+              width={40}
+              height={40}
               alt="logo"
               className="object-contain"
             />
-            <div className="flex flex-col leading-tight">
-              <span className="text-[18px] font-semibold">Ascend</span>
-              <span className="text-[10px] -mt-1 text-gray-600 tracking-wider">
-                Academy
-              </span>
-            </div>
           </div>
 
           {/* EXPLORE (Tablet + Desktop + Laptop) */}
-          <button
-            className="
-              bg-blue-600 text-white px-5 py-2 rounded-full gap-2 text-sm font-medium hover:bg-blue-700
-              hidden
-              md:flex      /* show at 768px */
-              lg:flex      /* show on desktop & laptop */
-            "
+          <Link
+            href="/course"
+            className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-full gap-2 text-[11px] sm:text-sm font-medium hover:bg-blue-700 inline-flex items-center whitespace-nowrap"
           >
             <span className="text-lg">»»»</span>
-            <Link href="/course">
-            Explore Courses
-            </Link>
-          </button>
+            <span>Explore Courses</span>
+          </Link>
 
           {/* MY LEARNING (Desktop only) */}
           <button className="text-gray-700 hover:text-black text-sm font-medium hidden lg:flex">
@@ -142,10 +132,10 @@ export default function UserHeader() {
                 ref={dropdownRef}
                 className="absolute right-0 mt-2 w-48 bg-white shadow-lg border rounded-lg py-2 z-50"
               >
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+                <Link href="/userdashboard/profile" className="block px-4 py-2 hover:bg-gray-100">
                   Profile
                 </Link>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+                <Link href="/userdashboard/profilecourses" className="block px-4 py-2 hover:bg-gray-100">
                   My Courses
                 </Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
@@ -163,7 +153,7 @@ export default function UserHeader() {
         </div>
 
         {/* MOBILE + TABLET RIGHT CONTROLS (≤1024px) */}
-        <div className="lg:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-4 ml-10 md:ml-4">
 
           {/* TABLET SEARCH BAR */}
           <div className="hidden md:flex lg:hidden items-center border rounded-full shadow-sm overflow-hidden px-3 py-1.5 w-[220px]">
@@ -221,8 +211,8 @@ export default function UserHeader() {
           </button>
 
           {/* PROFILE MENU */}
-          <button className="w-full text-left px-2 py-2 text-gray-800">Profile</button>
-          <button className="w-full text-left px-2 py-2 text-gray-800">My Courses</button>
+          <Link href="/userdashboard/profile" className="w-full block px-2 py-2 text-gray-800">Profile</Link>
+          <Link href="/userdashboard/profilecourses" className="w-full block px-2 py-2 text-gray-800">My Courses</Link>
           <button className="w-full text-left px-2 py-2 text-gray-800">Certificates</button>
           <button className="w-full text-left px-2 py-2 text-gray-800">Help Center</button>
           <button className="w-full text-left px-2 py-2 text-gray-800">Logout</button>
