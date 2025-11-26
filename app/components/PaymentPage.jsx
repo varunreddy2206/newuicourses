@@ -1,226 +1,355 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
 
-/**
- * PaymentPage.jsx
- * - Place in: app/payment/page.jsx  (or components/PaymentPage.jsx and import into a page)
- * - Uses Tailwind CSS for styling
- * - Uses the uploaded local file path as an image source (logo/placeholder)
- *
- * Note: Replace card icons and actual payment integrations with your preferred libs (Razorpay, Stripe).
- */
+import React, { useState } from "react";
+import { ChevronDown, Check } from "lucide-react";
 
 export default function PaymentPage() {
-  const [activeTab, setActiveTab] = useState("credit");
-  const [promo, setPromo] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState("");
-  const [price, setPrice] = useState(14990);
-  const discount = 1499; // example
-  const gst = 1249.95; // example
-  const total = 17990;
+  const [paymentMethod, setPaymentMethod] = useState("credit");
 
   return (
-    <div className="min-h-screen bg-white p-4 md:p-8">
-      {/* Top logo row */}
-      <header className="max-w-[1200px] mx-auto mb-6">
-        <div className="flex items-center">
-          <div className="w-36">
-            {/* Developer note: using uploaded path as image src per environment instructions */}
-            <Image
-              src="/mnt/data/b278dcdc-ef8e-4e44-858f-1130a6c3c164.png"
-              alt="Ascend Academy (placeholder)"
-              width={150}
-              height={50}
-              className="object-contain"
-            />
-          </div>
-        </div>
-      </header>
+    <div className="w-full min-h-screen bg-[#f8f8f8] flex justify-center py-10">
+      <div className="w-full max-w-[1400px] grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 px-4">
 
-      <main className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* LEFT: Main form and payment panels */}
-        <section className="lg:col-span-2 space-y-6">
-          {/* Basic Details card */}
-          <div className="bg-white border rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium">Basic Details</h3>
-              <button className="text-gray-400 text-sm">▾</button>
+        {/* --------------------- LEFT SIDE --------------------- */}
+        <div className="flex flex-col gap-8">
+
+          {/* BASIC DETAILS */}
+          <div className="bg-white shadow rounded-lg p-6 border border-gray-200">
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-semibold">Basic Details</h2>
+              <ChevronDown size={20} className="text-gray-600" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-gray-200">
               <div>
-                <label className="text-sm text-gray-700 mb-1 block">Full name <span className="text-red-500">*</span></label>
-                <input className="w-full border border-gray-300 rounded px-3 py-2 text-sm" placeholder="Enter Full Name" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-700 mb-1 block">Mobile Number <span className="text-red-500">*</span></label>
-                <input className="w-full border border-gray-300 rounded px-3 py-2 text-sm" placeholder="Enter mobile number" />
+                <label className="text-sm font-medium">Full name <span className="text-red-500">*</span></label>
+                <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1" placeholder="Enter Full Name" />
               </div>
 
               <div>
-                <label className="text-sm text-gray-700 mb-1 block">Email Address <span className="text-red-500">*</span></label>
-                <input className="w-full border border-gray-300 rounded px-3 py-2 text-sm" placeholder="Enter email" />
+                <label className="text-sm font-medium">Mobile Number <span className="text-red-500">*</span></label>
+                <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1" placeholder="Enter mobile number" />
               </div>
+
               <div>
-                <label className="text-sm text-gray-700 mb-1 block">State <span className="text-red-500">*</span></label>
-                <select className="w-full border border-gray-300 rounded px-3 py-2 text-sm">
-                  <option>Select state</option>
-                </select>
+                <label className="text-sm font-medium">Email Address <span className="text-red-500">*</span></label>
+                <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1" placeholder="Enter email" />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium">State <span className="text-red-500">*</span></label>
+                <div className="relative">
+                  <select className="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 appearance-none">
+                    <option>Select state</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-4 text-gray-500" size={18} />
+                </div>
               </div>
             </div>
 
-            <div className="mt-6">
-              <button className="bg-blue-600 text-white px-5 py-2 rounded text-sm font-medium">
-                🔒 Proceed to Payment
-              </button>
-            </div>
+            <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-md text-sm font-medium flex items-center gap-2">
+              Proceed to Payment
+            </button>
           </div>
 
-          {/* Secure Payment card */}
-          <div className="bg-white border rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-medium mb-4">Secure Payment</h3>
+          {/* SECURE PAYMENT */}
+          <div className="bg-white shadow rounded-lg p-6 border border-gray-200">
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-semibold">Secure Payment</h2>
+              <ChevronDown size={20} className="text-gray-600" />
+            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Left tabs + fields */}
-              <div className="col-span-1">
-                <div className="bg-gray-50 border rounded-md">
-                  {/* Tabs */}
-                  <div className="flex flex-col md:flex-row">
-                    <button
-                      onClick={() => setActiveTab("credit")}
-                      className={`flex-1 text-left px-4 py-3 border-b md:border-b-0 md:border-r ${activeTab === "credit" ? "bg-white font-medium" : "bg-transparent text-gray-600"}`}
-                    >
-                      Credit Card
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("debit")}
-                      className={`flex-1 text-left px-4 py-3 border-b md:border-b-0 md:border-r ${activeTab === "debit" ? "bg-white font-medium" : "bg-transparent text-gray-600"}`}
-                    >
-                      Debit Card
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("netbank")}
-                      className={`flex-1 text-left px-4 py-3 ${activeTab === "netbank" ? "bg-white font-medium" : "bg-transparent text-gray-600"}`}
-                    >
-                      Net Banking
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("upi")}
-                      className={`flex-1 text-left px-4 py-3 ${activeTab === "upi" ? "bg-white font-medium" : "bg-transparent text-gray-600"}`}
-                    >
-                      UPI
-                    </button>
-                  </div>
+            {/* LAYOUT: LEFT VERTICAL TABS + RIGHT FORM (MATCH REFERENCE UI) */}
+            <div className="mt-4 pt-4 border-t border-gray-200 flex flex-col md:flex-row gap-6 md:gap-10 items-start">
+              {/* LEFT: "Pay now" + PAYMENT METHODS */}
+              <div className="w-full md:w-auto">
+                <p className="text-base font-medium mb-3">Pay now</p>
+                <div className="w-full md:w-44 border rounded-lg overflow-hidden text-sm">
+                  {/* Credit Card */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod("credit")}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
+                      paymentMethod === "credit"
+                        ? "bg-blue-50 font-medium"
+                        : "bg-white"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        paymentMethod === "credit" ? "bg-blue-600" : "bg-gray-300"
+                      }`}
+                    />
+                    <span>Credit Card</span>
+                  </button>
+
+                  {/* Debit Card */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod("debit")}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
+                      paymentMethod === "debit" ? "bg-blue-50 font-medium" : "bg-white"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        paymentMethod === "debit" ? "bg-blue-600" : "bg-gray-300"
+                      }`}
+                    />
+                    <span>Debit Card</span>
+                  </button>
+
+                  {/* Net Banking */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod("netbanking")}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
+                      paymentMethod === "netbanking"
+                        ? "bg-blue-50 font-medium"
+                        : "bg-white"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        paymentMethod === "netbanking" ? "bg-blue-600" : "bg-gray-300"
+                      }`}
+                    />
+                    <span>Net Banking</span>
+                  </button>
+
+                  {/* UPI */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod("upi")}
+                    className={`w-full text-left px-4 py-3 flex items-center gap-2 ${
+                      paymentMethod === "upi" ? "bg-blue-50 font-medium" : "bg-white"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        paymentMethod === "upi" ? "bg-blue-600" : "bg-gray-300"
+                      }`}
+                    />
+                    <span>UPI</span>
+                  </button>
                 </div>
               </div>
 
-              {/* Middle: Card details */}
-              <div className="col-span-2">
-                <div className="space-y-3">
-                  <label className="text-sm text-gray-600">Enter your credit card details</label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <input placeholder="Card number" className="border border-gray-300 rounded px-3 py-2 text-sm w-full" />
-                    <input placeholder="Name as a Card" className="border border-gray-300 rounded px-3 py-2 text-sm w-full" />
-                    <input placeholder="value thru" className="border border-gray-300 rounded px-3 py-2 text-sm w-full" />
-                    <div className="flex gap-3">
-                      <input placeholder="MM • YYYY" className="border border-gray-300 rounded px-3 py-2 text-sm w-1/2" />
-                      <input placeholder="CVV" className="border border-gray-300 rounded px-3 py-2 text-sm w-1/2" />
+              {/* RIGHT: DYNAMIC PAYMENT CONTENT */}
+              <div className="w-full md:flex-1 md:max-w-md mt-6 md:mt-0">
+                {paymentMethod === "credit" && (
+                  <>
+                    <label className="text-sm font-medium">
+                      Enter your credit card details
+                    </label>
+
+                    <input
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
+                      placeholder="Card number"
+                    />
+
+                    <input
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3"
+                      placeholder="Name as a Card"
+                    />
+
+                    <div className="flex gap-3 mt-3">
+                      <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <option>MM</option>
+                      </select>
+                      <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <option>YYYY</option>
+                      </select>
+                      <input
+                        className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                        placeholder="CVV"
+                      />
                     </div>
+                  </>
+                )}
+
+                {paymentMethod === "debit" && (
+                  <>
+                    <label className="text-sm font-medium">
+                      Enter your debit card details
+                    </label>
+
+                    <input
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
+                      placeholder="Debit card number"
+                    />
+
+                    <input
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3"
+                      placeholder="Name on Card"
+                    />
+
+                    <div className="flex gap-3 mt-3">
+                      <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <option>MM</option>
+                      </select>
+                      <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
+                        <option>YYYY</option>
+                      </select>
+                      <input
+                        className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                        placeholder="CVV"
+                      />
+                    </div>
+                  </>
+                )}
+
+                {paymentMethod === "netbanking" && (
+                  <>
+                    <label className="text-sm font-medium">
+                      Choose your bank for Net Banking
+                    </label>
+                    <select className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2">
+                      <option>Select Bank</option>
+                      <option>HDFC Bank</option>
+                      <option>SBI</option>
+                      <option>ICICI Bank</option>
+                      <option>Axis Bank</option>
+                    </select>
+                  </>
+                )}
+
+                {paymentMethod === "upi" && (
+                  <>
+                    <label className="text-sm font-medium">
+                      Pay using UPI
+                    </label>
+
+                    {/* QR placeholder */}
+                    <div className="mt-3 border border-dashed border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-sm text-gray-500">
+                      <div className="w-32 h-32 bg-gray-100 mb-3" />
+                      <p>Scan this QR with your UPI app</p>
+                    </div>
+
+                    <p className="mt-3 text-xs text-gray-500">
+                      Or enter your UPI ID below
+                    </p>
+                    <input
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
+                      placeholder="yourupi@bank"
+                    />
+                  </>
+                )}
+
+                {/* PAYMENT AMOUNT + BUTTON (COMMON) */}
+                <div className="mt-6 font-semibold text-lg">₹17,688.20</div>
+
+                <button className="mt-4 w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium">
+                  Make Payment
+                </button>
+
+                {/* Secure payment info + card icons + disclaimer (like reference UI) */}
+                <div className="mt-4">
+                  <p className="flex items-center gap-2 text-xs text-gray-500">
+                    <span>🔒</span>
+                    <span>Secure payment powered by Razorpay</span>
+                  </p>
+
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
+                      VISA
+                    </span>
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
+                      RuPay
+                    </span>
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
+                      AMEX
+                    </span>
                   </div>
 
-                  {/* Amount display and Make Payment */}
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="text-sm font-medium">₹{(price - discount).toLocaleString("en-IN")}</div>
-                    <button className="bg-blue-600 text-white px-6 py-2 rounded text-sm font-medium">
-                      Make Payment
-                    </button>
-                  </div>
-
-                  <p className="text-xs text-gray-500 mt-3">🔒 Secure payment powered by Razorpay</p>
-
-                  <div className="flex items-center gap-2 mt-3">
-                    {/* Payment brand icons placeholders */}
-                    <div className="w-8 h-6 border rounded flex items-center justify-center text-xs">V</div>
-                    <div className="w-8 h-6 border rounded flex items-center justify-center text-xs">M</div>
-                    <div className="w-8 h-6 border rounded flex items-center justify-center text-xs">A</div>
-                    <div className="w-8 h-6 border rounded flex items-center justify-center text-xs">D</div>
-                  </div>
-
-                  <p className="text-xs text-gray-500 mt-3">
-                    By placing this order, you expressly confirm that you have read and you agree to Ascend Academy Terms of Use, Refund, Rescheduling and Privacy Policy.
+                  <p className="mt-3 text-[10px] leading-snug text-gray-400">
+                    By placing this order, you expressly confirm that you have read and you agree
+                    to Ascend Academy Terms of Use, Refund, Rescheduling and Privacy Policy.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* RIGHT: Order Summary */}
-        <aside className="lg:col-span-1">
-          <div className="bg-white border rounded-lg shadow-sm p-6">
-            <h4 className="font-medium">Order Summary</h4>
+        </div>
 
-            <div className="mt-4 border rounded p-4">
-              <h5 className="font-semibold">Machine Learning using Python</h5>
+        {/* --------------------- RIGHT SIDE --------------------- */}
+        <div>
+          <div className="bg-white shadow rounded-lg p-6 border border-gray-200 sticky top-4">
+            <h2 className="text-lg font-semibold">Order Summary</h2>
+
+            {/* COURSE DETAILS WITH TOP DIVIDER (LIKE REFERENCE) */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="font-medium">Machine Learning using Python</p>
+
               <ul className="mt-3 text-sm text-gray-600 space-y-2">
                 <li>📅 25th Nov – 16th Dec 2025</li>
-                <li>🕒 Evening 8:00 PM – 23:00 PM IST</li>
-                <li>⏳ Valid till 24th May 2026 — 180 days</li>
+                <li>⏰ Evening 20:00 PM – 23:00 PM IST</li>
+                <li>📄 Valid till 24th May 2026 — 180 days</li>
               </ul>
+            </div>
 
-              <div className="mt-4 flex items-center justify-between text-sm">
-                <div>Course Fee</div>
-                <div className="text-gray-500 line-through">₹21,990.00</div>
-              </div>
-              <div className="flex items-center justify-between mt-1">
-                <div className="text-sm font-semibold">Price</div>
-                <div className="text-lg font-bold">₹{price.toLocaleString("en-IN")}.00</div>
-              </div>
-
-              {/* Promo code input */}
-              <div className="mt-4">
-                <label className="text-xs text-gray-500">Promo Code</label>
-                <div className="flex gap-2 mt-2">
-                  <input value={promo} onChange={(e) => setPromo(e.target.value)} placeholder="HAPPY15" className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm" />
-                  <button onClick={() => { setAppliedPromo(promo); setPromo(""); }} className="px-3 py-2 border rounded text-sm">Apply</button>
-                </div>
-
-                {appliedPromo && (
-                  <div className="mt-3 border-l-4 border-green-400 bg-green-50 p-3 text-sm">
-                    <div className="font-medium text-green-700">COUPON APPLIED</div>
-                    <div>Grab an Extra 5% off</div>
-                    <div className="text-xs text-gray-500">Expires on: 28-Nov-2025</div>
-                  </div>
-                )}
-              </div>
-
-              {/* Billing breakdown */}
-              <div className="mt-4 text-sm">
-                <div className="flex justify-between">
-                  <span>Billing Details</span>
-                </div>
-
-                <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
-                  <div>Total Price</div>
-                  <div className="text-right">₹{price.toLocaleString("en-IN")}.00</div>
-
-                  <div>Additional Discount</div>
-                  <div className="text-right text-green-600">(-) ₹{discount.toLocaleString("en-IN")}.00</div>
-
-                  <div>GST (18%)</div>
-                  <div className="text-right">₹{gst.toLocaleString("en-IN")}</div>
-                </div>
-
-                <div className="mt-3 border-t pt-3 flex justify-between font-semibold">
-                  <div>Grand Total</div>
-                  <div>₹{total.toLocaleString("en-IN")}</div>
+            {/* COURSE FEE WITH DISCOUNT + STRIKE PRICE (MATCH REFERENCE) */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-600">Course Fee</p>
+                <div className="text-right">
+                  <span className="text-blue-600 text-xs font-semibold mr-1">11% Off</span>
+                  <span className="text-gray-400 line-through text-xs mr-1">₹21,990</span>
+                  <span className="text-gray-900 text-sm font-semibold">₹14,990.00</span>
                 </div>
               </div>
             </div>
+
+            {/* PROMO CODE */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-sm text-gray-600 mb-1">Promo Code</p>
+
+              <div className="flex gap-2">
+                <input
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                  value="HAPPY5"
+                />
+                <button className="px-4 border border-gray-300 rounded-md">Apply</button>
+              </div>
+
+              <div className="flex items-start gap-2 bg-green-50 text-green-700 px-3 py-2 rounded-md border border-green-300 mt-3 text-sm">
+                <Check size={16} />
+                <div>
+                  <p className="font-medium">COUPON APPLIED</p>
+                  <p className="text-xs">Grab an Extra 5% off<br />Expires on : 28-Nov-2025</p>
+                </div>
+              </div>
+            </div>
+
+            {/* BILLING DETAILS */}
+            <div className="mt-6 pt-4 border-t border-gray-200 text-sm">
+              <p className="font-semibold mb-2">Billing Details</p>
+
+              <div className="flex justify-between py-1">
+                <span>Total Price</span>
+                <span>₹14,990.00</span>
+              </div>
+
+              <div className="flex justify-between py-1 text-green-600">
+                <span>Additional Discount</span>
+                <span>(-) ₹549.95</span>
+              </div>
+
+              <div className="flex justify-between py-1">
+                <span>GST (18.00%)</span>
+                <span>₹2,698</span>
+              </div>
+            </div>
+
+            <div className="border-t mt-4 pt-4 flex justify-between font-semibold text-lg">
+              <span>Grand Total</span>
+              <span>₹17,990.00</span>
+            </div>
           </div>
-        </aside>
-      </main>
+        </div>
+
+      </div>
     </div>
   );
 }
