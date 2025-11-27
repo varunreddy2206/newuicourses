@@ -1,12 +1,13 @@
 "use client";
-
-import React, { useState } from "react";
-import { ChevronDown, MoreHorizontal, LogOut } from "lucide-react";
-
-export default function AdminSidebar() {
-  const [coursesOpen, setCoursesOpen] = useState(true);
-
-  return (
+ 
+ import React, { useState } from "react";
+ import Link from "next/link";
+ import { ChevronDown, MoreHorizontal, LogOut } from "lucide-react";
+ 
+ export default function AdminSidebar() {
+   const [coursesOpen, setCoursesOpen] = useState(true);
+ 
+   return (
     <aside className="hidden lg:flex flex-col w-60 bg-white border-r border-gray-200">
       {/* Profile */}
       <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
@@ -58,16 +59,22 @@ export default function AdminSidebar() {
                   }`}
                 />
               </button>
-              {coursesOpen && (
-                <div className="pl-6 space-y-1 text-xs mt-1">
-                  <button className="block w-full text-left text-indigo-600 font-medium">
-                    Courses List
-                  </button>
-                  <button className="block w-full text-left text-gray-500 hover:text-gray-800">
-                    Add Courses
-                  </button>
-                </div>
-              )}
+               {coursesOpen && (
+                 <div className="pl-6 space-y-1 text-xs mt-1">
+                   <Link
+                     href="/adminpanel/dashboardcourses"
+                     className="block w-full text-left hover:text-blue-500 font-medium"
+                   >
+                     Courses List
+                   </Link>
+
+                   <Link href="/adminpanel/addcourse">
+                   <button className="cursor-pointer block w-full text-left text-gray-500 hover:text-blue-500">
+                     Add Courses
+                   </button>
+                   </Link>
+                 </div>
+               )}
             </div>
 
             {/* Payments */}
@@ -114,5 +121,3 @@ export default function AdminSidebar() {
     </aside>
   );
 }
-
-

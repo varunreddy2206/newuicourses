@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 export default function UserPlacement() {
   return (
@@ -89,7 +90,8 @@ export default function UserPlacement() {
           </div>
 
           {/* Button */}
-          <button className="
+          <Link href="/courseslist">
+          <button className=" cursor-pointer
             mt-8 sm:mt-10 
             bg-blue-600 text-white 
             px-6 sm:px-8 py-3 
@@ -101,6 +103,7 @@ export default function UserPlacement() {
           ">
             Explore Courses →
           </button>
+          </Link>
         </div>
 
         {/* RIGHT IMAGE */}

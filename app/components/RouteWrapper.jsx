@@ -4,12 +4,13 @@ import { usePathname } from "next/navigation";
 import Header from "./Header";
 import SubHeader from "./SubHeader";
 import Link from "next/link";
-
 export default function RouteWrapper({ children }) {
   const pathname = usePathname();
 
   const hideHeader =
   pathname.startsWith("/userdashboard") ||
+  pathname.startsWith("/lms") ||
+  pathname.startsWith("/adminpanel")
   pathname.includes("/course/"); 
 
   return (

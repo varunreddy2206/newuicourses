@@ -80,8 +80,8 @@ export default function RegistrationForm() {
             {/* Terms */}
             <p className="text-xs text-center text-gray-600 leading-5">
               By registering, you agree to our{" "}
-              <span className="font-semibold">Terms of Use</span> and{" "}
-              <span className="font-semibold">Privacy Policy</span>.
+              <span className="font-semibold text-blue-500 cursor-pointer">Terms of Use</span> and{" "}
+              <span className="font-semibold text-blue-500 cursor-pointer">Privacy Policy</span>.
             </p>
 
             {/* Login */}

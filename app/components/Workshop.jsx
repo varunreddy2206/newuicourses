@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
+import Link from "next/link"; 
 
 export default function WorkShop() {
   const sliderRef = useRef(null);
@@ -70,10 +71,12 @@ export default function WorkShop() {
             </div>
 
             <div className="flex gap-4 mt-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-medium">
+              <Link href="/Registrationform">
+              <button className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-medium">
                 Register Now
               </button>
-              <button className="text-blue-600 font-medium text-sm">View details</button>
+              </Link>
+              <button className="cursor-pointer text-blue-600 font-medium text-sm">View details</button>
             </div>
           </div>
 

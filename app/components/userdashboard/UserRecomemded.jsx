@@ -69,10 +69,10 @@ export default function UserRecomemded() {
             </div>
 
             <div className="flex items-center justify-between mt-4">
-              <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center gap-1">
+              <button className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center gap-1">
                 Enroll Now →
               </button>
-              <button className="border px-5 py-2 rounded-full text-sm flex items-center gap-1">
+              <button className="cursor-pointer border px-5 py-2 rounded-full text-sm flex items-center gap-1">
                 Know More ⓘ
               </button>
             </div>

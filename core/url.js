@@ -2,10 +2,10 @@ import axios from "axios";
 import { errorMsgApi } from "./toast";
 
 export const API = axios.create({
-  baseURL: "http://localhost:8888",
+  baseURL: "https://itraining-backend.nuhvin.com/",
 });
 
-export const imageUrl = "http://localhost:8888";
+export const imageUrl = "https://itraining-backend.nuhvin.com/";
 
 // const useGetUserToken = () => {
 //   return localStorage.getItem("token") || null;

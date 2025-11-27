@@ -48,12 +48,12 @@ export default function ProfileCourses() {
       <div className="w-full min-h-screen bg-[#f8f9fb] px-4 md:px-10 py-10 pt-28">
         <div className="max-w-6xl mx-auto">
         {/* ---------------- TITLE ---------------- */}
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+        {/* <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
           My Courses
-        </h1>
+        </h1> */}
 
         {/* ---------------- FILTER BUTTONS ---------------- */}
-        <div className="flex flex-wrap gap-3 mb-6">
+        {/* <div className="flex flex-wrap gap-3 mb-6">
           {[
             "Self Learning",
             "Online Courses",
@@ -76,10 +76,10 @@ export default function ProfileCourses() {
               {item}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* ---------------- SEARCH BAR ---------------- */}
-        <div className="w-full flex flex-col md:flex-row md:items-center gap-4 mb-10">
+        {/* <div className="w-full flex flex-col md:flex-row md:items-center gap-4 mb-10">
           <div className="flex-1 relative">
             <input
               placeholder="Search courses here..."
@@ -92,7 +92,7 @@ export default function ProfileCourses() {
           <button className="bg-[#fcbc0a] text-white px-8 py-3 rounded-full text-sm font-semibold shadow hover:bg-[#f2b003] transition">
             Search
           </button>
-        </div>
+        </div> */}
 
         {/* ---------------- COURSE LIST ---------------- */}
         <div className="flex flex-col gap-6">

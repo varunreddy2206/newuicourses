@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import UserHeader from "./userheader";
+import Usernewheader from "./Usernewheader";
 
 export default function Profile() {
   const [userName, setUserName] = useState("User");
@@ -14,7 +14,7 @@ export default function Profile() {
 
   return (
     <>
-      <UserHeader noOffset />
+     <Usernewheader noOffset />
       <div className="w-full min-h-screen bg-[#f5f7fb] px-4 lg:px-10 py-10 pt-24">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
 

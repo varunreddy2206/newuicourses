@@ -115,15 +115,7 @@ export default function CourseAdding() {
                 </div>
               </div>
 
-              <div className="flex gap-3">
-                <button className="hidden sm:inline-block px-4 py-2 rounded border border-gray-200 bg-white text-sm">
-                  Cancel
-                </button>
-                <button className="hidden sm:inline-block px-4 py-2 rounded border border-gray-200 bg-white text-sm">
-                  Save Draft
-                </button>
-                <button className="px-4 py-2 rounded bg-blue-600 text-white text-sm">Publish Course</button>
-              </div>
+          
             </div>
 
             {/* Card container */}

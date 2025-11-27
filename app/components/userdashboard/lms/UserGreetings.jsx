@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Search, Play, Monitor, Users, Building } from "lucide-react";
+import Link from "next/link";
 
 export default function UserGreetings() {
   const [username, setUsername] = useState("");
@@ -29,22 +30,24 @@ export default function UserGreetings() {
           </p>
 
           {/* Category Buttons */}
-          <div className="flex flex-wrap items-center gap-4 mt-6">
+          <div className="cursor-pointer flex flex-wrap items-center gap-4 mt-6">
             <button className="flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
               <Play size={18} /> Self Learning
             </button>
 
-            <button className="flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
+            <button className="cursor-pointer flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
               <Monitor size={18} /> Online Courses
             </button>
 
-            <button className="flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
+            <button className="cursor-pointer flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
               <Building size={18} /> Classroom Courses
             </button>
 
-            <button className="flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
+            <Link href="/lms/lmscourse">
+            <button className="cursor-pointer flex items-center gap-2 bg-gray-100 px-5 py-2 rounded-full text-sm font-medium">
               <Users size={18} /> Free Courses
             </button>
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -69,7 +72,7 @@ export default function UserGreetings() {
             {/* Gift illustration on the left */}
             <div className="flex-shrink-0 flex items-center justify-center">
               <img
-                src="/invite-gift.png"
+                src="/lms/lmsimage.png"
                 alt="gift"
                 className="w-24 md:w-28"
               />

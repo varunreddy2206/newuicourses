@@ -82,7 +82,66 @@ export default function ContinueLearning() {
       </header>
 
       {/* CONTENT: SIDE NAV + MAIN AREA under the header */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* MOBILE TOP NAV (visible only on small screens) */}
+        <nav className="md:hidden w-full bg-[#f5f5f7] border-b border-gray-200 px-4 py-3 flex items-center justify-center gap-3">
+          {/* Course Learning (active) */}
+          <button
+            type="button"
+            className="flex flex-col items-center justify-center px-3 py-2 rounded-2xl bg-blue-50 text-blue-600 shadow-sm border border-blue-100 text-xs"
+          >
+            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-blue-600 mb-1">
+              <BookOpen size={16} />
+            </div>
+            <span className="text-[10px] leading-tight text-center">
+              Course
+              <br />
+              Learning
+            </span>
+          </button>
+
+          {/* Upgrade */}
+          <button
+            type="button"
+            className="flex flex-col items-center justify-center px-3 py-2 rounded-2xl bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 text-xs"
+          >
+            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-700 mb-1">
+              <TrendingUp size={16} />
+            </div>
+            <span className="text-[10px] leading-tight text-center">
+              Upgrade
+            </span>
+          </button>
+
+          {/* Certificate – locked / unlocked depending on progress */}
+          <button
+            type="button"
+            className={`flex flex-col items-center justify-center px-3 py-2 rounded-2xl border text-xs ${
+              certificateUnlocked
+                ? "bg-green-50 text-green-700 border-green-200"
+                : "bg-white text-gray-400 border-gray-200"
+            }`}
+            title={
+              certificateUnlocked
+                ? "Certificate unlocked"
+                : "Complete at least 85% of the course to unlock certificate"
+            }
+          >
+            <div
+              className={`w-8 h-8 flex items-center justify-center rounded-full mb-1 ${
+                certificateUnlocked
+                  ? "bg-white text-green-600"
+                  : "bg-gray-50 text-gray-400"
+              }`}
+            >
+              {certificateUnlocked ? <Award size={16} /> : <Lock size={14} />}
+            </div>
+            <span className="text-[10px] leading-tight text-center">
+              Certificate
+            </span>
+          </button>
+        </nav>
+
         {/* LEFT FIXED SIDE NAV (icon + label stacked, narrow like reference) */}
         <aside className="hidden md:flex flex-col items-center pt-6 pb-6 w-24 bg-[#f5f5f7] border-r border-gray-200 shadow-sm">
           <nav className="space-y-3 w-full flex flex-col items-center">

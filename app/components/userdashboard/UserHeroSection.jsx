@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 export default function UserHeroSection() {
   return (
@@ -60,7 +61,8 @@ export default function UserHeroSection() {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 mt-4">
-            <button className="
+            <Link href="/courseslist">
+            <button className=" cursor-pointer
               bg-blue-600 
               text-white 
               px-5 sm:px-6 
@@ -74,8 +76,10 @@ export default function UserHeroSection() {
             ">
               Explore Courses →
             </button>
+            </Link>
 
-            <button className="
+            <Link href="/Registrationform">
+            <button className=" cursor-pointer
               border border-gray-400 
               text-gray-700 
               px-5 sm:px-6 
@@ -89,6 +93,7 @@ export default function UserHeroSection() {
             ">
               Book A Free Demo →
             </button>
+            </Link>
           </div>
 
           {/* Feature List */}

@@ -50,7 +50,7 @@ export default function Footer() {
     />
 
     <button
-      className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 text-sm w-full"
+      className="cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 text-sm w-full"
     >
       Sign up
     </button>
@@ -66,7 +66,7 @@ export default function Footer() {
     />
 
     <button
-      className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 text-sm sm:text-base mr-2"
+      className="cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 text-sm sm:text-base mr-2"
     >
       Sign up
     </button>

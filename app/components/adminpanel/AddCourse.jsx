@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
+import Link from "next/link";
 
 /* ---------------------------------------------------------------------
    TAG PILL COMPONENT
@@ -257,9 +258,11 @@ export default function AddCourse() {
                   Save Draft
                 </button>
 
-                <button className="px-6 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium">
+                <Link href="/adminpanel/courseadding">
+                <button className=" cursor-pointer px-6 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium">
                   Save & Next
                 </button>
+                </Link>
               </div>
 
             </div>

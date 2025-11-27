@@ -114,7 +114,7 @@ export default function UserContactSection() {
 
             {/* Submit Button */}
             <button
-              className="w-full bg-blue-600 text-white py-3 rounded-xl 
+              className="cursor-pointer w-full bg-blue-600 text-white py-3 rounded-xl 
               text-base sm:text-lg font-medium hover:bg-blue-700 transition"
             >
               Submit

@@ -59,27 +59,21 @@ export default function PaymentPage() {
               <ChevronDown size={20} className="text-gray-600" />
             </div>
 
-            {/* LAYOUT: LEFT VERTICAL TABS + RIGHT FORM (MATCH REFERENCE UI) */}
+            {/* LAYOUT */}
             <div className="mt-4 pt-4 border-t border-gray-200 flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-              {/* LEFT: "Pay now" + PAYMENT METHODS */}
+
+              {/* Left tabs */}
               <div className="w-full md:w-auto">
                 <p className="text-base font-medium mb-3">Pay now</p>
                 <div className="w-full md:w-44 border rounded-lg overflow-hidden text-sm">
+
                   {/* Credit Card */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod("credit")}
-                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
-                      paymentMethod === "credit"
-                        ? "bg-blue-50 font-medium"
-                        : "bg-white"
-                    }`}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${paymentMethod === "credit" ? "bg-blue-50 font-medium" : "bg-white"}`}
                   >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        paymentMethod === "credit" ? "bg-blue-600" : "bg-gray-300"
-                      }`}
-                    />
+                    <span className={`w-2 h-2 rounded-full ${paymentMethod === "credit" ? "bg-blue-600" : "bg-gray-300"}`} />
                     <span>Credit Card</span>
                   </button>
 
@@ -87,15 +81,9 @@ export default function PaymentPage() {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod("debit")}
-                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
-                      paymentMethod === "debit" ? "bg-blue-50 font-medium" : "bg-white"
-                    }`}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${paymentMethod === "debit" ? "bg-blue-50 font-medium" : "bg-white"}`}
                   >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        paymentMethod === "debit" ? "bg-blue-600" : "bg-gray-300"
-                      }`}
-                    />
+                    <span className={`w-2 h-2 rounded-full ${paymentMethod === "debit" ? "bg-blue-600" : "bg-gray-300"}`} />
                     <span>Debit Card</span>
                   </button>
 
@@ -103,17 +91,9 @@ export default function PaymentPage() {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod("netbanking")}
-                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${
-                      paymentMethod === "netbanking"
-                        ? "bg-blue-50 font-medium"
-                        : "bg-white"
-                    }`}
+                    className={`w-full text-left border-b px-4 py-3 flex items-center gap-2 ${paymentMethod === "netbanking" ? "bg-blue-50 font-medium" : "bg-white"}`}
                   >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        paymentMethod === "netbanking" ? "bg-blue-600" : "bg-gray-300"
-                      }`}
-                    />
+                    <span className={`w-2 h-2 rounded-full ${paymentMethod === "netbanking" ? "bg-blue-600" : "bg-gray-300"}`} />
                     <span>Net Banking</span>
                   </button>
 
@@ -121,37 +101,23 @@ export default function PaymentPage() {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod("upi")}
-                    className={`w-full text-left px-4 py-3 flex items-center gap-2 ${
-                      paymentMethod === "upi" ? "bg-blue-50 font-medium" : "bg-white"
-                    }`}
+                    className={`w-full text-left px-4 py-3 flex items-center gap-2 ${paymentMethod === "upi" ? "bg-blue-50 font-medium" : "bg-white"}`}
                   >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        paymentMethod === "upi" ? "bg-blue-600" : "bg-gray-300"
-                      }`}
-                    />
+                    <span className={`w-2 h-2 rounded-full ${paymentMethod === "upi" ? "bg-blue-600" : "bg-gray-300"}`} />
                     <span>UPI</span>
                   </button>
+
                 </div>
               </div>
 
-              {/* RIGHT: DYNAMIC PAYMENT CONTENT */}
+              {/* Right dynamic form */}
               <div className="w-full md:flex-1 md:max-w-md mt-6 md:mt-0">
+
                 {paymentMethod === "credit" && (
                   <>
-                    <label className="text-sm font-medium">
-                      Enter your credit card details
-                    </label>
-
-                    <input
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
-                      placeholder="Card number"
-                    />
-
-                    <input
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3"
-                      placeholder="Name as a Card"
-                    />
+                    <label className="text-sm font-medium">Enter your credit card details</label>
+                    <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2" placeholder="Card number" />
+                    <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3" placeholder="Name as a Card" />
 
                     <div className="flex gap-3 mt-3">
                       <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
@@ -160,30 +126,16 @@ export default function PaymentPage() {
                       <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
                         <option>YYYY</option>
                       </select>
-                      <input
-                        className="border border-gray-300 rounded-md px-3 py-2 w-full"
-                        placeholder="CVV"
-                      />
+                      <input className="border border-gray-300 rounded-md px-3 py-2 w-full" placeholder="CVV" />
                     </div>
                   </>
                 )}
 
                 {paymentMethod === "debit" && (
                   <>
-                    <label className="text-sm font-medium">
-                      Enter your debit card details
-                    </label>
-
-                    <input
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
-                      placeholder="Debit card number"
-                    />
-
-                    <input
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3"
-                      placeholder="Name on Card"
-                    />
-
+                    <label className="text-sm font-medium">Enter your debit card details</label>
+                    <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2" placeholder="Debit card number" />
+                    <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-3" placeholder="Name on Card" />
                     <div className="flex gap-3 mt-3">
                       <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
                         <option>MM</option>
@@ -191,19 +143,14 @@ export default function PaymentPage() {
                       <select className="border border-gray-300 rounded-md px-3 py-2 w-full">
                         <option>YYYY</option>
                       </select>
-                      <input
-                        className="border border-gray-300 rounded-md px-3 py-2 w-full"
-                        placeholder="CVV"
-                      />
+                      <input className="border border-gray-300 rounded-md px-3 py-2 w-full" placeholder="CVV" />
                     </div>
                   </>
                 )}
 
                 {paymentMethod === "netbanking" && (
                   <>
-                    <label className="text-sm font-medium">
-                      Choose your bank for Net Banking
-                    </label>
+                    <label className="text-sm font-medium">Choose your bank for Net Banking</label>
                     <select className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2">
                       <option>Select Bank</option>
                       <option>HDFC Bank</option>
@@ -216,34 +163,24 @@ export default function PaymentPage() {
 
                 {paymentMethod === "upi" && (
                   <>
-                    <label className="text-sm font-medium">
-                      Pay using UPI
-                    </label>
+                    <label className="text-sm font-medium">Pay using UPI</label>
 
-                    {/* QR placeholder */}
                     <div className="mt-3 border border-dashed border-gray-300 rounded-md p-4 flex flex-col items-center justify-center text-sm text-gray-500">
                       <div className="w-32 h-32 bg-gray-100 mb-3" />
                       <p>Scan this QR with your UPI app</p>
                     </div>
 
-                    <p className="mt-3 text-xs text-gray-500">
-                      Or enter your UPI ID below
-                    </p>
-                    <input
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2"
-                      placeholder="yourupi@bank"
-                    />
+                    <p className="mt-3 text-xs text-gray-500">Or enter your UPI ID below</p>
+                    <input className="w-full border border-gray-300 rounded-md px-3 py-2 mt-2" placeholder="yourupi@bank" />
                   </>
                 )}
 
-                {/* PAYMENT AMOUNT + BUTTON (COMMON) */}
                 <div className="mt-6 font-semibold text-lg">₹17,688.20</div>
 
                 <button className="mt-4 w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium">
                   Make Payment
                 </button>
 
-                {/* Secure payment info + card icons + disclaimer (like reference UI) */}
                 <div className="mt-4">
                   <p className="flex items-center gap-2 text-xs text-gray-500">
                     <span>🔒</span>
@@ -251,26 +188,18 @@ export default function PaymentPage() {
                   </p>
 
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
-                      VISA
-                    </span>
-                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
-                      RuPay
-                    </span>
-                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">
-                      AMEX
-                    </span>
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">VISA</span>
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">RuPay</span>
+                    <span className="inline-flex items-center justify-center rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">AMEX</span>
                   </div>
 
                   <p className="mt-3 text-[10px] leading-snug text-gray-400">
-                    By placing this order, you expressly confirm that you have read and you agree
-                    to Ascend Academy Terms of Use, Refund, Rescheduling and Privacy Policy.
+                    By placing this order, you expressly confirm that you have read and you agree to Ascend Academy Terms of Use, Refund, Rescheduling and Privacy Policy.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         {/* --------------------- RIGHT SIDE --------------------- */}
@@ -278,7 +207,6 @@ export default function PaymentPage() {
           <div className="bg-white shadow rounded-lg p-6 border border-gray-200 sticky top-4">
             <h2 className="text-lg font-semibold">Order Summary</h2>
 
-            {/* COURSE DETAILS WITH TOP DIVIDER (LIKE REFERENCE) */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="font-medium">Machine Learning using Python</p>
 
@@ -289,7 +217,6 @@ export default function PaymentPage() {
               </ul>
             </div>
 
-            {/* COURSE FEE WITH DISCOUNT + STRIKE PRICE (MATCH REFERENCE) */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="flex items-center justify-between">
                 <p className="text-sm text-gray-600">Course Fee</p>
@@ -301,7 +228,7 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* PROMO CODE */}
+            {/* FIXED PROMO CODE ERROR */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-sm text-gray-600 mb-1">Promo Code</p>
 
@@ -309,6 +236,7 @@ export default function PaymentPage() {
                 <input
                   className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
                   value="HAPPY5"
+                  readOnly      // <-- FIXED READONLY ADDED
                 />
                 <button className="px-4 border border-gray-300 rounded-md">Apply</button>
               </div>
@@ -322,7 +250,6 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            {/* BILLING DETAILS */}
             <div className="mt-6 pt-4 border-t border-gray-200 text-sm">
               <p className="font-semibold mb-2">Billing Details</p>
 
