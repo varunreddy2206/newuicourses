@@ -38,6 +38,101 @@ const COURSE_THUMBNAILS = {
     "Corporate Upskilling (Custom Modules)": "/course2.png",
 };
 
+/* ------------ UNIQUE LINKS FOR EACH CARD (Enroll + Know More) ------------ */
+
+const BUTTON_LINKS = {
+    "Artificial Intelligence & Machine Learning with Python": {
+        enroll: "/course\[id]",
+        more: "/details/ai-ml",
+    },
+    "Data Science & Analytics with Python": {
+        enroll: "/enroll/data-science",
+        more: "/details/data-science",
+    },
+    "Python for Development & Automation": {
+        enroll: "/enroll/python-dev",
+        more: "/details/python-dev",
+    },
+
+    "Full Stack Web Development (MERN / MEAN)": {
+        enroll: "/enroll/mern",
+        more: "/details/mern",
+    },
+    "Full Stack Java Development (Spring Boot + React / Angular)": {
+        enroll: "/enroll/java-fullstack",
+        more: "/details/java-fullstack",
+    },
+    "Full Stack Python Development (Django / Flask + React)": {
+        enroll: "/enroll/python-fullstack",
+        more: "/details/python-fullstack",
+    },
+    "Frontend Development (HTML, CSS, JavaScript, React)": {
+        enroll: "/enroll/frontend",
+        more: "/details/frontend",
+    },
+    "Backend Development (Node.js, Express, MongoDB / MySQL)": {
+        enroll: "/enroll/backend",
+        more: "/details/backend",
+    },
+
+    "Flutter App Development": {
+        enroll: "/enroll/flutter",
+        more: "/details/flutter",
+    },
+    "React Native App Development": {
+        enroll: "/enroll/react-native",
+        more: "/details/react-native",
+    },
+    "Swift App Development (iOS)": {
+        enroll: "/enroll/swift",
+        more: "/details/swift",
+    },
+    "Kotlin App Development (Android)": {
+        enroll: "/enroll/kotlin",
+        more: "/details/kotlin",
+    },
+
+    "DevOps Engineer Program": {
+        enroll: "/enroll/devops",
+        more: "/details/devops",
+    },
+    "Cloud Computing Fundamentals": {
+        enroll: "/enroll/cloud",
+        more: "/details/cloud",
+    },
+    "Docker, Kubernetes & CI/CD Tools": {
+        enroll: "/enroll/devops-tools",
+        more: "/details/devops-tools",
+    },
+
+    "Manual & Automation Testing": {
+        enroll: "/enroll/manual-testing",
+        more: "/details/manual-testing",
+    },
+    "Selenium & API Testing (Advanced QA)": {
+        enroll: "/enroll/selenium",
+        more: "/details/selenium",
+    },
+
+    "UI/UX Design Fundamentals (Figma & Adobe XD)": {
+        enroll: "/enroll/uiux",
+        more: "/details/uiux",
+    },
+    "Graphic Design (Photoshop, Illustrator, Canva Pro)": {
+        enroll: "/enroll/graphic-design",
+        more: "/details/graphic-design",
+    },
+
+    "Real-Time Project Internship (Web/App/AI)": {
+        enroll: "/enroll/internship",
+        more: "/details/internship",
+    },
+    "Corporate Upskilling (Custom Modules)": {
+        enroll: "/enroll/corporate",
+        more: "/details/corporate",
+    },
+};
+
 /* ----------------------------- MAIN CATEGORIES ----------------------------- */
 
 const MAIN_CATEGORIES = [
@@ -106,11 +201,12 @@ function createCards(list) {
     return list.map((title, index) => ({
         id: `${title.replace(/\s+/g, "-").toLowerCase()}-${index + 1}`,
         title,
-        thumbnail: COURSE_THUMBNAILS[title] || THUMB_URL, // <-- UPDATED
+        thumbnail: COURSE_THUMBNAILS[title] || THUMB_URL,
         price: 799,
         oldPrice: 899,
         rating: (4 + (index % 2) * 0.5).toFixed(1),
         students: 800 + index * 30,
+        buttons: BUTTON_LINKS[title], // ⬅ unique button links
     }));
 }
 
@@ -121,13 +217,11 @@ export default function CourseListing() {
     const [query, setQuery] = useState("");
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-    /* Get subcourses for selected category */
     const subcourses =
         activeCategory === "Most Popular"
             ? POPULAR_SUBCOURSES
             : SUBCOURSES_BY_CATEGORY[activeCategory] || [];
 
-    /* Prepare cards */
     const cards = useMemo(() => {
         let base = createCards(subcourses);
         if (!query.trim()) return base;
@@ -290,19 +384,24 @@ export default function CourseListing() {
                                         Build intelligent solutions with real-world AI & ML training.
                                     </p>
 
-                                    {/* Buttons */}
+                                    {/* ------------------ UPDATED UNIQUE BUTTONS ------------------ */}
                                     <div className="flex items-center gap-2 md:gap-3 lg:gap-4 mt-auto pt-2">
                                         <Link
-                                            href={`/courses/${course.id}`}
+                                            href={course.buttons.enroll}
                                             className="bg-blue-600 text-white px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-blue-700 transition flex items-center gap-1 flex-1 justify-center"
                                         >
                                             Enroll Now →
                                         </Link>
 
-                                        <button className="border border-gray-300 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1 hover:bg-gray-50 transition flex-1 justify-center">
+                                        <Link
+                                            href={course.buttons.more}
+                                            className="border border-gray-300 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1 hover:bg-gray-50 transition flex-1 justify-center"
+                                        >
                                             Know More →
-                                        </button>
+                                        </Link>
                                     </div>
+                                    {/* ----------------------------------------------------------- */}
+
                                 </article>
                             ))}
                         </div>
