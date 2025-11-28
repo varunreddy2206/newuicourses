@@ -92,16 +92,7 @@ export default function Placement() {
 
           {/* Button */}
           <Link href="/courseslist">
-          <button className=" cursor-pointer
-            mt-8 sm:mt-10 
-            bg-blue-600 text-white 
-            px-6 sm:px-8 py-3 
-            rounded-full 
-            text-sm sm:text-base 
-            font-medium 
-            hover:bg-blue-700 
-            transition flex items-center gap-2 w-fit font-urbanist
-          ">
+          <button className="cursor-pointer bg-blue-600 text-white px-3 sm:px-8 py-2 sm:py-2 mt-5 sm:mt-3 md:mt-5 lg:mt-6 md:ml-5 rounded-full font-medium text-xs sm:text-base inline-flex items-center gap-1 sm:gap-2 hover:bg-blue-700 lg:px-6 lg:py-2 whitespace-nowrap shrink-0">
             Explore Courses →
           </button>
           </Link>
