@@ -30,14 +30,14 @@ export default function HeroSection() {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 mt-4">
-            <Link href="/courseslist">
-              <button className="cursor-pointer bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-medium hover:bg-blue-700 transition flex items-center gap-2">
+            <Link href="/courseslist" className="w-full sm:w-auto">
+              <button className="cursor-pointer bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-medium hover:bg-blue-700 transition flex items-center gap-2 w-full sm:w-auto justify-center">
                 Explore Courses →
               </button>
             </Link>
 
-            <Link href="/Registrationform">
-              <button className="cursor-pointer border border-gray-400 text-gray-700 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-medium hover:bg-gray-100 transition flex items-center gap-2">
+            <Link href="/Registrationform" className="w-full sm:w-auto">
+              <button className="cursor-pointer border border-gray-400 text-gray-700 px-5 sm:px-6 py-2.5 sm:py-3 md:px-4.5 md:py-3 rounded-full text-sm sm:text-base font-medium hover:bg-gray-100 transition flex items-center gap-2 w-full sm:w-auto justify-center">
                 Book A Free Demo →
               </button>
             </Link>
