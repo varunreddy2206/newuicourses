@@ -1,10 +1,89 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Play, Loader2 } from "lucide-react";
+import { imageUrl } from "@/core/url";
+import { useAuthStore } from "@/store/auth.store";
+import { enrollCourseApi } from "@/features/courses/service/get-course.service";
+import { successfully, errorMsgApi } from "@/core/toast";
 
 export default function CourseHero({ course }) {
-  console.log("course", course);
+  const router = useRouter();
+  const { isAuthenticated, token, user } = useAuthStore();
+  const [enrolling, setEnrolling] = useState(false);
+
+  // Check if user is already enrolled
+  const userId = user?._id || user?.id;
+  const enrolledUsers = course?.enrolledUsers || [];
+  const isAlreadyEnrolled = isAuthenticated && userId && enrolledUsers.some(
+    (enrolledUserId) => {
+      // Handle both string and ObjectId comparison
+      const enrolledId = enrolledUserId?.toString();
+      const currentUserId = userId?.toString();
+      return enrolledId === currentUserId;
+    }
+  );
+
+  const handleDownloadCurriculum = () => {
+    if (!course?.curriculumPdf) {
+      alert("Curriculum PDF not available");
+      return;
+    }
+
+    const pdfPath = course.curriculumPdf.replace(/\\/g, "/");
+    const pdfUrl = pdfPath.startsWith("http") 
+      ? pdfPath 
+      : `${imageUrl}/${pdfPath.replace(/^\//, "")}`;
+    
+    // Open in new tab for download
+    window.open(pdfUrl, "_blank");
+  };
+
+  const handleEnroll = async () => {
+    // Check if already enrolled
+    if (isAlreadyEnrolled) {
+      errorMsgApi("You are already enrolled in this course");
+      return;
+    }
+
+    // Check if user is logged in
+    if (!isAuthenticated || !token) {
+      errorMsgApi("Please login to enroll in this course");
+      router.push("/login");
+      return;
+    }
+
+    // Check if course ID exists
+    if (!course?._id && !course?.id) {
+      errorMsgApi("Course information not available");
+      return;
+    }
+
+    const courseId = course._id || course.id;
+    setEnrolling(true);
+
+    try {
+      const response = await enrollCourseApi(courseId);
+      
+      if (response.status) {
+        successfully("Successfully enrolled in course!");
+        // Refresh the page to update course data with enrollment status
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        // Optionally redirect to LMS or course dashboard
+        // router.push(`/lms/${courseId}`);
+      } else {
+        errorMsgApi(response.error || "Failed to enroll in course");
+      }
+    } catch (error) {
+      errorMsgApi("An error occurred while enrolling. Please try again.");
+    } finally {
+      setEnrolling(false);
+    }
+  };
 
   return (
     <section className="w-full py-12 sm:py-16 px-4 sm:px-6 md:px-16 lg:px-24">
@@ -36,12 +115,35 @@ export default function CourseHero({ course }) {
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3">
-              Enroll Now
-              <span className="text-lg sm:text-xl">➡</span>
+            <button
+              onClick={handleEnroll}
+              disabled={enrolling || isAlreadyEnrolled}
+              className={`px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3 transition-colors ${
+                isAlreadyEnrolled
+                  ? "bg-green-600 text-white cursor-not-allowed opacity-80"
+                  : enrolling
+                  ? "bg-blue-600 text-white opacity-70 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
+            >
+              {enrolling ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Enrolling...
+                </>
+              ) : isAlreadyEnrolled ? (
+                <>
+                  ✓ Already Enrolled
+                </>
+              ) : (
+                <>
+                  Enroll Now
+                  <span className="text-lg sm:text-xl">➡</span>
+                </>
+              )}
             </button>
 
-            <button className="bg-white border px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3 shadow-sm">
+            <button onClick={handleDownloadCurriculum} className="bg-white border border-gray-200 px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium flex items-center gap-3 shadow-sm">
               Download Curriculum
               <span className="text-lg sm:text-xl">📥</span>
             </button>

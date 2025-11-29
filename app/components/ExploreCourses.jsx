@@ -21,13 +21,13 @@ export default function ExploreCourses() {
   // Selected category
   const [selectedCategory, setSelectedCategory] = useState(newCat[0]);
 
-  // API CALL
+  // API CALL - Fetch 20 items, latest courses when "All" is selected
   const { data, loading, error } = useGetAPI(getCourseServiceApi, {
     category: selectedCategory,
     page: 1,
-    limit: 5,
+    limit: 20,
   });
-  
+
 
   const serverCourses = data?.data || [];
 
@@ -43,9 +43,9 @@ export default function ExploreCourses() {
           <button
             key={i}
             onClick={() => setSelectedCategory(category)}
-            className={`text-sm px-4 py-1 border rounded-full shadow-sm ${selectedCategory === category
-                ? "bg-blue-600 text-white"
-                : "bg-white text-gray-700"
+            className={`text-sm px-4 py-1 border border-gray-200 rounded-full shadow-sm ${selectedCategory === category
+              ? "bg-blue-600 text-white"
+              : "bg-white text-gray-700"
               }`}
           >
             {category}
@@ -77,10 +77,10 @@ export default function ExploreCourses() {
           serverCourses.map((course, index) => (
             <div
               key={index}
-              className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b pb-10"
+              className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-gray-200 pb-2"
             >
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900">
                   {course.title}
                 </h3>
 
@@ -89,7 +89,7 @@ export default function ExploreCourses() {
                 </p>
 
                 <div className="flex items-center gap-2 md:gap-4  
-  text-sm text-gray-700 mb-5">
+                  text-sm text-gray-700 mb-5 flex-wrap  ">
                   <div className="flex items-center gap-1 md:gap-2">
                     <User size={16} className="text-green-600" />
                     <span>{course.level}</span>
@@ -102,7 +102,7 @@ export default function ExploreCourses() {
 
                   <div className="flex items-center gap-1 md:gap-2">
                     <Globe size={16} className="text-teal-600" />
-                    <span>Online</span>
+                    <span>{course?.trainingOptions}</span>
                   </div>
 
                   <div className="flex items-center gap-1 md:gap-2">
@@ -111,7 +111,6 @@ export default function ExploreCourses() {
                   </div>
                 </div>
 
-                <div className="pt-15" />
                 <Link
                   href={`/course/${course._id}`}
                   className="bg-blue-600 text-white px-10 py-2.5 text-sm font-medium hover:bg-blue-700 mt-9 rounded-md shadow-md inline-flex items-center justify-center transition-colors"

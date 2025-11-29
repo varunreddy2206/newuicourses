@@ -1,37 +1,24 @@
 "use client";
-import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useRef } from "react";
+import { useGetAPI } from "@/common/hooks/useGetAPI";
+import { getPopularCoursesApi } from "@/features/courses/service/get-course.service";
+import CourseCard from "./CourseCard";
 
 export default function PopularCourses() {
-  const courses = [
-    {
-      title: "Generative AI",
-      desc: "Build intelligent solutions with real-world AI & ML training.",
-      img: "/course1.png",
-    },
-    {
-      title: "Generative AI",
-      desc: "Build intelligent solutions with real-world AI & ML training.",
-      img: "/course2.png",
-    },
-    {
-      title: "Generative AI",
-      desc: "Build intelligent solutions with real-world AI & ML training.",
-      img: "/course3.png",
-    },
-    {
-      title: "Generative AI",
-      desc: "Build intelligent solutions with real-world AI & ML training.",
-      img: "/course4.png",
-    },
-  ];
+  // Fetch popular courses from API
+  const { data, loading, error } = useGetAPI(getPopularCoursesApi, {
+    limit: 4,
+  });
+
+  // Get courses from API response
+  const courses = data?.data || [];
 
   const sliderRef = useRef(null);
 
   const slideLeft = () => {
     if (sliderRef.current) {
-      const card = sliderRef.current.querySelector('.course-card');
+      const card = sliderRef.current.querySelector('article');
       const gap = 16; // gap-4 = 1rem = 16px
       const scrollAmount = card ? card.offsetWidth + gap : 356;
       sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -40,59 +27,62 @@ export default function PopularCourses() {
 
   const slideRight = () => {
     if (sliderRef.current) {
-      const card = sliderRef.current.querySelector('.course-card');
+      const card = sliderRef.current.querySelector('article');
       const gap = 16; // gap-4 = 1rem = 16px
       const scrollAmount = card ? card.offsetWidth + gap : 356;
       sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="w-full px-2 sm:px-4 md:px-10 lg:px-20 py-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-gray-500">Loading popular courses...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="w-full px-2 sm:px-4 md:px-10 lg:px-20 py-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-red-500">Failed to load popular courses. Please try again later.</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show empty state
+  if (!courses || courses.length === 0) {
+    return (
+      <div className="w-full px-2 sm:px-4 md:px-10 lg:px-20 py-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-gray-500">No popular courses available at the moment.</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full px-2 sm:px-4 md:px-10 lg:px-20 py-8">
-
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
 
       {/* DESKTOP GRID — ONLY FROM 1280px (xl) */}
       <div className="hidden xl:grid xl:grid-cols-4 gap-6">
-        {courses.map((course, index) => (
-          <div key={index} className="bg-white border shadow-md rounded-2xl p-4">
-            <Image
-              src={course.img}
-              alt="Course"
-              width={400}
-              height={300}
-              className="rounded-xl object-cover w-full h-[170px]"
-            />
-
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-600">
-              <span>🛡 Beginner</span>
-              <span>🟢 Online</span>
-              <span>⭐ 17M+</span>
-            </div>
-
-            <h3 className="text-lg font-semibold text-gray-900 mt-2">
-              {course.title}
-            </h3>
-
-            <div className="h-[60px] overflow-hidden">
-              <p className="text-gray-600 text-sm leading-snug">{course.desc}</p>
-            </div>
-
-            <div className="flex items-center justify-between mt-4">
-              <button className="bg-blue-600 cursor-pointer text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700 flex items-center gap-1">
-                Enroll Now →
-              </button>
-              <button className="cursor-pointer border px-5 py-2 rounded-full text-sm flex items-center gap-1">
-                Know More ⓘ
-              </button>
-            </div>
-          </div>
+        {courses.map((course) => (
+          <CourseCard key={course._id || course.id} course={course} />
         ))}
       </div>
 
       {/* MOBILE + TABLET + LAPTOP SLIDER (ONLY <1280px) */}
       <div className="xl:hidden relative mt-2">
-
         <button
           onClick={slideLeft}
           className="absolute left-1 top-[40%] bg-white shadow-md border p-2 rounded-full z-10"
@@ -104,42 +94,12 @@ export default function PopularCourses() {
           ref={sliderRef}
           className="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x snap-mandatory scroll-pl-4"
         >
-          {courses.map((course, index) => (
+          {courses.map((course) => (
             <div
-              key={index}
-              className="course-card w-[calc(100vw-2rem)] sm:w-[calc(100vw-4rem)] md:min-w-[280px] lg:min-w-[300px] md:w-auto bg-white border shadow-md rounded-2xl p-4 snap-start flex-shrink-0"
+              key={course._id || course.id}
+              className="w-[calc(100vw-2rem)] sm:w-[calc(100vw-4rem)] md:min-w-[280px] lg:min-w-[300px] md:w-auto snap-start flex-shrink-0"
             >
-              <Image
-                src={course.img}
-                alt="Course"
-                width={400}
-                height={300}
-                className="rounded-xl object-cover w-full h-[170px]"
-              />
-
-              <div className="flex items-center gap-3 mt-3 text-xs text-gray-600">
-                <span>🛡 Beginner</span>
-                <span>🟢 Online</span>
-                <span>⭐ 17M+</span>
-              </div>
-
-              <h3 className="text-lg font-semibold text-gray-900 mt-2">
-                {course.title}
-              </h3>
-
-              <div className="h-[65px] overflow-hidden flex items-start">
-                <p className="text-gray-600 text-sm leading-snug">{course.desc}</p>
-              </div>
-
-              <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4 mt-4">
-                <button className="bg-blue-600 text-white px-4 sm:px-5 md:px-6 md:min-w-[150px] py-2 cursor-pointer rounded-full text-sm hover:bg-blue-700 flex items-center justify-center gap-1 whitespace-nowrap flex-1 md:flex-initial">
-                  Enroll Now →
-                </button>
-
-                <button className="border border-gray-800 text-gray-800 px-4 sm:px-5 md:px-6 md:min-w-[150px] py-2 cursor-pointer rounded-full text-sm hover:bg-gray-50 flex items-center justify-center gap-1 whitespace-nowrap flex-1 md:flex-initial">
-                  Know More ⓘ
-                </button>
-              </div>
+              <CourseCard course={course} />
             </div>
           ))}
         </div>
@@ -150,9 +110,7 @@ export default function PopularCourses() {
         >
           <ChevronRight size={22} />
         </button>
-
       </div>
-
     </div>
   );
 }

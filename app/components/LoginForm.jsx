@@ -70,11 +70,17 @@ export default function LoginForm() {
           {/* <Link href="/userdashboard"> */}
           <button
             onClick={handleLogin}
-            className="w-full bg-blue-600 text-white py-3 mt-4 rounded-md text-sm font-medium hover:bg-blue-700 transition"
+            disabled={loading}
+            className={`w-full bg-blue-600 text-white py-3 mt-4 rounded-md text-sm font-medium transition flex items-center justify-center gap-2 ${
+              loading 
+                ? "opacity-70 cursor-not-allowed" 
+                : "hover:bg-blue-700 cursor-pointer active:scale-[0.98]"
+            }`}
           >
             {loading ? (
               <>
-                <Loader2 />
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Logging in...</span>
               </>
             ) : (
               "Login"

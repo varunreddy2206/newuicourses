@@ -6,7 +6,7 @@ export default function CertificateSection() {
   return (
     <section className="w-full py-6 px-2 sm:px-4 md:px-8 lg:px-20 my-3 sm:my-4">
       <div
-        className="bg-white rounded-3xl border shadow-sm 
+        className="bg-white rounded-3xl border border-gray-200 shadow-sm 
         p-5 sm:p-6 md:p-8 lg:p-10 
         flex flex-col lg:flex-row items-center 
         gap-6 lg:gap-8"

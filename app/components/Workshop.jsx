@@ -30,7 +30,7 @@ export default function WorkShop() {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Workshops</h2>
 
       {/* MAIN WRAPPER */}
-      <div className="max-w-8xl mx-auto w-full bg-white rounded-2xl shadow-md border p-6 md:p-10">
+      <div className="max-w-8xl mx-auto w-full bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
 
           {/* LEFT BOX */}
@@ -91,7 +91,7 @@ export default function WorkShop() {
               {[1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="min-w-[230px] max-w-[230px] bg-white rounded-xl shadow-md border p-4"
+                  className="min-w-[230px] max-w-[230px] bg-white rounded-xl shadow-md border border-gray-200 p-4"
                 >
                   <Image
                     src={cardImages[i - 1]}   // 🌟 DIFFERENT IMAGE FOR EACH CARD

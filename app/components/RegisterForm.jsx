@@ -2,8 +2,32 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSignupHook } from "@/features/auth/signup.hook";
+import { Loader2 } from "lucide-react";
 
 export default function RegistrationForm() {
+  const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    email,
+    setEmail,
+    phoneCode,
+    setPhoneCode,
+    phoneNumber,
+    setPhoneNumber,
+    password,
+    setPassword,
+    handleSignup,
+    loading,
+    firstNameError,
+    lastNameError,
+    emailError,
+    phoneNumberError,
+    passwordError,
+  } = useSignupHook();
+
   return (
     <div className="w-full min-h-screen bg-white flex flex-col md:flex-row ">
       
@@ -18,48 +42,138 @@ export default function RegistrationForm() {
 
           {/* Form */}
           <div className="space-y-4">
+            {/* First Name and Last Name */}
             <div className="flex gap-3">
-              <input
-                type="text"
-                placeholder="First Name"
-                className="w-1/2 border border-gray-300 rounded-md px-3 py-2 text-sm"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="w-1/2 border border-gray-300 rounded-md px-3 py-2 text-sm"
-              />
+              <div className="w-1/2">
+                <input
+                  type="text"
+                  placeholder="First Name*"
+                  className={`w-full border rounded-md px-3 py-2.5 text-sm transition ${
+                    firstNameError 
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" 
+                      : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  } outline-none`}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  value={firstName}
+                  disabled={loading}
+                />
+                {firstNameError && (
+                  <p className="text-red-600 text-xs mt-1">{firstNameError}</p>
+                )}
+              </div>
+              <div className="w-1/2">
+                <input
+                  type="text"
+                  placeholder="Last Name*"
+                  className={`w-full border rounded-md px-3 py-2.5 text-sm transition ${
+                    lastNameError 
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" 
+                      : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  } outline-none`}
+                  onChange={(e) => setLastName(e.target.value)}
+                  value={lastName}
+                  disabled={loading}
+                />
+                {lastNameError && (
+                  <p className="text-red-600 text-xs mt-1">{lastNameError}</p>
+                )}
+              </div>
             </div>
 
-            <input
-              type="email"
-              placeholder="Email address*"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-            />
-
-            <div className="flex gap-3">
-              <select className="w-1/3 border border-gray-300 rounded-md px-3 py-2 text-sm">
-                <option>IND</option>
-              </select>
+            {/* Email */}
+            <div>
               <input
-                type="text"
-                placeholder="Phone Number*"
-                className="w-2/3 border border-gray-300 rounded-md px-3 py-2 text-sm"
+                type="email"
+                placeholder="Email address*"
+                className={`w-full border rounded-md px-3 py-2.5 text-sm transition ${
+                  emailError 
+                    ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" 
+                    : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                } outline-none`}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                disabled={loading}
               />
+              {emailError && (
+                <p className="text-red-600 text-xs mt-1">{emailError}</p>
+              )}
             </div>
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-            />
+            {/* Phone Code and Phone Number */}
+            <div className="flex gap-3">
+              <div className="w-1/3">
+                <select 
+                  className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
+                  onChange={(e) => setPhoneCode(e.target.value)}
+                  value={phoneCode}
+                  disabled={loading}
+                >
+                  <option value="IND">IND</option>
+                  <option value="USA">USA</option>
+                  <option value="UK">UK</option>
+                </select>
+              </div>
+              <div className="w-2/3">
+                <input
+                  type="text"
+                  placeholder="Phone Number*"
+                  maxLength={10}
+                  className={`w-full border rounded-md px-3 py-2.5 text-sm transition ${
+                    phoneNumberError 
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" 
+                      : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  } outline-none`}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, "");
+                    setPhoneNumber(value);
+                  }}
+                  value={phoneNumber}
+                  disabled={loading}
+                />
+                {phoneNumberError && (
+                  <p className="text-red-600 text-xs mt-1">{phoneNumberError}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <input
+                type="password"
+                placeholder="Password*"
+                className={`w-full border rounded-md px-3 py-2.5 text-sm transition ${
+                  passwordError 
+                    ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" 
+                    : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                } outline-none`}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                disabled={loading}
+              />
+              {passwordError && (
+                <p className="text-red-600 text-xs mt-1">{passwordError}</p>
+              )}
+            </div>
 
             {/* Register Button */}
-            <Link href="/userdashboard">
-            <button className="cursor-pointer  w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium hover:bg-blue-700 transition">
-              Register Now
+            <button
+              onClick={handleSignup}
+              disabled={loading}
+              className={`w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium transition flex items-center justify-center gap-2 ${
+                loading 
+                  ? "opacity-70 cursor-not-allowed" 
+                  : "hover:bg-blue-700 cursor-pointer active:scale-[0.98]"
+              }`}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Registering...</span>
+                </>
+              ) : (
+                "Register Now"
+              )}
             </button>
-            </Link>
 
             {/* Divider Text */}
             <p className="text-center text-xs text-gray-500">other signup options</p>

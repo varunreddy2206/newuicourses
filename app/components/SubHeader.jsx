@@ -2,12 +2,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Menu, X, Search, LogOut } from "lucide-react";
+import { useAuthStore } from "@/store/auth.store";
+import { normalizeImagePath } from "./userdashboard/Profile";
+import { successfully } from "@/core/toast";
 
 export default function SubHeader() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef(null);
   const menuRef = useRef(null);
+  const router = useRouter();
+  const { isAuthenticated, user, clearAuth } = useAuthStore();
 
   // Close menu when clicking outside (mobile/tablet)
   useEffect(() => {
@@ -25,6 +31,39 @@ export default function SubHeader() {
     document.addEventListener("mousedown", handleDocClick);
     return () => document.removeEventListener("mousedown", handleDocClick);
   }, [open]);
+
+  // Helper function to get user's name
+  const getUserName = () => {
+    if (!user) return "";
+    return user.firstName || user.name || user.username || "";
+  };
+
+  // Helper function to get first letter of name (capitalized)
+  const getInitial = () => {
+    const name = getUserName();
+    if (name) {
+      return name.charAt(0).toUpperCase();
+    }
+    return "U"; // Default to "U" for User
+  };
+
+  // Helper function to get profile image path
+  const getProfileImage = () => {
+    if (!user) return null;
+    const imagePath = user.profileImage || user.image || user.avatar;
+    if (!imagePath) return null;
+    return normalizeImagePath(imagePath);
+  };
+
+  // Logout handler
+  const handleLogout = () => {
+    clearAuth(); // Clear auth state and localStorage
+    successfully("Logged out successfully!");
+    setOpen(false); // Close mobile menu if open
+    router.push("/login"); // Navigate to login page
+  };
+
+
 
   return (
     <div className="fixed top-3 left-0 w-full z-30 bg-white shadow-md px-0 py-4 mt-4 sm:mt-0">
@@ -53,7 +92,7 @@ export default function SubHeader() {
         {/* RIGHT CLUSTER (Desktop) */}
         <div className="hidden lg:flex items-center gap-4 ml-auto">
           {/* SEARCH BAR */}
-          <div className="flex items-center w-[360px] border rounded-full shadow-sm overflow-hidden">
+          <div className="flex items-center w-[360px] border border-gray-200 rounded-full shadow-sm overflow-hidden">
             <div className="px-3 text-gray-500">
               <Search size={18} />
             </div>
@@ -67,19 +106,53 @@ export default function SubHeader() {
             </button>
           </div>
 
-          {/* LOGIN BUTTON */}
-          <Link href="/login">
-            <button className="cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-full">
-              Login →
-            </button>
-          </Link>
-
-          {/* JOIN FOR FREE (Desktop) */}
+          {/* PROFILE IMAGE / LOGIN BUTTON */}
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-3">
+              <Link href="/userdashboard/profile">
+                <div className="cursor-pointer w-10 h-10 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600 hover:border-blue-700 transition">
+                  {getProfileImage() ? (
+                    <Image
+                      src={getProfileImage()}
+                      alt={getUserName() || "User"}
+                      width={40}
+                      height={40}
+                      className="object-cover w-full h-full"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-white font-semibold text-lg">
+                      {getInitial()}
+                    </span>
+                  )}
+                </div>
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-red-600 hover:text-red-700 px-4 py-2 rounded-full border border-red-200 hover:border-red-300 transition text-sm font-medium"
+                title="Logout"
+              >
+                <LogOut size={18} />
+                <span className="hidden xl:inline">Logout</span>
+              </button>
+            </div>
+          ) : (
+            <>
+            
+            <Link href="/login">
+              <button className="cursor-pointer bg-blue-600 text-white px-6 py-2 rounded-full">
+                Login →
+              </button>
+            </Link>
           <Link href="/Registrationform">
             <button className="border cursor-pointer  border-blue-600 text-blue-600 px-3 py-2 rounded-full font-medium">
               Join For Free
             </button>
           </Link>
+            </>
+          )}
+
+          {/* JOIN FOR FREE (Desktop) */}
         </div>
 
         {/* RIGHT SIDE - TABLET: JOIN FOR FREE + HAMBURGER MENU */}
@@ -123,19 +196,51 @@ export default function SubHeader() {
             </button>
           </div>
 
-          {/* LOGIN (Mobile + Tablet) */}
-          <Link href="/login">
-            <button onClick={() => setOpen(false)} className=" w-full bg-blue-600 text-white py-3 rounded-full font-medium mb-3">
-              Login →
-            </button>
-          </Link>
-
-          {/* JOIN FOR FREE – Mobile only */}
-          <Link href="/Registrationform">
-            <button onClick={() => setOpen(false)} className="  w-full bg-white border border-blue-600 text-blue-600 py-3 rounded-full font-medium sm:hidden">
-              Join For Free
-            </button>
-          </Link>
+          {/* PROFILE IMAGE / LOGIN (Mobile + Tablet) */}
+          {isAuthenticated && user ? (
+            <>
+              <Link href="/userdashboard/profile" onClick={() => setOpen(false)}>
+                <div className="w-full flex items-center justify-center mb-3">
+                  <div className="cursor-pointer w-12 h-12 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600">
+                    {getProfileImage() ? (
+                      <Image
+                        src={getProfileImage()}
+                        alt={getUserName() || "User"}
+                        width={48}
+                        height={48}
+                        className="object-cover w-full h-full"
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="text-white font-semibold text-xl">
+                        {getInitial()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 text-red-600 hover:text-red-700 py-3 rounded-full border border-red-200 hover:bg-red-50 transition font-medium mb-3"
+              >
+                <LogOut size={20} />
+                <span>Logout</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <button onClick={() => setOpen(false)} className=" w-full bg-blue-600 text-white py-3 rounded-full font-medium mb-3">
+                  Login →
+                </button>
+              </Link>
+              <Link href="/Registrationform">
+                <button onClick={() => setOpen(false)} className="  w-full bg-white border border-blue-600 text-blue-600 py-3 rounded-full font-medium sm:hidden">
+                  Join For Free
+                </button>
+              </Link>
+            </>
+          )}
 
         </div>
       )}

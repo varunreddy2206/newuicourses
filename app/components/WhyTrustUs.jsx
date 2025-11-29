@@ -7,7 +7,7 @@ export default function WhyTrustUs() {
   return (
     <section className="w-full py-6 px-2 sm:px-4 md:px-8 lg:px-20">
       {/* Outer Card */}
-      <div className="bg-white border rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm">
+      <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm">
 
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-8 sm:mb-10">
