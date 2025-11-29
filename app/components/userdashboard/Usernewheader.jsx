@@ -8,19 +8,34 @@ import {
   Search,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/auth.store";
+import { successfully } from "@/core/toast";
 
 export default function Usernewheader({ noOffset = false }) {
   const [openMenu, setOpenMenu] = useState(false);  
   const [openUser, setOpenUser] = useState(false);   
 
   const [userName, setUserName] = useState("User");
+  const router = useRouter();
+  const { clearAuth, user } = useAuthStore();
 
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
   const mobileMenuRef = useRef(null); // ⭐ added
+
+  // Logout handler
+  const handleLogout = () => {
+    clearAuth(); // Clear auth state and localStorage
+    successfully("Logged out successfully!");
+    setOpenUser(false); // Close dropdown if open
+    setOpenMenu(false); // Close mobile menu if open
+    router.push("/login"); // Navigate to login page
+  };
 
   // Load user name
   useEffect(() => {
@@ -92,7 +107,7 @@ export default function Usernewheader({ noOffset = false }) {
 
         {/* RIGHT SIDE — DESKTOP */}
         <div className="hidden lg:flex items-center gap-5 ml-auto">
-          <div className="flex items-center border rounded-full px-4 py-2 w-[300px] shadow-sm">
+          <div className="flex items-center border border-gray-200 rounded-full px-4 py-2 w-[300px] shadow-sm">
             <Search size={18} className="text-gray-400" />
             <input type="text" placeholder="Search courses here....." className="ml-2 w-full outline-none text-sm text-gray-700" />
             <button className="bg-yellow-400 hover:bg-yellow-500 px-4 py-1.5 rounded-full text-sm text-white font-medium">Search</button>
@@ -130,7 +145,13 @@ export default function Usernewheader({ noOffset = false }) {
                 <Link href="/userdashboard/profilecourses" className="block px-4 py-2 hover:bg-gray-100">My Courses</Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100">Certificates</Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100">Help Center</Link>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100">Logout</Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-red-600"
+                >
+                  <LogOut size={16} />
+                  Logout
+                </button>
               </div>
             )}
           </div>
@@ -194,7 +215,13 @@ export default function Usernewheader({ noOffset = false }) {
 
           <Link href="#" className="block w-full text-left px-2 py-2 text-gray-800">Certificates</Link>
           <Link href="#" className="block w-full text-left px-2 py-2 text-gray-800">Help Center</Link>
-          <Link href="#" className="block w-full text-left px-2 py-2 text-gray-800">Logout</Link>
+          <button
+            onClick={handleLogout}
+            className="w-full text-left flex items-center gap-2 px-2 py-2 text-red-600 hover:bg-gray-100 rounded"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
         </div>
       )}
     </header>

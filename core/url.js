@@ -2,43 +2,58 @@ import axios from "axios";
 import { errorMsgApi } from "./toast";
 
 export const API = axios.create({
-  baseURL: "https://itraining-backend.nuhvin.com/",
+  baseURL: "http://localhost:8888",
 });
 
-export const imageUrl = "https://itraining-backend.nuhvin.com/";
+export const imageUrl = "http://localhost:8888";
 
-// const useGetUserToken = () => {
-//   return localStorage.getItem("token") || null;
-// };
+// API Endpoints
+export const API_ENDPOINTS = {
+  AUTH: {
+    LOGIN: "/auth/login",
+    SIGNUP: "/auth/signup",
+    PROFILE: "/auth/profile",
+    UPLOAD_PROFILE_IMAGE: "/auth/upload-profile-image",
+  },
+};
 
-// API.interceptors.request.use(
-//   (config) => {
-//     const token = useGetUserToken();
+const getToken = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("token") || null;
+  }
+  return null;
+};
 
-//     if (token && !config.url?.includes("/login")) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
+API.interceptors.request.use(
+  (config) => {
+    const token = getToken();
 
-//     config.headers["Content-Type"] =
-//       config.headers["Content-Type"] || "application/json";
+    if (token && !config.url?.includes("/login") && !config.url?.includes("/signup")) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-//     return config; // Return the modified config object
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+    // Don't override Content-Type if it's already set (e.g., for multipart/form-data)
+    if (!config.headers["Content-Type"]) {
+      config.headers["Content-Type"] = "application/json";
+    }
 
-// API.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     const errorMessage = error?.response?.data?.message;
-//     console.log("API call failed:", errorMessage);
+    return config; // Return the modified config object
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-//     errorMsgApi(errorMessage);
+API.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const errorMessage = error?.response?.data?.message;
+    console.log("API call failed:", errorMessage);
 
-//     return Promise.reject(error);
-//   }
-// );
+    errorMsgApi(errorMessage);
+
+    return Promise.reject(error);
+  }
+);

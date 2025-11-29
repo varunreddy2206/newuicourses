@@ -23,7 +23,7 @@ export default function TrainingOptions() {
           {/* ---------------------------------------------------------------- */}
           {/* 1. Recorded Videos */}
           {/* ---------------------------------------------------------------- */}
-          <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
+          <div className="border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
             <div className="bg-[#EEDDFE] text-[#8A33E1] text-xs font-semibold text-center py-2">
               Self-Paced
@@ -70,7 +70,7 @@ export default function TrainingOptions() {
           {/* ---------------------------------------------------------------- */}
           {/* 2. Online Live Classes */}
           {/* ---------------------------------------------------------------- */}
-          <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
+          <div className="border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
             <div className="bg-[#CFE2FF] text-[#0058E6] text-xs font-semibold text-center py-2">
               Most Popular
@@ -120,7 +120,7 @@ export default function TrainingOptions() {
           {/* ---------------------------------------------------------------- */}
           {/* 3. Offline Classroom */}
           {/* ---------------------------------------------------------------- */}
-          <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
+          <div className="border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
             <div className="bg-[#FFE8D6] text-[#D47100] text-xs font-semibold text-center py-2">
               Premium
@@ -181,7 +181,7 @@ export default function TrainingOptions() {
           {/* ---------------------------------------------------------------- */}
           {/* 4. Corporate Training */}
           {/* ---------------------------------------------------------------- */}
-          <div className="border rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
+          <div className="border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden relative flex flex-col h-full min-h-[560px] lg:min-h-[700px] print:shadow-none print:border-gray-200 print:rounded-none print:break-inside-avoid">
 
             <div className="bg-[#DDE8FF] text-[#0040C1] text-xs font-semibold text-center py-2">
               PREFERRED

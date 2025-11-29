@@ -1,144 +1,50 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useGetAPI } from "@/common/hooks/useGetAPI";
+import { getCourseServiceApi } from "@/features/courses/service/get-course.service";
+import CourseCard from "./CourseCard";
 
-/* Default fallback image */
-const THUMB_URL = "/mnt/data/d4eb4c91-fb62-4670-99da-2fdbcfae3ec2.png";
-
-/* ---------------------- INDIVIDUAL THUMBNAILS FOR EACH COURSE ---------------------- */
-const COURSE_THUMBNAILS = {
-    "Artificial Intelligence & Machine Learning with Python": "/course2.png",
-    "Data Science & Analytics with Python": "/course3.png",
-    "Python for Development & Automation": "/course4.png",
-
-    "Full Stack Web Development (MERN / MEAN)": "/course3.png",
-    "Full Stack Java Development (Spring Boot + React / Angular)": "/course2.png",
-    "Full Stack Python Development (Django / Flask + React)": "/course4.png",
-    "Frontend Development (HTML, CSS, JavaScript, React)": "/course4.png",
-    "Backend Development (Node.js, Express, MongoDB / MySQL)": "/course1.png",
-
-    "Flutter App Development": "/course2.png",
-    "React Native App Development": "/course1.png",
-    "Swift App Development (iOS)": "/course3.png",
-    "Kotlin App Development (Android)": "/course4.png",
-
-    "DevOps Engineer Program": "/course3.png",
-    "Cloud Computing Fundamentals": "/course2.png",
-    "Docker, Kubernetes & CI/CD Tools": "/course4.png",
-
-    "Manual & Automation Testing": "/course1.png",
-    "Selenium & API Testing (Advanced QA)": "/course3.png",
-
-    "UI/UX Design Fundamentals (Figma & Adobe XD)": "/course2.png",
-    "Graphic Design (Photoshop, Illustrator, Canva Pro)": "/course1.png",
-
-    "Real-Time Project Internship (Web/App/AI)": "/course3.png",
-    "Corporate Upskilling (Custom Modules)": "/course2.png",
-};
-
-/* ----------------------------- MAIN CATEGORIES ----------------------------- */
-
-const MAIN_CATEGORIES = [
-    "Most Popular",
+export default function CourseListing() {
+  // Categories - same as ExploreCourses component
+  const categories = [
+    "All",
     "Artificial Intelligence, Data & Automation",
     "Web Development",
     "Mobile App Development",
     "Cloud, DevOps & Infrastructure",
-    "Software Testing & Quality Assurance",
+    "Software Testing & QA",
     "Design & Creative Technologies",
     "Internship & Corporate Programs",
-];
+  ];
 
-/* ------------------------------ SUBCOURSES -------------------------------- */
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [query, setQuery] = useState("");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-const SUBCOURSES_BY_CATEGORY = {
-    "Artificial Intelligence, Data & Automation": [
-        "Artificial Intelligence & Machine Learning with Python",
-        "Data Science & Analytics with Python",
-        "Python for Development & Automation",
-    ],
+  // API CALL - Fetch courses based on selected category
+  const { data, loading, error } = useGetAPI(getCourseServiceApi, {
+    category: selectedCategory,
+    page: 1,
+    limit: 50, // Fetch more courses for grid display
+  });
 
-    "Web Development": [
-        "Full Stack Web Development (MERN / MEAN)",
-        "Full Stack Java Development (Spring Boot + React / Angular)",
-        "Full Stack Python Development (Django / Flask + React)",
-        "Frontend Development (HTML, CSS, JavaScript, React)",
-        "Backend Development (Node.js, Express, MongoDB / MySQL)",
-    ],
+  // Get courses from API response
+  const serverCourses = data?.data || [];
 
-    "Mobile App Development": [
-        "Flutter App Development",
-        "React Native App Development",
-        "Swift App Development (iOS)",
-        "Kotlin App Development (Android)",
-    ],
+  // Filter courses by search query
+  const filteredCourses = useMemo(() => {
+    if (!query.trim()) return serverCourses;
+    return serverCourses.filter(
+      (course) =>
+        course.title?.toLowerCase().includes(query.toLowerCase()) ||
+        course.subtitle?.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [serverCourses, query]);
 
-    "Cloud, DevOps & Infrastructure": [
-        "DevOps Engineer Program",
-        "Cloud Computing Fundamentals",
-        "Docker, Kubernetes & CI/CD Tools",
-    ],
-
-    "Software Testing & Quality Assurance": [
-        "Manual & Automation Testing",
-        "Selenium & API Testing (Advanced QA)",
-    ],
-
-    "Design & Creative Technologies": [
-        "UI/UX Design Fundamentals (Figma & Adobe XD)",
-        "Graphic Design (Photoshop, Illustrator, Canva Pro)",
-    ],
-
-    "Internship & Corporate Programs": [
-        "Real-Time Project Internship (Web/App/AI)",
-        "Corporate Upskilling (Custom Modules)",
-    ],
-};
-
-/* Popular = ALL SUBCOURSES */
-const POPULAR_SUBCOURSES = Object.values(SUBCOURSES_BY_CATEGORY).flat();
-
-/* --------------------------- HELPER: CREATE CARDS -------------------------- */
-
-function createCards(list) {
-    return list.map((title, index) => ({
-        id: `${title.replace(/\s+/g, "-").toLowerCase()}-${index + 1}`,
-        title,
-        thumbnail: COURSE_THUMBNAILS[title] || THUMB_URL, // <-- UPDATED
-        price: 799,
-        oldPrice: 899,
-        rating: (4 + (index % 2) * 0.5).toFixed(1),
-        students: 800 + index * 30,
-    }));
-}
-
-/* ----------------------------- MAIN COMPONENT ------------------------------ */
-
-export default function CourseListing() {
-    const [activeCategory, setActiveCategory] = useState("Most Popular");
-    const [query, setQuery] = useState("");
-    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
-    /* Get subcourses for selected category */
-    const subcourses =
-        activeCategory === "Most Popular"
-            ? POPULAR_SUBCOURSES
-            : SUBCOURSES_BY_CATEGORY[activeCategory] || [];
-
-    /* Prepare cards */
-    const cards = useMemo(() => {
-        let base = createCards(subcourses);
-        if (!query.trim()) return base;
-        return base.filter((c) =>
-            c.title.toLowerCase().includes(query.toLowerCase())
-        );
-    }, [subcourses, query]);
-
-    return (
-        <section className="w-full bg-white py-4 sm:py-6 md:py-6 lg:py-8 px-3 sm:px-4 md:px-6 lg:px-12">
-            <div className="max-w-8xl mx-auto">
+  return (
+    <section className="w-full bg-white py-4 sm:py-6 md:py-6 lg:py-8 px-3 sm:px-4 md:px-6 lg:px-12">
+      <div className="max-w-8xl mx-auto">
 
                 {/* HEADER */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start mb-4 sm:mb-5 md:mb-6 lg:mb-8 gap-3 sm:gap-0">
@@ -160,20 +66,20 @@ export default function CourseListing() {
                 {/* TABLET CATEGORIES */}
                 <div className="hidden md:flex lg:hidden mb-4 w-full overflow-x-auto">
                     <div className="flex items-center gap-2 min-w-max pb-2">
-                        {MAIN_CATEGORIES.map((cat) => (
+                        {categories.map((category) => (
                             <button
-                                key={cat}
+                                key={category}
                                 onClick={() => {
-                                    setActiveCategory(cat);
+                                    setSelectedCategory(category);
                                     setQuery("");
                                 }}
                                 className={`whitespace-nowrap px-3 py-2 rounded-lg border text-xs transition-all shrink-0 ${
-                                    activeCategory === cat
+                                    selectedCategory === category
                                         ? "bg-blue-600 text-white border-blue-600 font-medium"
                                         : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                                 }`}
                             >
-                                {cat}
+                                {category}
                             </button>
                         ))}
                     </div>
@@ -185,20 +91,20 @@ export default function CourseListing() {
                     {/* DESKTOP SIDEBAR */}
                     <aside className="hidden lg:block w-full lg:w-60 shrink-0">
                         <div className="space-y-2">
-                            {MAIN_CATEGORIES.map((cat) => (
+                            {categories.map((category) => (
                                 <button
-                                    key={cat}
+                                    key={category}
                                     onClick={() => {
-                                        setActiveCategory(cat);
+                                        setSelectedCategory(category);
                                         setQuery("");
                                     }}
                                     className={`w-full text-left px-4 py-2.5 rounded-lg border text-sm transition-all ${
-                                        activeCategory === cat
+                                        selectedCategory === category
                                             ? "bg-blue-600 text-white border-blue-600 font-medium"
                                             : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
                                     }`}
                                 >
-                                    {cat}
+                                    {category}
                                 </button>
                             ))}
                         </div>
@@ -208,21 +114,21 @@ export default function CourseListing() {
                     {mobileFiltersOpen && (
                         <div className="md:hidden mb-4 w-full">
                             <div className="grid grid-cols-2 gap-2 border p-3 rounded-lg shadow-sm">
-                                {MAIN_CATEGORIES.map((cat) => (
+                                {categories.map((category) => (
                                     <button
-                                        key={cat}
+                                        key={category}
                                         onClick={() => {
-                                            setActiveCategory(cat);
+                                            setSelectedCategory(category);
                                             setQuery("");
                                             setMobileFiltersOpen(false);
                                         }}
                                         className={`px-3 py-2 text-sm border rounded-md ${
-                                            activeCategory === cat
+                                            selectedCategory === category
                                                 ? "bg-blue-600 text-white border-blue-600"
                                                 : "bg-white text-gray-700 border-gray-300"
                                         }`}
                                     >
-                                        {cat}
+                                        {category}
                                     </button>
                                 ))}
                             </div>
@@ -231,65 +137,41 @@ export default function CourseListing() {
 
                     {/* RIGHT CONTENT */}
                     <main className="flex-1">
+                        {/* Loading State */}
+                        {loading && (
+                            <div className="text-center py-10 text-gray-500">
+                                Loading courses...
+                            </div>
+                        )}
+
+                        {/* Error State */}
+                        {error && !loading && (
+                            <div className="text-center py-10 text-red-600">
+                                Error loading courses. Please try again.
+                            </div>
+                        )}
+
+                        {/* No Courses */}
+                        {!loading && !error && filteredCourses.length === 0 && (
+                            <div className="text-center py-10 text-gray-600">
+                                <p className="text-lg font-medium">
+                                    No courses found
+                                    {query ? ` matching "${query}"` : " in this category"}
+                                </p>
+                                <p className="text-sm text-gray-500 mt-1">
+                                    Try selecting another category or search term.
+                                </p>
+                            </div>
+                        )}
 
                         {/* GRID */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-4 md:gap-5 lg:gap-6">
-                            {cards.map((course) => (
-                                <article
-                                    key={course.id}
-                                    className="bg-white rounded-2xl sm:rounded-2xl md:rounded-3xl border shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden p-3 sm:p-3 md:p-4 lg:p-4 flex flex-col h-full"
-                                >
-
-                                    {/* Thumbnail */}
-                                    <div className="w-full rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden">
-                                        <Image
-                                            src={course.thumbnail}
-                                            alt={course.title}
-                                            width={500}
-                                            height={300}
-                                            className="object-cover w-full h-40 sm:h-44 md:h-44 lg:h-48 rounded-xl sm:rounded-xl md:rounded-2xl"
-                                        />
-                                    </div>
-
-                                    {/* Badges */}
-                                    <div className="flex items-center gap-2 sm:gap-2 md:gap-3 lg:gap-4 mt-3 sm:mt-3 md:mt-4 lg:mt-4 flex-wrap">
-                                        <span className="flex items-center gap-1 text-green-700 bg-green-50 px-2 py-0.5 rounded-full text-[10px] md:text-xs">
-                                            🟩 Beginner
-                                        </span>
-                                        <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-0.5 rounded-full text-[10px] md:text-xs">
-                                            🟢 Online
-                                        </span>
-                                        <span className="flex items-center gap-1 text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full text-[10px] md:text-xs">
-                                            ⭐ 17 M+
-                                        </span>
-                                    </div>
-
-                                    {/* Title */}
-                                    <h3 className="mt-2 md:mt-3 text-base md:text-lg font-bold text-gray-900 leading-tight">
-                                        {course.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="text-xs md:text-sm text-gray-500 mt-1 mb-3 md:mb-4 grow">
-                                        Build intelligent solutions with real-world AI & ML training.
-                                    </p>
-
-                                    {/* Buttons */}
-                                    <div className="flex items-center gap-2 md:gap-3 lg:gap-4 mt-auto pt-2">
-                                        <Link
-                                            href={`/courses/${course.id}`}
-                                            className="bg-blue-600 text-white px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-blue-700 transition flex items-center gap-1 flex-1 justify-center"
-                                        >
-                                            Enroll Now →
-                                        </Link>
-
-                                        <button className="border border-gray-300 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1 hover:bg-gray-50 transition flex-1 justify-center">
-                                            Know More →
-                                        </button>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
+                        {!loading && filteredCourses.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-4 md:gap-5 lg:gap-6">
+                                {filteredCourses.map((course) => (
+                                    <CourseCard key={course._id || course.id} course={course} />
+                                ))}
+                            </div>
+                        )}
 
                     </main>
                 </div>

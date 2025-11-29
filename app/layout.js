@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import RouteWrapper from "./components/RouteWrapper";
+import AuthProvider from "../components/AuthProvider";
 import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
@@ -35,7 +36,9 @@ export default function RootLayout({ children }) {
           draggable
           pauseOnHover
         />
-        <RouteWrapper>{children}</RouteWrapper>
+        <AuthProvider>
+          <RouteWrapper>{children}</RouteWrapper>
+        </AuthProvider>
       </body>
     </html>
   );
