@@ -6,13 +6,13 @@ import Link from "next/link";
 
 export default function Placement() {
   return (
-    <section className="w-full bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-6">
+    <section className="w-full bg-white px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
       <div
         className="
-          max-w-7xl mx-auto 
+          max-w-8xl mx-auto 
           bg-white rounded-3xl border border-gray-200 
           overflow-hidden 
-          grid grid-cols-1 md:grid-cols-2
+          grid grid-cols-1 md:grid-cols-[480px_1fr]
         "
       >
 

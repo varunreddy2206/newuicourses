@@ -38,101 +38,6 @@ const COURSE_THUMBNAILS = {
     "Corporate Upskilling (Custom Modules)": "/course2.png",
 };
 
-/* ------------ UNIQUE LINKS FOR EACH CARD (Enroll + Know More) ------------ */
-
-const BUTTON_LINKS = {
-    "Artificial Intelligence & Machine Learning with Python": {
-        enroll: "/course\[id]",
-        more: "/details/ai-ml",
-    },
-    "Data Science & Analytics with Python": {
-        enroll: "/enroll/data-science",
-        more: "/details/data-science",
-    },
-    "Python for Development & Automation": {
-        enroll: "/enroll/python-dev",
-        more: "/details/python-dev",
-    },
-
-    "Full Stack Web Development (MERN / MEAN)": {
-        enroll: "/enroll/mern",
-        more: "/details/mern",
-    },
-    "Full Stack Java Development (Spring Boot + React / Angular)": {
-        enroll: "/enroll/java-fullstack",
-        more: "/details/java-fullstack",
-    },
-    "Full Stack Python Development (Django / Flask + React)": {
-        enroll: "/enroll/python-fullstack",
-        more: "/details/python-fullstack",
-    },
-    "Frontend Development (HTML, CSS, JavaScript, React)": {
-        enroll: "/enroll/frontend",
-        more: "/details/frontend",
-    },
-    "Backend Development (Node.js, Express, MongoDB / MySQL)": {
-        enroll: "/enroll/backend",
-        more: "/details/backend",
-    },
-
-    "Flutter App Development": {
-        enroll: "/enroll/flutter",
-        more: "/details/flutter",
-    },
-    "React Native App Development": {
-        enroll: "/enroll/react-native",
-        more: "/details/react-native",
-    },
-    "Swift App Development (iOS)": {
-        enroll: "/enroll/swift",
-        more: "/details/swift",
-    },
-    "Kotlin App Development (Android)": {
-        enroll: "/enroll/kotlin",
-        more: "/details/kotlin",
-    },
-
-    "DevOps Engineer Program": {
-        enroll: "/enroll/devops",
-        more: "/details/devops",
-    },
-    "Cloud Computing Fundamentals": {
-        enroll: "/enroll/cloud",
-        more: "/details/cloud",
-    },
-    "Docker, Kubernetes & CI/CD Tools": {
-        enroll: "/enroll/devops-tools",
-        more: "/details/devops-tools",
-    },
-
-    "Manual & Automation Testing": {
-        enroll: "/enroll/manual-testing",
-        more: "/details/manual-testing",
-    },
-    "Selenium & API Testing (Advanced QA)": {
-        enroll: "/enroll/selenium",
-        more: "/details/selenium",
-    },
-
-    "UI/UX Design Fundamentals (Figma & Adobe XD)": {
-        enroll: "/enroll/uiux",
-        more: "/details/uiux",
-    },
-    "Graphic Design (Photoshop, Illustrator, Canva Pro)": {
-        enroll: "/enroll/graphic-design",
-        more: "/details/graphic-design",
-    },
-
-    "Real-Time Project Internship (Web/App/AI)": {
-        enroll: "/enroll/internship",
-        more: "/details/internship",
-    },
-    "Corporate Upskilling (Custom Modules)": {
-        enroll: "/enroll/corporate",
-        more: "/details/corporate",
-    },
-};
-
 /* ----------------------------- MAIN CATEGORIES ----------------------------- */
 
 const MAIN_CATEGORIES = [
@@ -201,12 +106,11 @@ function createCards(list) {
     return list.map((title, index) => ({
         id: `${title.replace(/\s+/g, "-").toLowerCase()}-${index + 1}`,
         title,
-        thumbnail: COURSE_THUMBNAILS[title] || THUMB_URL,
+        thumbnail: COURSE_THUMBNAILS[title] || THUMB_URL, // <-- UPDATED
         price: 799,
         oldPrice: 899,
         rating: (4 + (index % 2) * 0.5).toFixed(1),
         students: 800 + index * 30,
-        buttons: BUTTON_LINKS[title], // ⬅ unique button links
     }));
 }
 
@@ -217,11 +121,13 @@ export default function CourseListing() {
     const [query, setQuery] = useState("");
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+    /* Get subcourses for selected category */
     const subcourses =
         activeCategory === "Most Popular"
             ? POPULAR_SUBCOURSES
             : SUBCOURSES_BY_CATEGORY[activeCategory] || [];
 
+    /* Prepare cards */
     const cards = useMemo(() => {
         let base = createCards(subcourses);
         if (!query.trim()) return base;
@@ -232,32 +138,16 @@ export default function CourseListing() {
 
     return (
         <section className="w-full bg-white py-4 sm:py-6 md:py-6 lg:py-8 px-3 sm:px-4 md:px-6 lg:px-12">
-            <div className="max-w-[1400px] mx-auto">
+            <div className="max-w-8xl mx-auto">
 
                 {/* HEADER */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-5 md:mb-6 lg:mb-8 gap-3 sm:gap-0">
-                    <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold leading-tight">
-                        Explore Our Top Trending{" "}
-                        <span className="text-yellow-500 text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start mb-4 sm:mb-5 md:mb-6 lg:mb-8 gap-3 sm:gap-0">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight">
+                        Explore Our Top Trending
+                        <span className="block text-yellow-500 text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold">
                             IT Courses
                         </span>
                     </h2>
-
-                    {/* Desktop Search */}
-                    <div className="hidden md:flex items-center gap-3">
-                        <div className="relative">
-                            <input
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                placeholder="Search courses..."
-                                className="w-[280px] md:w-[320px] lg:w-[420px] px-3 md:px-4 lg:px-4 py-1.5 md:py-2 lg:py-2 rounded-full border border-gray-300 text-xs md:text-sm lg:text-sm outline-none focus:ring-2 focus:ring-yellow-300"
-                            />
-                            <button className="absolute right-1 top-1/2 -translate-y-1/2 bg-yellow-400 px-3 md:px-4 lg:px-4 py-1 md:py-1.5 lg:py-1.5 rounded-full text-white text-xs md:text-sm lg:text-sm font-medium hover:bg-yellow-500">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-
                     {/* Mobile Filter Button */}
                     <button
                         onClick={() => setMobileFiltersOpen((s) => !s)}
@@ -293,7 +183,7 @@ export default function CourseListing() {
                 <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 lg:gap-8">
 
                     {/* DESKTOP SIDEBAR */}
-                    <aside className="hidden lg:block w-full lg:w-[240px] shrink-0">
+                    <aside className="hidden lg:block w-full lg:w-60 shrink-0">
                         <div className="space-y-2">
                             {MAIN_CATEGORIES.map((cat) => (
                                 <button
@@ -380,28 +270,23 @@ export default function CourseListing() {
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-xs md:text-sm text-gray-500 mt-1 mb-3 md:mb-4 flex-grow">
+                                    <p className="text-xs md:text-sm text-gray-500 mt-1 mb-3 md:mb-4 grow">
                                         Build intelligent solutions with real-world AI & ML training.
                                     </p>
 
-                                    {/* ------------------ UPDATED UNIQUE BUTTONS ------------------ */}
+                                    {/* Buttons */}
                                     <div className="flex items-center gap-2 md:gap-3 lg:gap-4 mt-auto pt-2">
                                         <Link
-                                            href={course.buttons.enroll}
+                                            href={`/courses/${course.id}`}
                                             className="bg-blue-600 text-white px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-blue-700 transition flex items-center gap-1 flex-1 justify-center"
                                         >
                                             Enroll Now →
                                         </Link>
 
-                                        <Link
-                                            href={course.buttons.more}
-                                            className="border border-gray-300 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1 hover:bg-gray-50 transition flex-1 justify-center"
-                                        >
+                                        <button className="border border-gray-300 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium text-gray-700 flex items-center gap-1 hover:bg-gray-50 transition flex-1 justify-center">
                                             Know More →
-                                        </Link>
+                                        </button>
                                     </div>
-                                    {/* ----------------------------------------------------------- */}
-
                                 </article>
                             ))}
                         </div>

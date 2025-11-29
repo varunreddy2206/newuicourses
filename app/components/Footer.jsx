@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="w-full bg-[#F3F5FB] border-t pt-12 pb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
 
         {/* --------- TOP SECTION --------- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12">
@@ -83,10 +84,26 @@ export default function Footer() {
               Explore
             </h3>
             <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Non IT Courses</li>
-              <li>Blog</li>
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition cursor-pointer">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/courseslist" className="hover:text-blue-600 transition cursor-pointer">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/lms" className="hover:text-blue-600 transition cursor-pointer">
+                  Non IT Courses
+                </Link>
+              </li>
+              <li>
+                <Link href="/adminpanel" className="hover:text-blue-600 transition cursor-pointer">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -8,6 +8,7 @@ import Link from "next/link";
 
 export default function ExploreCourses() {
   const newCat = [
+    "All",
     "Artificial Intelligence, Data & Automation",
     "Web Development",
     "Mobile App Development",
@@ -26,11 +27,12 @@ export default function ExploreCourses() {
     page: 1,
     limit: 5,
   });
+  
 
   const serverCourses = data?.data || [];
 
   return (
-    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
+    <div className="w-full px-2 sm:px-2 md:px-5 lg:px-20 py-4">
       <h2 className="text-lg font-semibold text-gray-900 mb-6">
         Explore courses
       </h2>
@@ -112,7 +114,7 @@ export default function ExploreCourses() {
                 <div className="pt-15" />
                 <Link
                   href={`/course/${course._id}`}
-                  className="bg-blue-600 text-white px-6 py-2 text-sm font-medium hover:bg-blue-700 mt-9"
+                  className="bg-blue-600 text-white px-10 py-2.5 text-sm font-medium hover:bg-blue-700 mt-9 rounded-md shadow-md inline-flex items-center justify-center transition-colors"
                 >
                   Enroll Now
                 </Link>

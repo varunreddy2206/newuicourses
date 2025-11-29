@@ -4,12 +4,12 @@ import React from "react";
 
 export default function CertificateSection() {
   return (
-    <section className="w-full px-4 sm:px-6 md:px-16 lg:px-24 my-14 sm:my-20">
+    <section className="w-full py-6 px-2 sm:px-4 md:px-8 lg:px-20 my-3 sm:my-4">
       <div
         className="bg-white rounded-3xl border shadow-sm 
-        p-6 sm:p-8 md:p-12 lg:p-16 
+        p-5 sm:p-6 md:p-8 lg:p-10 
         flex flex-col lg:flex-row items-center 
-        gap-10 lg:gap-12"
+        gap-6 lg:gap-8"
       >
 
         {/* ------------------ LEFT SIDE CERTIFICATE IMAGE ------------------ */}

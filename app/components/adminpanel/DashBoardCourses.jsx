@@ -28,69 +28,102 @@ const SidebarItem = ({ icon, label, active }) => (
 );
 
 const CourseCard = ({ data }) => {
+  const getBadgeColor = (badge) => {
+    if (badge === "Active") return "bg-green-50 text-green-700";
+    if (badge === "Upcoming") return "bg-blue-50 text-blue-700";
+    if (badge === "Published") return "bg-green-50 text-green-700";
+    if (badge === "Draft") return "bg-gray-50 text-gray-700";
+    return "bg-gray-50 text-gray-700";
+  };
+
   return (
-    <div className="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden">
-      <div className="relative h-40 md:h-44 lg:h-44">
+    <div className="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden flex flex-col h-full w-full">
+      {/* Image section - 40-45% of card */}
+      <div className="relative h-36 md:h-40">
         <img
-          src={data.image || "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png"}
+          src={data.image || "/course1.png"}
           alt={data.title}
           className="object-cover w-full h-full"
         />
-        <div className="absolute left-3 top-3 flex gap-2">
-          <span className="bg-white/90 text-xs rounded-full px-2 py-1 font-semibold">{data.tag}</span>
+      </div>
+
+      {/* Content section - 55-60% of card */}
+      <div className="p-4 flex-1 flex flex-col">
+        {/* Tags row */}
+        <div className="flex items-center justify-between mb-2">
+          <span className="bg-blue-400 text-white text-xs rounded-full px-2.5 py-1 font-semibold">{data.tag}</span>
           {data.badge && (
-            <span className="bg-emerald-50 text-emerald-700 text-xs rounded-full px-2 py-1 font-semibold">
+            <span className={`${getBadgeColor(data.badge)} text-xs rounded-full px-2.5 py-1 font-semibold`}>
               {data.badge}
             </span>
           )}
         </div>
-      </div>
 
-      <div className="p-4">
-        <h3 className="font-semibold text-sm md:text-base text-slate-900 mb-2 leading-tight">{data.title}</h3>
+        {/* Course title */}
+        <h3 className="font-semibold text-sm md:text-base text-slate-900 mb-2 leading-tight line-clamp-2">{data.title}</h3>
 
+        {/* Instructor */}
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-3">
+          <img src={data.authorAvatar} alt="author" className="w-6 h-6 rounded-full" />
+          <span>{data.author}</span>
+        </div>
+
+        {/* Course details list */}
+        <div className="text-xs text-slate-500 flex flex-col gap-1.5 mb-3 flex-1">
           <div className="flex items-center gap-2">
-            <img src={data.authorAvatar} alt="author" className="w-6 h-6 rounded-full" />
-            <span>{data.author}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-slate-400">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="1.5"/>
+            </svg>
+            <span>{data.mode}</span>
           </div>
+          <div className="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-slate-400">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="1.5"/>
+            </svg>
+            <span>{data.date}</span>
+          </div>
+          {data.duration && (
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-slate-400">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+              <span>{data.duration}</span>
+            </div>
+          )}
         </div>
 
-        <div className="flex flex-wrap gap-4 items-center justify-between">
-          <div className="text-xs text-slate-500 flex flex-col">
-            <span className="flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M12 7V12L15 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>{data.mode}</span>
-            </span>
-            <span className="flex items-center gap-2 mt-1">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M21 10V21H3V6A2 2 0 0 1 5 4h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M7 10h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>{data.date}</span>
-            </span>
+        {/* Bottom section: Price and actions */}
+        <div className="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+          <div className="flex items-center gap-2">
+            <div className="text-base font-semibold text-slate-900">${data.price}</div>
+            {data.oldPrice && (
+              <div className="text-slate-400 text-xs line-through">${data.oldPrice}</div>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="text-sm font-semibold text-slate-900">${data.price}</div>
-            <div className="text-slate-300 text-sm line-through">{data.oldPrice ? `$${data.oldPrice}` : ""}</div>
-          </div>
-        </div>
-
-        <div className="mt-3 flex items-center justify-between text-slate-400">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 text-slate-400">
             <button className="p-1 rounded hover:bg-slate-100">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 12H9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 15V9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" strokeWidth="1.5"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
             </button>
             <button className="p-1 rounded hover:bg-slate-100">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M7 10l5-5 5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="1.5"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
             </button>
-          </div>
-
-          <div className="text-slate-300 text-xs flex items-center gap-3">
-            <button className="p-1 hover:bg-slate-50 rounded">⋯</button>
+            <button className="p-1 rounded hover:bg-slate-100">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                <circle cx="12" cy="19" r="1.5" fill="currentColor"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -103,7 +136,7 @@ export default function DashBoardCourses() {
   const sampleCourses = [
     {
       id: 1,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course1.png",
       tag: "Web Development",
       badge: "Active",
       title: "Complete React Development",
@@ -111,12 +144,13 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=12",
       mode: "Online",
       date: "Jan 15, 2024",
+      duration: "8 weeks",
       price: 299,
       oldPrice: 399,
     },
     {
       id: 2,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course2.png",
       tag: "Data Science",
       badge: "Upcoming",
       title: "Python for Data Analytics",
@@ -124,11 +158,12 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=13",
       mode: "Classroom",
       date: "Feb 1, 2024",
+      duration: "12 weeks",
       price: 599,
     },
     {
       id: 3,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course3.png",
       tag: "UI/UX",
       badge: "Draft",
       title: "Advanced UI/UX Design",
@@ -136,11 +171,12 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=14",
       mode: "Hybrid",
       date: "TBD",
+      duration: "10 weeks",
       price: 450,
     },
     {
       id: 4,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course4.png",
       tag: "Marketing",
       badge: "Published",
       title: "Digital Marketing Mastery",
@@ -148,11 +184,12 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=15",
       mode: "Online",
       date: "Dec 1, 2023",
+      duration: "6 weeks",
       price: 199,
     },
     {
       id: 5,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course1.png",
       tag: "Data Science",
       badge: "Draft",
       title: "Machine Learning Fundamentals",
@@ -160,12 +197,13 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=16",
       mode: "Online",
       date: "Jan 8, 2024",
+      duration: "16 weeks",
       price: 799,
       oldPrice: 999,
     },
     {
       id: 6,
-      image: "/mnt/data/05351aa1-ef83-41ac-91a6-780b10cc2b3c.png",
+      image: "/course2.png",
       tag: "Web Development",
       badge: "Published",
       title: "Mobile App Development",
@@ -173,6 +211,7 @@ export default function DashBoardCourses() {
       authorAvatar: "https://i.pravatar.cc/40?img=17",
       mode: "Hybrid",
       date: "Mar 1, 2024",
+      duration: "14 weeks",
       price: 699,
     },
   ];
@@ -283,35 +322,38 @@ export default function DashBoardCourses() {
               {/* Main courses grid section */}
               <div className="flex-1">
                 {/* Controls row */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3 w-full">
-                    <div className="flex items-center gap-3 w-full bg-white border border-slate-100 rounded-lg px-3 py-2">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-slate-400">
-                        <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <input className="w-full outline-none text-sm text-slate-600" placeholder="Search courses..." />
-                      <select className="border border-slate-100 rounded px-3 py-2 text-sm hidden sm:inline">
-                        <option>Newest</option>
-                        <option>Oldest</option>
-                        <option>Price low to high</option>
-                      </select>
-                    </div>
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  {/* Search bar */}
+                  <div className="flex items-center gap-3 bg-white border border-slate-100 rounded-lg px-3 py-2 flex-1 max-w-md">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-slate-400">
+                      <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <input className="flex-1 outline-none text-sm text-slate-600" placeholder="Search courses..." />
                   </div>
 
-                  <div className="flex items-center gap-3 ml-4">
+                  {/* Sort dropdown */}
+                  <select className="border border-slate-100 rounded-lg px-3 py-2 text-sm bg-white hidden sm:inline-flex items-center">
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                    <option>Price low to high</option>
+                    <option>Price high to low</option>
+                  </select>
+
+                  {/* Course count and view toggles */}
+                  <div className="flex items-center gap-3">
                     <div className="text-sm text-slate-500 hidden md:inline">124 courses</div>
                     <button className="bg-white border border-slate-100 p-2 rounded-lg hidden sm:inline">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3h18M3 12h18M3 21h18" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </button>
-                    <button className="bg-white border border-slate-100 p-2 rounded-lg hidden sm:inline">
+                    <button className="bg-blue-600 text-white p-2 rounded-lg hidden sm:inline">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5h4v4H3zM10 5h4v4h-4zM17 5h4v4h-4zM3 12h4v4H3zM10 12h4v4h-4zM17 12h4v4h-4zM3 19h4v0H3z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </button>
                   </div>
                 </div>
 
-                {/* Grid – 4 columns on large screens to match reference */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {/* Grid – 3 columns consistently */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {sampleCourses.map((c) => (
                     <CourseCard key={c.id} data={c} />
                   ))}

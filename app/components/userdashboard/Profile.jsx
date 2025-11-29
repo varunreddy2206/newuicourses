@@ -30,7 +30,7 @@ export default function Profile() {
           >
             <div className="w-36 h-36 rounded-full overflow-hidden mb-4 border border-gray-200">
               <Image
-                src="/mnt/data/622b158f-6b7c-4629-86b4-efdafd93e074.png"
+                src="/profile.png"
                 alt="Profile"
                 width={144}
                 height={144}

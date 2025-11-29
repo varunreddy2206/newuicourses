@@ -24,13 +24,13 @@ export default function WorkShop() {
   ];
 
   return (
-    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 py-10">
 
       {/* SECTION TITLE */}
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Workshops</h2>
 
       {/* MAIN WRAPPER */}
-      <div className="w-full bg-white rounded-2xl shadow-md border p-6 md:p-10">
+      <div className="max-w-8xl mx-auto w-full bg-white rounded-2xl shadow-md border p-6 md:p-10">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
 
           {/* LEFT BOX */}
@@ -64,7 +64,7 @@ export default function WorkShop() {
               </span>
             </div>
 
-            <div className="flex gap-5 text-sm text-gray-700 mb-4">
+            <div className="flex flex-col sm:flex-row gap-1 sm:gap-5 text-sm text-gray-700 mb-4">
               <span>• Beginner Level</span>
               <span>• Live Workshop</span>
               <span>• 1 Week</span>

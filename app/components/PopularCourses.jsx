@@ -30,15 +30,25 @@ export default function PopularCourses() {
   const sliderRef = useRef(null);
 
   const slideLeft = () => {
-    sliderRef.current.scrollBy({ left: -260, behavior: "smooth" });
+    if (sliderRef.current) {
+      const card = sliderRef.current.querySelector('.course-card');
+      const gap = 16; // gap-4 = 1rem = 16px
+      const scrollAmount = card ? card.offsetWidth + gap : 356;
+      sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    }
   };
 
   const slideRight = () => {
-    sliderRef.current.scrollBy({ left: 260, behavior: "smooth" });
+    if (sliderRef.current) {
+      const card = sliderRef.current.querySelector('.course-card');
+      const gap = 16; // gap-4 = 1rem = 16px
+      const scrollAmount = card ? card.offsetWidth + gap : 356;
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
   };
 
   return (
-    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-10">
+    <div className="w-full px-2 sm:px-4 md:px-10 lg:px-20 py-8">
 
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Courses</h2>
 
@@ -92,16 +102,12 @@ export default function PopularCourses() {
 
         <div
           ref={sliderRef}
-          className="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x snap-mandatory"
+          className="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x snap-mandatory scroll-pl-4"
         >
           {courses.map((course, index) => (
             <div
               key={index}
-              className="
-                min-w-[260px] max-w-[260px]
-                bg-white border shadow-md rounded-2xl p-4
-                snap-start
-              "
+              className="course-card w-[calc(100vw-2rem)] sm:w-[calc(100vw-4rem)] md:min-w-[280px] lg:min-w-[300px] md:w-auto bg-white border shadow-md rounded-2xl p-4 snap-start flex-shrink-0"
             >
               <Image
                 src={course.img}
@@ -125,15 +131,13 @@ export default function PopularCourses() {
                 <p className="text-gray-600 text-sm leading-snug">{course.desc}</p>
               </div>
 
-              <div className="flex items-center justify-between mt-4">
-                <button className="bg-blue-600 text-white px-5 py-2 cursor-pointer rounded-full text-sm hover:bg-blue-700 flex items-center justify-center gap-2 leading-none">
-                  <span className="inline-block">Enroll Now</span>
-                  <span className="inline-block translate-y-px">→</span>
+              <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4 mt-4">
+                <button className="bg-blue-600 text-white px-4 sm:px-5 md:px-6 md:min-w-[150px] py-2 cursor-pointer rounded-full text-sm hover:bg-blue-700 flex items-center justify-center gap-1 whitespace-nowrap flex-1 md:flex-initial">
+                  Enroll Now →
                 </button>
 
-                <button className="border px-5 py-2 cursor-pointer rounded-full text-sm flex items-center gap-1 justify-center leading-none">
-                  <span className="inline-block">Know More</span>
-                  <span className="inline-block translate-y-px">ⓘ</span>
+                <button className="border border-gray-800 text-gray-800 px-4 sm:px-5 md:px-6 md:min-w-[150px] py-2 cursor-pointer rounded-full text-sm hover:bg-gray-50 flex items-center justify-center gap-1 whitespace-nowrap flex-1 md:flex-initial">
+                  Know More ⓘ
                 </button>
               </div>
             </div>

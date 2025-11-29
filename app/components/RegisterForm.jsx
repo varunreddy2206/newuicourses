@@ -56,7 +56,7 @@ export default function RegistrationForm() {
 
             {/* Register Button */}
             <Link href="/userdashboard">
-            <button className="w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium hover:bg-blue-700 transition">
+            <button className="cursor-pointer  w-full bg-blue-600 text-white py-3 rounded-md text-sm font-medium hover:bg-blue-700 transition">
               Register Now
             </button>
             </Link>

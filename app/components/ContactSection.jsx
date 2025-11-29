@@ -8,11 +8,11 @@ export default function ContactSection() {
   const [selected, setSelected] = useState("");
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-16 lg:px-24 py-3">
+    <section className="w-full py-6 px-2 sm:px-4 md:px-8 lg:px-20 my-2 sm:my-3">
       <div
-        className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 
         rounded-3xl bg-white shadow-sm 
-        p-5 sm:p-6 md:p-10"
+        p-5 sm:p-6 md:p-8"
       >
         {/* LEFT IMAGE */}
         <div className="rounded-2xl overflow-hidden w-full h-[260px] sm:h-[350px] md:h-full">
