@@ -100,7 +100,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/adminpanel" className="hover:text-blue-600 transition cursor-pointer">
+                <Link href="/" className="hover:text-blue-600 transition cursor-pointer">
                   Blog
                 </Link>
               </li>
